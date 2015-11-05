@@ -9,6 +9,7 @@ API Baas provides the following features:
 
  Data storage & management
  ------------------------------
+ 
  Application data 
  --------------------
 At the core of the BaaS is a flexible platform that can store any type of application data, from simple records like a catalog of books to complex associations like user relationships. No matter what type of data drives your app, you can store it as collections of data entities and immediately perform complex queries or full-text searches on any field. You can also create custom entities with custom properties, giving you the ability to store data and context in a way that makes sense for your app.
