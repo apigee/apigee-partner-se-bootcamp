@@ -11,11 +11,11 @@ API Baas provides the following features:
 
 ####Application data 
 
-...At the core of the BaaS is a flexible platform that can store any type of application data, from simple records like a catalog of books to complex associations like user relationships. No matter what type of data drives your app, you can store it as collections of data entities and immediately perform complex queries or full-text searches on any field. You can also create custom entities with custom properties, giving you the ability to store data and context in a way that makes sense for your app.
+At the core of the BaaS is a flexible platform that can store any type of application data, from simple records like a catalog of books to complex associations like user relationships. No matter what type of data drives your app, you can store it as collections of data entities and immediately perform complex queries or full-text searches on any field. You can also create custom entities with custom properties, giving you the ability to store data and context in a way that makes sense for your app.
 
-...To learn more about entities and collections, see [API BaaS Data model](http://apigee.com/docs/app-services/content/app-services-data-model-1).
+To learn more about entities and collections, see [API BaaS Data model](http://apigee.com/docs/app-services/content/app-services-data-model-1).
 For a complete list of the default data entities available, see Default [Data Entities](http://apigee.com/docs/app-services/content/default-data-entities).
 
 ####Files & assets
 ...Images, video, and audio are key components of a great app experience. With the BaaS, you can upload and retrieve binary objects from the same data store as the rest of your application data, eliminating the need to set up content delivery networks (CDNs) and easing implementation. We handle all the back-end details that keep your content quickly accessible.
-To learn more about files and asset storage, see [Uploading files and assets](http://apigee.com/docs/app-services/content/uploading-files-and-assets) .
+To learn more about files and asset storage, see [Uploading files and assets](http://apigee.com/docs/app-services/content/uploading-files-and-assets).
