@@ -51,10 +51,10 @@ After setting those properties, click on the `Checkbox` in the `Actions` column 
 
 - Add another resource with the following properties:
 ```
- - Name: Get Individual Hotel
- - Proxy Endpoint: Default
- - Method: GET
- - Path: /{hotel-uuid}
+ Name: Get Individual Hotel
+ Proxy Endpoint: Default
+ Method: GET
+ Path: /{hotel-uuid}
 ```
 
 ###Adding Policies to a Proxy
@@ -85,7 +85,7 @@ Now let’s implement the policies.
 
 - From the `New Policy` drop-down, select the `Assign Message` policy
 ![3_add_policy](./images/3_add_policy.png)
-- In the ‘New Policy - Assign Message’ dialog box provide the following information:
+- In the `New Policy - Assign Message` dialog box provide the following information:
 ```
  Policy Display Name: Create Geo Coding Request
  Policy Name: Create-Geo-Coding-Request
@@ -131,7 +131,7 @@ Here's a brief description of the elements in this policy. You can read more abo
 ###Using the Service Callout Policy to invoke the Google GeoCoding API
 - From the `New Policy` drop-down, select the `Service Callout` policy and add it with the following properties:
 ```
- Policy Display Name: **Call Geo Coding API
+ Policy Display Name: Call Geo Coding API
  Policy Name: Call-Geo-Coding-API
  Attach Policy: Checked
  Flow: Flow Get Hotels, Proxy Endpoint default
@@ -186,12 +186,12 @@ It may not be obvious, but it's important to see that ExtractVariables produces 
 - From the `New Policy` drop-down, select the `Javascript` policy and add it with the following properties:
 ```
  Policy Display Name: Create Location Query
- - Policy Name: Create-Location-Query
- - Script File: Create new script
- - Script Name: Create-Location-Query.js
- - Attach Policy: Checked
- - Flow: Flow Get Hotels, Proxy Endpoint default**
- - Segment: Request
+ Policy Name: Create-Location-Query
+ Script File: Create new script
+ Script Name: Create-Location-Query.js
+ Attach Policy: Checked
+ Flow: Flow Get Hotels, Proxy Endpoint default**
+ Segment: Request
 ```
 - Once the policy has been added, from the `Navigator` panel go to `Scripts → Javascript` section and select the `Create-Location-Query.js` script file
 - Add the following code to the `Create-Location-Query.js` script in the `Code: Create Location Query` panel:
@@ -319,19 +319,20 @@ context.setVariable("response.content", JSON.stringify(finalResponse));
 The above script creates a customized JSON response by merging information from the query parameters received in the original request and certain attributes from the API BaaS response. The final JSON format being created and returned is as follows:
 
 ```json
-{ 
-“hotels” : {
-	“queryparams” : {
-		“zipcode” : “zip code value”,
-		“radius” : “radius value”
-},
-“resultsMetadata” : {
-	“count” : count value,
-	“currentCursor” : “current cursor value”,
-	“nextCursor” : “next cursor value”
-}
-“entities” : [Array of hotel entities]
-}
+{
+    "hotels": {
+        "queryparams": {
+            "zipcode": "zip code value",
+            "radius": "radius value"
+        },
+        "resultsMetadata": {
+            "count": "count value",
+            "currentCursor": "current cursor value",
+            "nextCursor": "next cursor value"
+        }"entities": [
+            "Array of hotel entities"
+        ]
+    }
 }
 ```
 - Save the changes to the API Proxy, wait for it to successfully deploy and test again using Postman as described in Step 8 earlier in the lesson.
