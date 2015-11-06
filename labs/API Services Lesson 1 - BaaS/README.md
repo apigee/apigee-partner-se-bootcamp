@@ -59,8 +59,8 @@ To learn more about error monitoring, see [Get alerted to crashes and critical e
 The objective of this lesson is to provide an overview of API Backend-as-a-Service (BaaS). This includes interacting with data collections, calling the RESTful services exposed automatically by BaaS, and using the BaaS query language against the data collection.
 
 ##Prerequisites
-■	Your Apigee Edge organization name, user name, and the password 
-■	Your Apigee API BaaS organization name
+- [x] Your Apigee Edge organization name, user name, and the password 
+- [x] Your Apigee API BaaS organization name
 
 ##Estimated Time: 30 mins
 1. **Interacting with Data Collections** in the BaaS can be done easily from the BaaS portal. The BaaS portal provides a user interface built using the RESTful APIs automatically exposed by BaaS for data collections. A data collection called `hotels` has already been created for you in your BaaS instance.
@@ -102,11 +102,11 @@ Replace `{your-org}` with the actual name of your API BaaS organization name.
  ![Select App](./images/5_query_editor.png)
  3.	Run the query and review the results. You’ll notice that only those hotels with the city attribute matching `Burlingame` are returned.
  4.	Try a few of the following other queries to get a better understanding of how data querying works in BaaS:
-■	select name, postalCode where city = ‘Burlingame’
-■	select * where hotelRating = 5
-■	select * where hotelRating = 5 and city = ‘Seattle’
-■	select * where hotelRating = 5 or city = ‘Seattle’
-■	select * where shortDescription contains ‘Amazon’
+- [x] `select name, postalCode where city = ‘Burlingame’`
+- [x] `select * where hotelRating = 5`
+- [x] `select * where hotelRating = 5 and city = ‘Seattle’`
+- [x] `select * where hotelRating = 5 or city = ‘Seattle’`
+- [x] `select * where shortDescription contains ‘Amazon’`
  5. These queries can also be provided as parameters to the GET API by using the `ql` query parameter. Switch to the browser tab used to issue GET API calls directly against the BaaS.
  6. Call the GET API as follows to get hotels in the city of Burlingame
 `https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels?ql=select%20*%20where%20city=%27Burlingame%27`
@@ -116,19 +116,3 @@ Note: Most browsers will URL encode special characters automatically
 
 ##Summary
 That completes this hands-on lesson. We have barely scratched the surface of Apigee API BaaS capabilities. In this lab we learned how data is stored in an easy-to-consume format, how it can be accessed and interacted with using the BaaS portal and RESTful APIs automatically exposed by BaaS, and how to easily query the data including full-text searching. For further information refer to the API BaaS [documentation](http://apigee.com/docs/developer-services/content/add-and-edit-content).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
