@@ -47,6 +47,7 @@ Adding Resources to a Policy is done from the `Overview` tab of the API Proxy
  Path: /
 ```
 After setting those properties, click on the `Checkbox` in the `Actions` column to complete adding the resource 
+
 ![1_add_resources](./images/1_add_resources.png)
 
 - Add another resource with the following properties:
@@ -73,6 +74,7 @@ location within <distance_in_meters> of <latitude>, <longitude>
   - Use the geocoordinate to create the geo-location query 
   - Add the location query as a query parameter before the target BaaS service is invoked. 
  A pictorial representation of the logic is depicted below:
+ 
  ![2_flow_logic](./images/2_flow_logic.png)
 
  For the service callout to convert the zipcode to the geocoordinate, you will use the Google GeoCoding API. 
@@ -250,11 +252,13 @@ Here's a brief description of the elements that were modified in this policy. Yo
 ###Testing the API Proxy with the location query after deploying changes
 
 All the policies depicted in the diagram earlier in this lesson for the request flow have been implemented. Your `Get Hotels` Proxy should look as follows:
+
 ![4_policies_added](./images/4_policies_added.png)
 
 Though you could have tested each policy iteratively as they were being added to the flow, you have sufficient logic in the flow to test the behavior of the flow to see if the results being returned from the API BaaS are as expected. 
 
 - Click on the `Save` button to save and deploy the changes to the `hotels` API Proxy
+
 ![5_save_proxies](./images/5_save_proxies.png)
 
 - Wait for the `Successfully saved API Proxy` message to appear and verify that the ‘hotels’ proxy is deployed to the `test` environment
