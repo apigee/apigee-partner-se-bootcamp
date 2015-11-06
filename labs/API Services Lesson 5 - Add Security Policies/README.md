@@ -373,7 +373,7 @@ The above response shows that the OAuth Verification policy is being enforced as
 
  - Review the response of the `/POST OAuth Token - Client Cred` request. Copy the value of the `access_token` attribute to use in the next step.
 
-```json
+ ```json
 {
     "issued_at": "1414962637000",
     "application_name": "ef723b8b-fdb1-4aae-9418-096d8ab7fec7",
@@ -390,7 +390,7 @@ The above response shows that the OAuth Verification policy is being enforced as
     "refresh_token_expires_in": "0",
     "refresh_count": "0"
 }
-```
+ ```
 
  - Start a Trace session for the `hotels` proxy
  - Set up the `/GET hotels` request in Postman with the following query parameters **AND header**: 
