@@ -67,6 +67,7 @@ The objective of this lesson is to provide an overview of API Backend-as-a-Servi
  1. Open a browser tab & log in to your API BaaS instance by going to: https://appservices.apigee.com/amer-apibaas. 
  2. Pick your API BaaS organization from the Organization drop-down
  3. Pick the `hospitality` App from the App drop-down
+ ![Select App](./images/1_select_app.png)
 
 2. 
 
