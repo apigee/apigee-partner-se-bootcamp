@@ -169,11 +169,11 @@ With the above brief introduction to API Products, Developers and Developer Apps
  - Click on `+ Product` button to add a new product
  - In the `Product Details` section of the new product screen, enter or select the following values for the various fields:
 
-  - Display Name: **Hospitality Basic Product** 
-  - Description: **API Bundle for a basic Hospitality App.**
-  - Environment: **Test**
-  - Access: **Public**
-  - Key Approval Type: **Automatic**
+   - Display Name: **Hospitality Basic Product** 
+   - Description: **API Bundle for a basic Hospitality App.**
+   - Environment: **Test**
+   - Access: **Public**
+   - Key Approval Type: **Automatic**
 
 ![3_create_product.png](./images/3_create_product.png)
  
