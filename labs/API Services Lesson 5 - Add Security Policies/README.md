@@ -184,7 +184,7 @@ With the above brief introduction to API Products, Developers and Developer Apps
   	- Revision: **1**
   	- Resource Path: **/**
 
-![4_product_add_resources.png](./images/4_product_add_resources.png)
+	![4_product_add_resources.png](./images/4_product_add_resources.png)
 
  - Click on `Import Resources` to add the `/` resource of the `hotels` proxy to the `Hospitality Basic Product`
  - **Repeat** the above two steps for the ‘/**’ resource
