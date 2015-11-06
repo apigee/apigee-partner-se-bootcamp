@@ -95,7 +95,7 @@ This request is being prepared for the next step where a Service Callout policy 
 
 - Modify the Javascript code in the `Create-Final-Response.js` file by adding the following few lines of code right before the comment line: 
 ```
-‘// update the response that will be returned to the client’. 
+// update the response that will be returned to the client 
 ```
 
 New Code:
@@ -121,7 +121,7 @@ The above lines of Javascript mashes-up the Weather information with the Hotel i
 - Add a new API Product with the following Product Details & Resources:
 
 Product Details
- - Display Name: **Hospitality Pro Product **
+ - Display Name: **Hospitality Pro Product**
  - Description: **API Bundle for a Pro Hospitality App.**
  - Environment: **Test**
  - Access: **Public**
