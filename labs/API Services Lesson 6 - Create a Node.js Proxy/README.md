@@ -19,7 +19,6 @@ The goal of this lesson is to introduce you to Node.js, download and use Node.js
 - [x] Your Apigee Edge organization name, user name, and the password 
 - [x] Node downloaded from http://nodejs.org/download/ and installed as an admin user
 - [x] apigeetool NPM module downloaded and installed globally as an admin user. 
-
 ```sh
 sudo npm install -g apigeetool
 ```
