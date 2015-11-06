@@ -102,11 +102,11 @@ Replace `{your-org}` with the actual name of your API BaaS organization name.
  ![Select App](./images/5_query_editor.png)
  3.	Run the query and review the results. You’ll notice that only those hotels with the city attribute matching `Burlingame` are returned.
  4.	Try a few of the following other queries to get a better understanding of how data querying works in BaaS:
-  - [x] `select name, postalCode where city = ‘Burlingame’`
-  - [x] `select * where hotelRating = 5`
-  - [x] `select * where hotelRating = 5 and city = ‘Seattle’`
-  - [x] `select * where hotelRating = 5 or city = ‘Seattle’`
-  - [x] `select * where shortDescription contains ‘Amazon’`
+   - [x] `select name, postalCode where city = ‘Burlingame’`
+   - [x] `select * where hotelRating = 5`
+   - [x] `select * where hotelRating = 5 and city = ‘Seattle’`
+   - [x] `select * where hotelRating = 5 or city = ‘Seattle’`
+   - [x] `select * where shortDescription contains ‘Amazon’`
  5. These queries can also be provided as parameters to the GET API by using the `ql` query parameter. Switch to the browser tab used to issue GET API calls directly against the BaaS.
  6. Call the GET API as follows to get hotels in the city of Burlingame
 `https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels?ql=select%20*%20where%20city=%27Burlingame%27`
