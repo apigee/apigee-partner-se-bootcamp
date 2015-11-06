@@ -85,6 +85,7 @@ Now let’s implement the policies.
 ###Using Assign Message Policy to prepare the service callout request
 
 - From the `New Policy` drop-down, select the `Assign Message` policy
+
 ![3_add_policy](./images/3_add_policy.png)
 
 - In the `New Policy - Assign Message` dialog box provide the following information:
