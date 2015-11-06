@@ -175,7 +175,7 @@ With the above brief introduction to API Products, Developers and Developer Apps
    	- Access: **Public**
    	- Key Approval Type: **Automatic**
 
-![3_create_product.png](./images/3_create_product.png)
+	![3_create_product.png](./images/3_create_product.png)
  
 
  - In the `Resources` section select the following values for the various fields:
@@ -183,7 +183,7 @@ With the above brief introduction to API Products, Developers and Developer Apps
  	- API Proxy: **hotels** 
   	- Revision: **1**
   	- Resource Path: **/**
-  	
+
 ![4_product_add_resources.png](./images/4_product_add_resources.png)
 
  - Click on `Import Resources` to add the `/` resource of the `hotels` proxy to the `Hospitality Basic Product`
