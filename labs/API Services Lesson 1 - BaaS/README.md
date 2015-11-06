@@ -41,6 +41,39 @@ To learn more about groups, see [Working with group data](http://apigee.com/docs
 ####Third-party authentication
 In addition to supporting user management and OAuth-based login for your app, API Services also makes it easy to integrate third-party authentication through such popular services as Facebook, Twitter and other OAuth-enabled accounts. Providing third-party sign-in can improve user experience, while increasing adoption, giving you access to valuable information from social networks and services.
 To learn more about using third-party sign-in, see [Facebook sign in](http://apigee.com/docs/app-services/content/facebook-sign).
+###Geolocation
+The device entity allows you to capture geolocation data from your users' GPS-enabled devices to more effectively target campaigns, push notifications, offers and more. Geolocation also gives you an important data point for contextualizing and analyzing trends and user behavior.
+To learn more about geolocation, see [Geolocation](http://apigee.com/docs/app-services/content/geolocation).
+###Push notifications
+Push notifications are the most effective way to engage your users with relevant content, and thanks to API Services, implementing them can be done in minutes. Simply register your app and your user's devices with a notification provider, such as Apple Push Notification Service or Google Cloud Messaging, then use the API Services notification entity to send millions of push notifications a month at no cost. When used in conjunction with queries of user and application data, push notifications become a powerful tool for leveraging user data, ensuring relevancy and driving engagement.
+To learn more about push notifications, see [Push notifications overview](http://apigee.com/docs/app-services/content/push-notifications-overview).
+###Configuration management
+By giving you the ability to push configuration changes directly to users' devices, API Services lets you test and deliver bug fixes and performance improvements in real time. Remote configuration management can even be used to push changes to a subset of all users, enabling A/B testing of fixes, so that you can monitor and collect data to ensure your updates perform as intended before they are pushed to your entire user base.
+To learn more about configuration management, see [Configure your app](http://apigee.com/docs/app-services/content/configure-your-app) .
+###Error & performance monitoring
+One of the largest barriers to the success of an app can be the ability of developers to respond quickly and precisely to performance issues and bugs. API Services includes data logging and visualization tools that let you monitor and analyze network performance, usage patterns, crash statistics and other key metrics, giving you the data necessary to quickly manage performance issues as they arise.
+To learn more about usage monitoring, see [Monitor your app’s use](http://apigee.com/docs/app-services/content/monitor-your-app%E2%80%99s-use)
+To learn more about error monitoring, see [Get alerted to crashes and critical errors](http://apigee.com/docs/app-services/content/get-alerted-crashes-and-critical-errors)
+
+##Objectives
+The objective of this lesson is to provide an overview of API Backend-as-a-Service (BaaS). This includes interacting with data collections, calling the RESTful services exposed automatically by BaaS, and using the BaaS query language against the data collection.
+
+##Prerequisites
+■	Your Apigee Edge organization name, user name, and the password 
+■	Your Apigee API BaaS organization name
+
+##Estimated Time: 30 mins
+1. **Interacting with Data Collections** in the BaaS can be done easily from the BaaS portal. The BaaS portal provides a user interface built using the RESTful APIs automatically exposed by BaaS for data collections. A data collection called `hotels` has already been created for you in your BaaS instance.
+ 1. Open a browser tab & log in to your API BaaS instance by going to: https://appservices.apigee.com/amer-apibaas. 
+ 2. Pick your API BaaS organization from the Organization drop-down
+ 3. Pick the `hospitality` App from the App drop-down
+
+2. 
+
+
+
+
+
 
 
 
