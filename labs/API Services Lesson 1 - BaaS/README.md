@@ -85,17 +85,38 @@ The objective of this lesson is to provide an overview of API Backend-as-a-Servi
 **Hint:** Remove the *uuid* and *type* attributes in case you copy-paste from an existing entity.
 
 2. **Paging through results** is supported inherently by BaaS. By default, the GET API for data collections in BaaS returns 10 entities at a time. This can be changed by providing a `limits` query parameter when calling the API. To page through the results, API BaaS provides a cursor attribute, which can be used in subsequent calls
- - Open up another browser tab and go to ```
+ 1. Open up another browser tab and go to ```
 https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels```
 Replace `{your-org}` with the actual name of your API BaaS organization name
 **Note:** The `hospitality` App created for these lab exercises has been configured so that the Guest role has full permissions (that is, /** for GET, POST, PUT, and DELETE) to all the data collections in the App. As with any other app, you can secure the application by updating its roles and permissions. For more on working with permissions and roles, see [Managing access by defining permission rules](http://apigee.com/docs/app-services/content/managing-access-defining-permission-rules).
- - Effectively you’ve called the GET API for the `hotels` data collection by calling the above URL. Review the information presented in JSON format. This is the same information you previously saw on the BaaS portal. 
- - Browse towards the bottom of the response. You’ll notice that by default BaaS provides 10 entities at a time. This can be verified by looking at the attribute "count" : 10
- - Now call the GET API as follows with the limits parameter ``` https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels?limit=20 ```
+ 2. Effectively you’ve called the GET API for the `hotels` data collection by calling the above URL. Review the information presented in JSON format. This is the same information you previously saw on the BaaS portal. 
+ 3. Browse towards the bottom of the response. You’ll notice that by default BaaS provides 10 entities at a time. This can be verified by looking at the attribute "count" : 10
+ 4. Now call the GET API as follows with the limits parameter ``` https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels?limit=20 ```
 Replace `{your-org}` with the actual name of your API BaaS organization name.
- - Review the results and you’ll notice that BaaS has returned 20 hotels instead of 10 this time around
- - To page forward to the next set of results, copy the value of the `cursor` attributed provided at the bottom of the results and call the GET API again after adding the query parameter `cursor={cursor value}` to the URL. 
- - Using cursors, page forwards and backwards through the results.By keeping track of the cursor values, one can start to provide paging functionality within an App when using these APIs.
+ 5. Review the results and you’ll notice that BaaS has returned 20 hotels instead of 10 this time around
+ 6. To page forward to the next set of results, copy the value of the `cursor` attributed provided at the bottom of the results and call the GET API again after adding the query parameter `cursor={cursor value}` to the URL. 
+ 7. Using cursors, page forwards and backwards through the results.By keeping track of the cursor values, one can start to provide paging functionality within an App when using these APIs.
+3.	**Querying data** is also easily accomplished by using API BaaS’ query language capabilities.
+ 1.	Go back to the BaaS portal
+ 2.	While in the `hotels` collection, use the `READ` method to query for hotels in the city of Burlingame
+ ![Select App](./images/5_query_editor.png)
+ 3.	Run the query and review the results. You’ll notice that only those hotels with the city attribute matching `Burlingame` are returned.
+ 4.	Try a few of the following other queries to get a better understanding of how data querying works in BaaS:
+■	select name, postalCode where city = ‘Burlingame’
+■	select * where hotelRating = 5
+■	select * where hotelRating = 5 and city = ‘Seattle’
+■	select * where hotelRating = 5 or city = ‘Seattle’
+■	select * where shortDescription contains ‘Amazon’
+ 5. These queries can also be provided as parameters to the GET API by using the `ql` query parameter. Switch to the browser tab used to issue GET API calls directly against the BaaS.
+ 6. Call the GET API as follows to get hotels in the city of Burlingame
+`https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels?ql=select%20*%20where%20city=%27Burlingame%27`
+Replace `{your-org}` with the actual name of your API BaaS organization name.
+Note: Most browsers will URL encode special characters automatically
+ 7. Try the other query examples provided earlier and use them as the value of the `ql` parameter of the GET API call.
+
+##Summary
+That completes this hands-on lesson. We have barely scratched the surface of Apigee API BaaS capabilities. In this lab we learned how data is stored in an easy-to-consume format, how it can be accessed and interacted with using the BaaS portal and RESTful APIs automatically exposed by BaaS, and how to easily query the data including full-text searching. For further information refer to the API BaaS [documentation](http://apigee.com/docs/developer-services/content/add-and-edit-content).
+
 
 
 
