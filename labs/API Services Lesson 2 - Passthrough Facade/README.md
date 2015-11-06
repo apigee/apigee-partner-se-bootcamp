@@ -30,14 +30,14 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
  	![2_plus_api.png](./images/2_plus_api.png)
  6. On the `New API Proxy` form that is displayed, provide information needed to generate an API proxy
  	![3_api_create.png](./images/3_api_create.png)
- 	```javascript
- 	Starting Point Type: Backend Service
+```
+	Starting Point Type: Backend Service
 	Backend Service URL: https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels
 	Name: hotels
 	Project Base Path: /v1/hotels
 	Description: Facade to the BaaS hotels data collection
 	Features: None
-	```
+```
  7. Click on `Build` to build and deploy the proxy
  8. Once the proxy has been deployed, click on the `Close` button
  9. Review the information on the resulting API Proxy page
