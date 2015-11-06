@@ -107,6 +107,7 @@ Replace `{your-org}` with the actual name of your API BaaS organization name.
    - [x] `select * where hotelRating = 5 and city = ‘Seattle’`
    - [x] `select * where hotelRating = 5 or city = ‘Seattle’`
    - [x] `select * where shortDescription contains ‘Amazon’`
+   - 
  5. These queries can also be provided as parameters to the GET API by using the `ql` query parameter. Switch to the browser tab used to issue GET API calls directly against the BaaS.
  6. Call the GET API as follows to get hotels in the city of Burlingame
 `https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels?ql=select%20*%20where%20city=%27Burlingame%27`
