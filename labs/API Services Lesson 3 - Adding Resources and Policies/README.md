@@ -338,7 +338,8 @@ The above script creates a customized JSON response by merging information from 
             "count": "count value",
             "currentCursor": "current cursor value",
             "nextCursor": "next cursor value"
-        }"entities": [
+        },
+        "entities": [
             "Array of hotel entities"
         ]
     }
