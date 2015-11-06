@@ -85,13 +85,18 @@ The objective of this lesson is to provide an overview of API Backend-as-a-Servi
 **Hint:** Remove the *uuid* and *type* attributes in case you copy-paste from an existing entity.
 
 2. **Paging through results** is supported inherently by BaaS. By default, the GET API for data collections in BaaS returns 10 entities at a time. This can be changed by providing a `limits` query parameter when calling the API. To page through the results, API BaaS provides a cursor attribute, which can be used in subsequent calls
- 1. Open up another browser tab and go to ```https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels```
+ 1. Open up another browser tab and go to 
+```
+https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels
+```
 Replace `{your-org}` with the actual name of your API BaaS organization name
 **Note:** The `hospitality` App created for these lab exercises has been configured so that the Guest role has full permissions (that is, /** for GET, POST, PUT, and DELETE) to all the data collections in the App. As with any other app, you can secure the application by updating its roles and permissions. For more on working with permissions and roles, see [Managing access by defining permission rules](http://apigee.com/docs/app-services/content/managing-access-defining-permission-rules).
  2. Effectively you’ve called the GET API for the `hotels` data collection by calling the above URL. Review the information presented in JSON format. This is the same information you previously saw on the BaaS portal. 
  3. Browse towards the bottom of the response. You’ll notice that by default BaaS provides 10 entities at a time. This can be verified by looking at the attribute "count" : 10
  4. Now call the GET API as follows with the limits parameter
-```https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels?limit=20```
+```
+https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels?limit=20
+```
 Replace `{your-org}` with the actual name of your API BaaS organization name.
  5. Review the results and you’ll notice that BaaS has returned 20 hotels instead of 10 this time around
  6. To page forward to the next set of results, copy the value of the `cursor` attributed provided at the bottom of the results and call the GET API again after adding the query parameter `cursor={cursor value}` to the URL. 
