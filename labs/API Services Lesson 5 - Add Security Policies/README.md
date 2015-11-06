@@ -235,7 +235,7 @@ You will be learning more about how Developers can go through a self-service reg
  - From the `Developer Apps` page, select the `iExplore App` to view the details page for the app
  - In the `Products` section, next to the entry for `Hospitality Basic Product`, click `Show` in the `Consumer Key` and `Consumer Secret` columns to display the generated keys
 
-**Note:** Since you selected `Key Approval Type: Automatic` when you created the API product, the API key is automatically approved and you can view it immediately
+ **Note:** Since you selected `Key Approval Type: Automatic` when you created the API product, the API key is automatically approved and you can view it immediately
 
 If you had selected `Approval Type: Manual`, you would need to click `Approve` in the `Actions` column to approve the API key.
 
@@ -286,7 +286,7 @@ To support use cases with grant types other than client credentials, the OAuth p
 
  - Review the XML configuration and/or the properties associated with the `Validate OAuth v2 Token` policy.
 
-```xml
+ ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <OAuthV2 async="false" continueOnError="false" enabled="true" name="Validate-OAuth-v2-Token">
     <DisplayName>Validate OAuth v2 Token</DisplayName>
@@ -299,7 +299,7 @@ To support use cases with grant types other than client credentials, the OAuth p
     <GenerateResponse enabled="true"/>
     <Tokens/>
 </OAuthV2>
-```
+ ```
 
 The value of the `<Operation>` element indicates the action to take - in this case, verification of the access token. 
 The value of the `<ExternalAuthorization>` element is set to `false`, indicating that Apigee Edge should validate the OAuth Token rather than delegating it to an external validator.
@@ -320,7 +320,7 @@ The value of the `<ExternalAuthorization>` element is set to `false`, indicating
 
  - For the `Remove Authorization Header` policy, change the XML configuration of the policy using the `Code: Remove Authorization Header` panel as follows:
 
-```xml
+ ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <AssignMessage async="false" continueOnError="false" enabled="true" name="Remove-Authorization-Header">
     <DisplayName>Remove Authorization Header</DisplayName>
@@ -332,7 +332,7 @@ The value of the `<ExternalAuthorization>` element is set to `false`, indicating
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
     <AssignTo createNew="false" transport="http" type="request"/>
 </AssignMessage>
-```
+ ```
 
 As a security measure, the `Remove Authorization Header` policy removes the `Authorization` header from the HTTP request message so it is not sent to the backend service. In fact, if the `Authorization` header is not removed, the Backend-as-a-Service API will throw an invalid token error.
 
@@ -343,7 +343,7 @@ As a security measure, the `Remove Authorization Header` policy removes the `Aut
  - Send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200&apikey={iExplore App Consumer Key}`
  - As expected, a fault will be returned since a valid OAuth Token has not been provided as part of the request:
 
-```json
+ ```json
 {
     "fault": {
         "faultstring": "Invalid access token",
@@ -352,9 +352,9 @@ As a security measure, the `Remove Authorization Header` policy removes the `Aut
         }
     }
 }
-```
+ ```
 
-The above response shows that the OAuth Verification policy is being enforced as expected.
+ The above response shows that the OAuth Verification policy is being enforced as expected.
 
  - Review the `Trace` for the proxy and the `returned response` to ensure that the flow is working as expected.
  - Stop the `Trace` session for the `hotels` proxy
@@ -404,7 +404,7 @@ The above response shows that the OAuth Verification policy is being enforced as
 	![12_postman_test_oauth.png](./images/12_postman_test_oauth.png)
  
 
-**Note:** Replace the {access_token} with the value of the `access_token` from the response in the step above.
+ **Note:** Replace the {access_token} with the value of the `access_token` from the response in the step above.
 
  - Send the `Postman` request. 
  - Review the `Trace` for the proxy and the returned response to ensure that the flow is working as expected.
