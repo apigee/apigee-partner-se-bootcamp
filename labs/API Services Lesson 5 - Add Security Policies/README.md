@@ -192,8 +192,8 @@ With the above brief introduction to API Products, Developers and Developer Apps
 
 - **Registering a Developer**
 
-Developers access your APIs through apps. When the developer registers an app, they receive a single API key that allows them to access all of the API products associated with the app. However, developers must be registered before they can register an app.
-Developers typically have several ways of registering:
+ Developers access your APIs through apps. When the developer registers an app, they receive a single API key that allows them to access all of the API products associated with the app. However, developers must be registered before they can register an app.
+ Developers typically have several ways of registering:
  - If you have a paid Edge account, through a Developer Services portal. See [Add and manage user accounts](http://apigee.com/docs/developer-services/content/add-and-manage-user-accounts) for more.
  - By accessing a form that uses the Edge management API to register the developer. See [Using the Edge management API to Publish APIs](http://apigee.com/docs/developers-services/content/using-edge-management-api-publish-apis) for more.
  - By a back-end administrator using the Edge management UI.
@@ -214,8 +214,8 @@ You will be learning more about how Developers can go through a self-service reg
 
 - **Registering a Developer App**
 
-Now that you have an API product and a developer, you can register a Developer App with the API product. Registering the Developer App generates the API key for the API products associated with the app. You can then distribute the key to app developers so they can access the features in the API products from the app.
-As mentioned earlier, you will learn about self-registering apps as a developer using Developer Services Portal in later lessons. For the continuity of this lesson, the following steps describe the process of registering Developer Apps using the Apigee Edge Management UI.
+ Now that you have an API product and a developer, you can register a Developer App with the API product. Registering the Developer App generates the API key for the API products associated with the app. You can then distribute the key to app developers so they can access the features in the API products from the app.
+ As mentioned earlier, you will learn about self-registering apps as a developer using Developer Services Portal in later lessons. For the continuity of this lesson, the following steps describe the process of registering Developer Apps using the Apigee Edge Management UI.
  - From the Apigee Edge Management UI, go to Publish → Developer Apps
  - Click on `+ Developer App` button to add a new product
  - In the `Developer App Details` section, enter or select the following values for the various fields:
@@ -274,11 +274,11 @@ To support use cases with grant types other than client credentials, the OAuth p
  ![8_detach_api_key.png](./images/8_detach_api_key.png) 
 
  - Using the `New Policy` drop-down from the `Design` tab of the `hotels` proxy, add the `OAuth v2.0` policy with the following properties:
-  - Policy Display Name: **Validate OAuth v2 Token**
-  - Policy Name: **Validate-OAuth-v2-Token**
-  - Attach Policy: **Checked**
-  - Flow: **Flow PreFlow, Proxy Endpoint default**
-  - Segment: **Request**
+  	- Policy Display Name: **Validate OAuth v2 Token**
+  	- Policy Name: **Validate-OAuth-v2-Token**
+  	- Attach Policy: **Checked**
+  	- Flow: **Flow PreFlow, Proxy Endpoint default**
+  	- Segment: **Request**
 
  - The `Validate OAuth v2 Token` policy will get added after the `Response Cache` policy. **Drag and move** the `Validate OAuth v2 Token` policy to be _**before**_ the `Remove APIKey QP` policy
 
@@ -308,11 +308,11 @@ The value of the `<ExternalAuthorization>` element is set to `false`, indicating
 
  - Using the `New Policy` drop-down from the `Design` tab of the `hotels` proxy, add the `Assign Message` policy with the following properties:
 
-  - Policy Display Name:**Remove Authorization Header** 
-  - Policy Name: **Remove-Authorization-Header**
-  - Attach Policy: **Checked**
-  - Flow: **Flow PreFlow, Proxy Endpoint default**
-  - Segment: **Request**
+  	- Policy Display Name:**Remove Authorization Header** 
+  	- Policy Name: **Remove-Authorization-Header**
+  	- Attach Policy: **Checked**
+  	- Flow: **Flow PreFlow, Proxy Endpoint default**
+  	- Segment: **Request**
 
  - The `Remove Authorization Header` policy will get added after the `Response Cache` policy. **Drag and move** the `Remove Authorization Header` policy to be _**before**_ the `Response Cache` policy
 
@@ -369,7 +369,7 @@ The above response shows that the OAuth Verification policy is being enforced as
 
   	![11_postman_get_oauth.png](./images/11_postman_get_oauth.png)
 
-**Note:** Copy-paste the Consumer Key and Consumer Secret from the `iExplore App`’s detail page. As you copy-paste, remove any spaces before and after the values of the Consumer Key and Consumer Secret.
+ **Note:** Copy-paste the Consumer Key and Consumer Secret from the `iExplore App`’s detail page. As you copy-paste, remove any spaces before and after the values of the Consumer Key and Consumer Secret.
 
  - Review the response of the `/POST OAuth Token - Client Cred` request. Copy the value of the `access_token` attribute to use in the next step.
 
