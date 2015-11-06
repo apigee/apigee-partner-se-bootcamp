@@ -20,47 +20,48 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
 
 ##Estimated Time: 15 mins
 
-1. Creating an API Proxy for a backend service that you want to expose requires you to provide the network address for the backend service, along with some information that API Services uses to model the API that will be exposed to developers.
- 1. Open up a browser tab and log in to http://edge.apigee.com
- 2. From the `Organization` drop-down in the top-right corner, select the organization assigned to you
- 3. From the `Environment` drop-down, select `test`
- 4. From the main menu, select APIs → API Proxies
+- Creating an API Proxy for a backend service that you want to expose requires you to provide the network address for the backend service, along with some information that API Services uses to model the API that will be exposed to developers.
+ - Open up a browser tab and log in to http://edge.apigee.com
+ - From the `Organization` drop-down in the top-right corner, select the organization assigned to you
+ - From the `Environment` drop-down, select `test`
+ - From the main menu, select APIs → API Proxies
     ![apis_tab.png](./images/2_apis_tab.png)
- 5. To create a new API proxy, select the `+ API Proxy` button to add a new proxy.
+ - To create a new API proxy, select the `+ API Proxy` button to add a new proxy.
  	![2_plus_api.png](./images/2_plus_api.png)
- 6. On the `New API Proxy` form that is displayed, provide information needed to generate an API proxy
+ - On the `New API Proxy` form that is displayed, provide information needed to generate an API proxy
  	![3_api_create.png](./images/3_api_create.png)
-```
+	
+	```
 	Starting Point Type: Backend Service
 	Backend Service URL: https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels
 	Name: hotels
 	Project Base Path: /v1/hotels
 	Description: Facade to the BaaS hotels data collection
 	Features: None
-```
- 7. Click on `Build` to build and deploy the proxy
- 8. Once the proxy has been deployed, click on the `Close` button
- 9. Review the information on the resulting API Proxy page
+	```
+ - Click on `Build` to build and deploy the proxy
+ - Once the proxy has been deployed, click on the `Close` button
+ - Review the information on the resulting API Proxy page
  	![4_api_overview.png](./images/4_api_overview.png)
- 10. That’s it! With those few steps, you’ve deployed a simple passthrough API Proxy which acts as a facade to our BaaS `hotels` data collection
-2. **Deploying & Undeploying a Proxy** to a given environment from the Management UI is simple too.
- 1. Click on the `Deploy` drop-down on the API Proxy page
+ - That’s it! With those few steps, you’ve deployed a simple passthrough API Proxy which acts as a facade to our BaaS `hotels` data collection
+- **Deploying & Undeploying a Proxy** to a given environment from the Management UI is simple too.
+ - Click on the `Deploy` drop-down on the API Proxy page
  	![5_deployment.png](./images/5_deployment.png)
- 2. Notice that the proxy we just created is deployed to the `test` environment
- 3. Click on the `test` environment name. This undeploys the proxy from the `test` environment
- 4. Click on the `Deploy` drop-down again and select the `test` environment. This re-deploys the proxy to the `test` environment
-3. Tracing the execution of a proxy can also be done easily from the Management UI. This is a very powerful capability of the product since it makes it easy to troubleshoot and monitor API proxies running on Apigee Edge. Trace lets you probe the details of each step through an API proxy flow. 
- 1. From the `hotels` API Proxy page, click on the `Trace` tab
+ - Notice that the proxy we just created is deployed to the `test` environment
+ - Click on the `test` environment name. This undeploys the proxy from the `test` environment
+ - Click on the `Deploy` drop-down again and select the `test` environment. This re-deploys the proxy to the `test` environment
+- Tracing the execution of a proxy can also be done easily from the Management UI. This is a very powerful capability of the product since it makes it easy to troubleshoot and monitor API proxies running on Apigee Edge. Trace lets you probe the details of each step through an API proxy flow. 
+ - From the `hotels` API Proxy page, click on the `Trace` tab
  	![6_trace.png](./images/6_trace.png)
- 2. Once on the `Trace` tab, pick the correct environment from the ‘Deployment to Trace’ drop-down. In your case there should only be one environment to pick - `Environment test, Revision 1`
+ - Once on the `Trace` tab, pick the correct environment from the ‘Deployment to Trace’ drop-down. In your case there should only be one environment to pick - `Environment test, Revision 1`
  	![7_start_trace.png](./images/7_start_trace.png)
- 3. Click on the `Start Trace Session` button
- 4. After the trace session starts, click on the `Send` button in the `Send Requests` section
+ - Click on the `Start Trace Session` button
+ - After the trace session starts, click on the `Send` button in the `Send Requests` section
  	![8_send_request.png](./images/8_send_request.png)
- 5. You will see the a transaction appear in the `Transactions` section and a visual representation of the executed proxy flow in the `Transaction Map` section
- 6. The `Transaction Map` is interactive - click on the various execution steps within the flow and review the information provided in the `Phase Details` section. You will notice that for each step information such as headers, variables, payload, properties and other relevant information is available. This helps you quickly understand exactly what is happening within the proxy flow.
+ - You will see the a transaction appear in the `Transactions` section and a visual representation of the executed proxy flow in the `Transaction Map` section
+ - The `Transaction Map` is interactive - click on the various execution steps within the flow and review the information provided in the `Phase Details` section. You will notice that for each step information such as headers, variables, payload, properties and other relevant information is available. This helps you quickly understand exactly what is happening within the proxy flow.
  	![9_trace_message.png](./images/9_trace_message.png)
- 7.At this point, we will start to use the `Postman` tool as a client to invoke our proxy and continue to use `Postman` throughout the rest of the labs. 
+ - At this point, we will start to use the `Postman` tool as a client to invoke our proxy and continue to use `Postman` throughout the rest of the labs. 
     - Launch `Postman`
     - Select the `SE Technical Enablement` environment
    	![10_postman_overview.png](./images/10_postman_overview.png)
@@ -69,7 +70,7 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
    	![11_postman_collection.png](./images/11_postman_collection.png)
     - Review the response returned by the proxy. It should be the same response as the one you observed when using the `Trace` tool in the Management UI
 
- 8. Switch to the ‘Trace’ tab of the Apigee Edge Management UI and click on the ‘Stop Trace’ button
+ - Switch to the ‘Trace’ tab of the Apigee Edge Management UI and click on the ‘Stop Trace’ button
 
 ##Summary
 That completes this hands-on lesson. Simple and quick, but you learned the fundamentals of how to create an API Proxy, how to deploy and undeploy it to/from an environment, and how to trace the proxy flow. Throughout the rest of the hands-on labs you will be working with this Management UI to add policies to proxies, testing and tracing these proxies, and learning about the power of the Apigee Edge platform.
