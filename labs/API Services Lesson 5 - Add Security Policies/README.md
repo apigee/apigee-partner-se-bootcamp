@@ -203,12 +203,12 @@ You will be learning more about how Developers can go through a self-service reg
  - Click on `+ Developer` button to add a new product
  - Add a new developer with the following properties:
 
-  - First Name: **Marco** 
-  - Last Name: **Polo**
-  - Email: **{your email}+mpolo@gmail.com**
-  - Username: **mpolo**
+  	- First Name: **Marco** 
+  	- Last Name: **Polo**
+  	- Email: **{your email}+mpolo@gmail.com**
+  	- Username: **mpolo**
 
- ![5_create_developer.png](./images/5_create_developer.png)
+ 	![5_create_developer.png](./images/5_create_developer.png)
 
  - Click `Save` to save the Developer. The new developer should now be listed on the `Developers` page.
 
@@ -220,15 +220,15 @@ As mentioned earlier, you will learn about self-registering apps as a developer 
  - Click on `+ Developer App` button to add a new product
  - In the `Developer App Details` section, enter or select the following values for the various fields:
 
-  - Display Name: **iExplore App**
-  - Developer: **Marco Polo**
-  - Callback URL: **Leave it blank**
+  	- Display Name: **iExplore App**
+  	- Developer: **Marco Polo**
+  	- Callback URL: **Leave it blank**
 
  - In the `Products` section, click on the `+ Product` button
  - From the `Product` drop-down, select `Hospitality Basic Product`
  - Click the `check-mark` button in the `Actions` column to accept the changes
 
-![7_add_product_to_app.png](./images/7_add_product_to_app.png)
+ ![7_add_product_to_app.png](./images/7_add_product_to_app.png)
  
 
  - Click `Save` to save the Developer App. The new app should now be listed on the `Developer Apps` page
@@ -271,7 +271,7 @@ To support use cases with grant types other than client credentials, the OAuth p
  - Go to the Apigee Edge Management UI browser tab
  - Since you will be adding an OAuth v2.0 policy, the API Key Verification policy is no longer necessary. Delete the `Verify API Key` policy from the ‘hotels’ proxy default proxy endpoint preflow.
 
-![8_detach_api_key.png](./images/8_detach_api_key.png) 
+ ![8_detach_api_key.png](./images/8_detach_api_key.png) 
 
  - Using the `New Policy` drop-down from the `Design` tab of the `hotels` proxy, add the `OAuth v2.0` policy with the following properties:
   - Policy Display Name: **Validate OAuth v2 Token**
@@ -316,7 +316,7 @@ The value of the `<ExternalAuthorization>` element is set to `false`, indicating
 
  - The `Remove Authorization Header` policy will get added after the `Response Cache` policy. **Drag and move** the `Remove Authorization Header` policy to be _**before**_ the `Response Cache` policy
 
-![10_remove_auth_header.png](./images/10_remove_auth_header.png)  
+ ![10_remove_auth_header.png](./images/10_remove_auth_header.png)  
 
  - For the `Remove Authorization Header` policy, change the XML configuration of the policy using the `Code: Remove Authorization Header` panel as follows:
 
@@ -364,10 +364,10 @@ The above response shows that the OAuth Verification policy is being enforced as
  - You will obtain a valid oauth token by directly calling the `oauth` API proxy token endpoint and passing the consumer key and consumer secret of the `iExplore App` app. 
  - Send a test `/POST OAuth Token - Client Cred` request from Postman after setting appropriate values in the `x-www-form-urlencoded` section of the request:
 
-  - client_id: **{iExplore App Consumer Key}**
-  - client_secret: **{iExplore App Consumer Secret}**
+  	- client_id: **{iExplore App Consumer Key}**
+  	- client_secret: **{iExplore App Consumer Secret}**
 
- ![11_postman_get_oauth.png](./images/11_postman_get_oauth.png)
+  	![11_postman_get_oauth.png](./images/11_postman_get_oauth.png)
 
 **Note:** Copy-paste the Consumer Key and Consumer Secret from the `iExplore App`’s detail page. As you copy-paste, remove any spaces before and after the values of the Consumer Key and Consumer Secret.
 
@@ -395,13 +395,13 @@ The above response shows that the OAuth Verification policy is being enforced as
  - Start a Trace session for the `hotels` proxy
  - Set up the `/GET hotels` request in Postman with the following query parameters **AND header**: 
 
-  - **Query Parameters:**
-    - zipcode: **98101**
-    - radius: **200**
-  - **Header:**
-    - Authorization: **Bearer {access_token}**
+  	- **Query Parameters:**
+    	- zipcode: **98101**
+    	- radius: **200**
+  	- **Header:**
+    	- Authorization: **Bearer {access_token}**
 
-![12_postman_test_oauth.png](./images/12_postman_test_oauth.png)
+	![12_postman_test_oauth.png](./images/12_postman_test_oauth.png)
  
 
 **Note:** Replace the {access_token} with the value of the `access_token` from the response in the step above.
