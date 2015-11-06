@@ -30,7 +30,7 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
  	![2_plus_api.png](./images/2_plus_api.png)
  6. On the `New API Proxy` form that is displayed, provide information needed to generate an API proxy
  	![3_api_create.png](./images/3_api_create.png)
- 	```
+ 	```javascript
  	Starting Point Type: Backend Service
 	Backend Service URL: https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels
 	Name: hotels
@@ -61,13 +61,13 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
  6. The `Transaction Map` is interactive - click on the various execution steps within the flow and review the information provided in the `Phase Details` section. You will notice that for each step information such as headers, variables, payload, properties and other relevant information is available. This helps you quickly understand exactly what is happening within the proxy flow.
  	![9_trace_message.png](./images/9_trace_message.png)
  7.At this point, we will start to use the `Postman` tool as a client to invoke our proxy and continue to use `Postman` throughout the rest of the labs. 
-   - Launch `Postman`
-   - Select the `SE Technical Enablement` environment
+    - Launch `Postman`
+    - Select the `SE Technical Enablement` environment
    	![10_postman_overview.png](./images/10_postman_overview.png)
-   - Open the `SE Technical Enablement` project
-   - Select and send the `/GET hotels` request
+    - Open the `SE Technical Enablement` project
+    - Select and send the `/GET hotels` request
    	![11_postman_collection.png](./images/11_postman_collection.png)
-   - Review the response returned by the proxy. It should be the same response as the one you observed when using the `Trace` tool in the Management UI
+    - Review the response returned by the proxy. It should be the same response as the one you observed when using the `Trace` tool in the Management UI
 
  8. Switch to the ‘Trace’ tab of the Apigee Edge Management UI and click on the ‘Stop Trace’ button
 
