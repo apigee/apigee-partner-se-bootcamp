@@ -1,4 +1,4 @@
-#API Services_ Lesson 6 - Create a Node.js Proxy
+#API Services: Lesson 6 - Create a Node.js Proxy
 
 ##Overview
 Node.js on Apigee Edge adds more programmability to the Edge API platform. Running on Edge, Node.js apps take advantage of Edge's enterprise-grade cloud operations like traffic management, security, deployment tools, revision control, logging, and analytics. Furthermore, you can leverage thousands of third-party Node.js modules in your APIs.
