@@ -1,0 +1,26 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:apigee="http://api.apigee.com/wadl/2010/07/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://wadl.dev.java.net/2009/02 http://apigee.com/schemas/wadl-schema.xsd http://api.apigee.com/wadl/2010/07/ http://apigee.com/schemas/apigee-wadl-extensions.xsd">
+	<resources base="http://demo37-test.apigee.net">
+		<resource path="/v1/hotels/">
+			<method name="GET" apigee:displayName="Get Hotels">
+				<apigee:tags>
+					<apigee:tag primary="true">hotels</apigee:tag>
+				</apigee:tags>
+			</method>
+			<param name="zipcode" style="query"/>
+			<param name="radius" style="query"/>
+			<param name="some-header-name" style="header"/>
+			<param name="weight" style="header"/>
+		</resource>
+		<resource path="/v1/hotels/{hotel-uuid}">
+			<method name="GET" apigee:displayName="Get Individual Hotels">
+				<apigee:tags>
+					<apigee:tag primary="true">hotels</apigee:tag>
+				</apigee:tags>
+			</method>
+			<param name="zipcode" style="query"/>
+			<param name="radius" style="query"/>
+			<param name="some-header-name" style="header"/>
+			<param name="weight" style="header"/>
+		</resource>
+	</resources>
+</application>
