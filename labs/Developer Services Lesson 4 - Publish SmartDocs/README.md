@@ -12,9 +12,7 @@ App developers and partners can make API requests without leaving the page, work
 There are Four key SmartDocs features:
 
 1. **Method-level detail:** Every method of your API gets its own page of documentation. This gives you plenty of space to describe the behavior of that method in detail. Not only does that help provide necessary information to developers, the documentation itself is indexed, which brings SEO benefits to internal (portal) search results as well as external search results (Google ranking, for example).
-
 ![2_method_level_details](./images/2_method_level_details.png)
-
 2. **Interactive requests:** Developers can send requests without leaving your docs. SmartDocs guides developers to build well-formed requests and to sign them with their  credentials. This helps you minimize a crucial adoption metric: time to first request. And because your writers can test their work in-situ, it should improve the accuracy of your documentation.
 
 3. **Docs that learn:** SmartDocs remembers the values that each developer uses for subsequent requests. This makes SmartDocs a tool that gets better the more you use it, and it helps developers move faster.
