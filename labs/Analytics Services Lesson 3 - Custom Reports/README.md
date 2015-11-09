@@ -13,13 +13,44 @@ In this lab you will get a first-hand exposure of creating a custom report and c
 
 ##Estimated Time: 30 mins
 
+###Updating the Extract Message Policy to parse the service callout response
+Now we will extract an additional attribute, city name from the Google Geo Code API and log it to analytics.
+- From the policy drop-down, select the `Extract Geo Codes` policy
+- For the `Extract Geo Codes` policy, change the XML configuration of the policy using the `Code: Extract Geo Codes` panel as follows. Add the additional extract variable tag:
+
+```xml
+<Variable name="city_name">
+   <JSONPath>$.results[0].formatted_address</JSONPath>
+</Variable>
+```
+- Your policy should look like this
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="Extract-Geo-Codes">
+    <DisplayName>Extract Geo Codes</DisplayName>
+    <Source>GeocodingResponse</Source>
+    <VariablePrefix>geocodeResponse</VariablePrefix>
+    <JSONPayload>
+        <Variable name="latitude">
+            <JSONPath>$.results[0].geometry.location.lat</JSONPath>
+        </Variable>
+        <Variable name="longitude">
+            <JSONPath>$.results[0].geometry.location.lng</JSONPath>
+        </Variable>
+        <Variable name="city_name">
+            <JSONPath>$.results[0].formatted_address</JSONPath>
+        </Variable>
+    </JSONPayload>
+</ExtractVariables>
+```
+
+
 ###Adding Statistics Collector Policy
-Adding Statistics Collector Policy is done from the `Develop` tab of the API Proxy
 
 - Go to the Apigee Edge Management UI browser tab
 - Go to the `{your initials}-hotels` proxy’s `develop` tab
 - From the `Navigator` pane, select `Proxy Endpoints → Default → Get Hotels`
-- From the 1New Policy` drop-down, select the `Statistics Collector` policy
+- From the `New Policy` drop-down, select the `Statistics Collector` policy
 - In the `New Policy - Statistics Collector` dialog box provide the following information:
   - Policy Display Name: **Get Hotels Statistics Collector**
   - Policy Name: **Get-Hotels-Statistics-Collector**
@@ -34,11 +65,11 @@ Adding Statistics Collector Policy is done from the `Develop` tab of the API Pro
     <DisplayName>Statistics Collector-1</DisplayName>
     <Properties/>
     <Statistics>
-        <Statistic name="{your initials}_zipcode" ref="request.queryparam.zipcode" type="STRING">NO_ZIP</Statistic>
+        <Statistic name="{your initials}_zipcode" ref="request.queryparam.zipcode" type="STRING">NO_CITY</Statistic>
+        <Statistic name="{your initials}_cityname" ref="city_name" type="STRING">NO_CITY</Statistic>
     </Statistics>
 </StatisticsCollector>
 ```
-
 
 ###Testing the API
 - You will obtain a valid oauth token by directly calling the `oauth` API proxy token endpoint and passing the consumer key and consumer secret of the `iExplore App` app. 
@@ -138,59 +169,6 @@ Click on Analytics Reports Dashboard from the main menu. You will most likely se
  
 ![9_custom_dashboard_created](./images/9_custom_dashboard_created.png) 
 
-###Updating the Extract Message Policy to parse the service callout response
-Now we will extract an additional attribute, city name from the Google Geo Code API and log it to analytics.
-- From the policy drop-down, select the `Extract Geo Codes` policy
-- For the `Extract Geo Codes` policy, change the XML configuration of the policy using the `Code: Extract Geo Codes` panel as follows. Add the additional extract variable tag:
-
-```xml
-<Variable name="city_name">
-   <JSONPath>$.results[0].formatted_address</JSONPath>
-</Variable>
-```
-- Your policy should look like this
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ExtractVariables async="false" continueOnError="false" enabled="true" name="Extract-Geo-Codes">
-    <DisplayName>Extract Geo Codes</DisplayName>
-    <Source>GeocodingResponse</Source>
-    <VariablePrefix>geocodeResponse</VariablePrefix>
-    <JSONPayload>
-        <Variable name="latitude">
-            <JSONPath>$.results[0].geometry.location.lat</JSONPath>
-        </Variable>
-        <Variable name="longitude">
-            <JSONPath>$.results[0].geometry.location.lng</JSONPath>
-        </Variable>
-        <Variable name="city_name">
-            <JSONPath>$.results[0].formatted_address</JSONPath>
-        </Variable>
-    </JSONPayload>
-</ExtractVariables>
-```
-
-
-###Log the city name to analytics
-
-- Update the statistics collector policy
-- Click on the `Get Hotels Statistics Collector` policy in the pipeline and modify the XML configuration in the `Code: Get-Hotels-Statistics-Collector` section. Add the additional statistic tag:
-
-```xml
-<Statistic name="{your initials}_zipcode" ref="request.queryparam.zipcode" type="STRING">NO_CITY</Statistic>
-<Statistic name="{your initials}_cityname" ref="city_name" type="STRING">NO_CITY</Statistic>
-```
-- Your policy should look like this
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<StatisticsCollector async="false" continueOnError="false" enabled="true" name="Statistics-Collector-1">
-    <DisplayName>Statistics Collector-1</DisplayName>
-    <Properties/>
-    <Statistics>
-        <Statistic name="{your initials}_zipcode" ref="request.queryparam.zipcode" type="STRING">NO_CITY</Statistic>
-        <Statistic name="{your initials}_cityname" ref="city_name" type="STRING">NO_CITY</Statistic>
-    </Statistics>
-</StatisticsCollector>
-```
 
 ##Summary
 That completes this hands-on lesson. You have learned how to create a simple custom report to capture the most popular city being queried. You also added the custom report along with other reports to a custom dashboard. Please visit the documentation to see the different kinds of operational reports and dashboards that are available to you..
