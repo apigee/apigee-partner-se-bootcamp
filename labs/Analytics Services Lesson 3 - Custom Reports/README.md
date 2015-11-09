@@ -171,5 +171,5 @@ Click on Analytics Reports Dashboard from the main menu. You will most likely se
 
 
 ##Summary
-That completes this hands-on lesson. You have learned how to create a simple custom report to capture the most popular city being queried. You also added the custom report along with other reports to a custom dashboard. Please visit the documentation to see the different kinds of operational reports and dashboards that are available to you..
+That completes this hands-on lesson. You have learned how to create a simple custom report to capture the most popular city being queried. You also added the custom report along with other reports to a custom dashboard. Please visit the [documentation](http://apigee.com/docs/api-services/content/analytics-dashboards) to see the different kinds of operational reports and dashboards that are available to you..
 
