@@ -27,7 +27,7 @@ After this lesson you will be able to configure SmartDocs for your developer por
 ###Configure/Enable SmartDocs 
 Configure/Enable SmartDocs in your portal In this section you will review the various configuration settings for SmartDocs and if not enabled already you will enable them for your developer portal instance.
 
-- Login into the developer portal as an administrator. Click on Modules link on the top menu and enter the keyword “smart” on the filter text box. you should see something like this:
+- Login into the developer portal as an administrator. Click on Modules link on the top menu and enter the keyword `smart` on the filter text box. you should see something like this:
 
 ![3_smartdocs_enabled](./images/3_smartdocs_enabled.png) 
 
@@ -37,7 +37,7 @@ If the SmartDocs (smartdocs) module enabled status is not “green”, go ahead 
 		
 ![4_smartdocs_permissions](./images/4_smartdocs_permissions.png) 
 
-Please note that currently the portal is configured so that SmartDocs content is only administerable by an Administrator. If required you can also set it so that any authen![1_analytics_overview](./images/1_analytics_overview.png)ticated user is also able to administer it by checking the `authenticated user` checkbox and saving the permissions. It’s probably not a good idea to have anonymous users administering SmartDocs content.
+Please note that currently the portal is configured so that SmartDocs content is only administerable by an Administrator. If required you can also set it so that any authenticated user is also able to administer it by checking the `authenticated user` checkbox and saving the permissions. It’s probably not a good idea to have anonymous users administering SmartDocs content.
 
 - Select Configuration → Dev Portal Settings in the Drupal administration menu.
 
@@ -45,10 +45,10 @@ Please note that currently the portal is configured so that SmartDocs content is
 
 - Next, lets configure URL settings. Select Configuration → Search and metadata → URL aliases → Settings from the Drupal menu.
 
-- Set the Maximum alias length and Maximum component length to 255. Expand Punctuation. For the Left curly bracket ({) and Right curly bracket (}) settings, select No action (do not replace). Finally save the configuration.
+- Set the Maximum alias length and Maximum component length to 255. Expand Punctuation. For the Left curly bracket `{` and Right curly bracket `}` settings, select `No action` (do not replace). Finally save the configuration.
 
 ###How to document your APIs by using SmartDocs
-How to document your APIs by using SmartDocs In this section you will review the steps/process to document your API. SmartDocs represents your APIs by using a model, where the model contains all the information about your APIs. The portal extracts information about your APIs from the model to render the documentation pages on the portal as Drupal nodes, where each Drupal node corresponds to a page of documentation on the portal. The general steps that you follow to use SmartDocs are:
+In this section you will review the steps/process to document your API. SmartDocs represents your APIs by using a model, where the model contains all the information about your APIs. The portal extracts information about your APIs from the model to render the documentation pages on the portal as Drupal nodes, where each Drupal node corresponds to a page of documentation on the portal. The general steps that you follow to use SmartDocs are:
 
 - Configure the Drupal SmartDocs module on the portal.
 
@@ -65,7 +65,7 @@ How to document your APIs by using SmartDocs In this section you will review the
 - Enable SSL. Because SmartDocs can send authentication credentials to your backend as part of making a request to your APIs, you should enable SSL on your portal to ensure that those credentials are secure. 
 
 ###Creating a model
-Creating a model In this section you will create an API model. A model contains all the information about the representation of your API. You can define multiple models on the portal to support different APIs, or group all of your APIs into a single model.
+In this section you will create an API model. A model contains all the information about the representation of your API. You can define multiple models on the portal to support different APIs, or group all of your APIs into a single model.
 
 Each model specifies a unique name, called the machine readable name, that also defines the base URL of the generated Drupal nodes. The URL of each Drupal node is in the form:
 ```
