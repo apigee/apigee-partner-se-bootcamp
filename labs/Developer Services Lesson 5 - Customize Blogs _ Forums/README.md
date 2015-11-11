@@ -183,4 +183,4 @@ Administrators set the permissions required to post, to edit exiting posts, and 
 ![29_home_page](./images/29_home_page.png) 
 
 ##Summary
-In this section you learned about what blogs/forums are, the different type we support in the developer portal. You also customized their look and feel, modify permissions and promote some entries. For further information refer to the developer portal documentation. 
+In this section you learned about what blogs/forums are, the different type we support in the developer portal. You also customized their look and feel, modify permissions and promote some entries. For further information refer to the [developer portal documentation](http://apigee.com/docs/developer-services/content/add-blog-and-forum-posts). 
