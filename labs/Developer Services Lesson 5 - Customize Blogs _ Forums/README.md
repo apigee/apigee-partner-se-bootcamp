@@ -45,23 +45,23 @@ Any user with the necessary privilege can comment on a blog post. Comments can a
 
 4. Save the configuration.
 
-![4_blogs](./images/4_blogs.png)
+ ![4_blogs](./images/4_blogs.png)
  
 5. Next we will review and set/reset the permissions for blogs. Usually only authenticated users are allowed to post comments to blogs and as you can see above the portal mentions that you have to `Log in or register to post comments`. In the following steps you will make changes so un-authenticated or anonymous users can also post comments. (*Note that we are enabling that anonymous users can comment on your blog, this is just to give you an example of how to changes permissions. Your requirements in a real life could be different*)
 
 6. Select `People` → `Permissions` link in the Drupal menu.
 
-![5_permissions](./images/5_permissions.png) 
+ ![5_permissions](./images/5_permissions.png) 
 
 7. Cick on the `Permissions` tab on the top right and scroll down to the Comment area of the page.
 
 8. Under the Comment area, set the following permissions that control which users can add, view, edit, and approve comments. The permission set should looks like this:
 
-![6_user_permissions](./images/6_user_permissions.png) 
+ ![6_user_permissions](./images/6_user_permissions.png) 
 
 9. Scroll down to the Node area of the page, set the permissions on the Blog entry set to look like this:
  
-![7_edit_permissions](./images/7_edit_permissions.png)
+ ![7_edit_permissions](./images/7_edit_permissions.png)
 
 10. Scroll down the bottom of the screen and click on `Save Permissions`. Now go and flush all caches (You should know how to do this by now).
 
@@ -69,33 +69,33 @@ Any user with the necessary privilege can comment on a blog post. Comments can a
 
 12. You should now be able to comments on blogs. See the `Add new comment` link enabled below. Once you click on it you should see a page which lets you add comments to this blog post. See the pictures below:
 
-![8_comments](./images/8_comments.png) 
+ ![8_comments](./images/8_comments.png) 
 
-![9_write_comments](./images/9_write_comments.png)	
+ ![9_write_comments](./images/9_write_comments.png)	
  
 
 13. Add the comments and you should see a message on the next page: `Your comment has been queued for review by site administrators and will be published after approval`. (*This process can also be automated if required by setting the right permissions*)
 
-![10_comment_queued](./images/10_comment_queued.png) 
+ ![10_comment_queued](./images/10_comment_queued.png) 
 
 14. Lets go approve these new comments. Log in to your portal as a user with admin or comment approval privileges.
 
 15. Select `Content` → `Comments` in the Drupal administration menu.
 
-![11_comments_menu](./images/11_comments_menu.png) 
+ ![11_comments_menu](./images/11_comments_menu.png) 
 
 16. Select the comment that was just entered. Click on `Publish` for the operation and click on the `Execute` button to publish the comments. You should see a series of pages like this:
 
-![12_execute](./images/12_execute.png) 
-![13_execute](./images/13_execute.png)
-![14_execute](./images/14_execute.png) 
+ ![12_execute](./images/12_execute.png) 
+ ![13_execute](./images/13_execute.png)
+ ![14_execute](./images/14_execute.png) 
  
 
 17. Logout from the portal as the admin user. Open a new browser window or tab, point to the portal URL, click on the `blog` link and make sure you are not logged in.
 
 18. Navigate to the blog post on which you commented and you should be able to see the most recent comments you made on the blog post.
 
-![15_comments](./images/15_comments.png) 
+ ![15_comments](./images/15_comments.png) 
 
 19. The developer portal uses a Drupal view, called the Items tagged as blog content view, to control the display of blog entries on the Blog page. By default, blog entries are listed in descending order of creation date. In this section we will show you how you can change the blog display page.
 
@@ -103,12 +103,12 @@ Any user with the necessary privilege can comment on a blog post. Comments can a
 
 21. Select the `Edit link` in the row for the `Items tagged as blog content` view (Content) view. This displays the following page that you can use to configure the view:
 
-![16_tags](./images/16_tags.png) 
+ ![16_tags](./images/16_tags.png) 
 
 
 22. On the following display configuration page you can make the necessary changes and save them.
 
-![17_tags_created](./images/17_tags_created.png) 
+ ![17_tags_created](./images/17_tags_created.png) 
 
 
 ###Forums 
