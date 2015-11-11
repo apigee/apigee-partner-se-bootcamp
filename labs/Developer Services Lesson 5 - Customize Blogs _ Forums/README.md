@@ -130,57 +130,57 @@ Administrators set the permissions required to post, to edit exiting posts, and 
 
 4. Scroll to the bottom and on the left panel select `DevConnect`. Enter `forum` in the filter list at the top of the Modules page.
 
-![18_forum_modules](./images/18_forum_modules.png) 
+ ![18_forum_modules](./images/18_forum_modules.png) 
 
 5. If the `Advanced Forum` module is listed and is enabled, then you are using the Advanced Forum module. If Advanced Forum module is missing or disabled, and the Forum module is enabled, then you are using the core Forum module. If not enabled click on the button which says `Forum (advanced_forum)`, it should turn green which indicates that the Advanced Forum mode is on.
 
 6. You can now make changes to the Advanced Forum configuration. Select `Configuration`` →  Content authoring` → `Advanced Forum` in the Drupal menu. 
 
-![19_forum_authoring](./images/19_forum_authoring.png) 
+ ![19_forum_authoring](./images/19_forum_authoring.png) 
 
 7. The Advanced Forum page appears. Set the display options to your preference.
 
-![20_forum_configs](./images/20_forum_configs.png) 
+ ![20_forum_configs](./images/20_forum_configs.png) 
 
 8. Save the configuration.
 
-![21_save_configs](./images/21_save_configs.png) 
+ ![21_save_configs](./images/21_save_configs.png) 
 
 9. Now lets add a new forum. By default, the developer portal comes with a single forum called General discussion. You can add additional forums, nest forums, and create forum containers which are groups of forums. A forum container gives you a way to create a collection of forums. However a container is not a forum itself, it simply defines a collection of forums.
 
 10. Select `Structure` → `Forums` in the Drupal menu to see the list of current forums.
 
-![22_forum_menu](./images/22_forum_menu.png) 
+ ![22_forum_menu](./images/22_forum_menu.png) 
 
 11. On this page, you can edit existing forums or rearrange the order that forums appear on the Forums page.
 
-![23_edit_forums](./images/23_edit_forums.png) 
+ ![23_edit_forums](./images/23_edit_forums.png) 
 
 12. Select `+Add forum`. Add information about the new forum, including its parent if you want to nest the forum. (*In this case we will make this a root level forum. You can also select an appropriate weight if you wish; Forums are displayed in ascending order by the weight.*)
 
-![24_write_forum](./images/24_write_forum.png)
+ ![24_write_forum](./images/24_write_forum.png)
  
 13. Select Save. It may not be a bad idea to `Flush All Caches` as well.
 
 14. Log out of the portal and open a new browser window/tab, navigate to the `forums` link on the main portal. You should see the newly created forum entry in there
 
-![25_view_forum](./images/25_view_forum.png) 
+ ![25_view_forum](./images/25_view_forum.png) 
 
-![26_home_page](./images/26_home_page.png) 
+ ![26_home_page](./images/26_home_page.png) 
 
 15. In this section we will promote a forum topic to the top of the list in the forums section on the home page. See a snaphot of the home page above before we make any changes.
 
 16. Log in to your portal as a user with admin or comment approval privileges. Select Content in the Drupal administration menu. Filter the content by selecting Forum topic in the Type dropdown box, and then selecting Apply.
 
-![27_select_forum_filter](./images/27_select_forum_filter.png)
+ ![27_select_forum_filter](./images/27_select_forum_filter.png)
  
 17. Only Forum topics appear in the content list. Select one or more forum topics (In Voluptat) to promote. In the Operations dropdown, select Promote to front page. Select Execute and you should see the selected topic move up to the top of the list.
 
-![28_promote_forum](./images/28_promote_forum.png)  
+ ![28_promote_forum](./images/28_promote_forum.png)  
 
 18. Flush all caches. Log out and navigate to the home page of the developer portal. You should see the selected topic (In Voluptat) move up to the first in the list.
 
-![29_home_page](./images/29_home_page.png) 
+ ![29_home_page](./images/29_home_page.png) 
 
 ##Summary
 In this section you learned about what blogs/forums are, the different type we support in the developer portal. You also customized their look and feel, modify permissions and promote some entries. For further information refer to the [developer portal documentation](http://apigee.com/docs/developer-services/content/add-blog-and-forum-posts). 
