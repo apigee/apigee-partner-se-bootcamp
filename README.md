@@ -9,6 +9,6 @@ Welcome to Apigee Partner SE Bootcamp. We are excited to invite you into the pre
 ##Suggested Agenda
 
 | Topic          | Description          | Duration          |
-| ------------- | ----------- |
+| ------------- | ----------- |----------- |
 | Edge Product Overview + Demo| The demo give a high level overview of the Apigee Edge product|75|
 | API Design Best Practices| This topic is not directly related to Edge product. But having an understanding on API Best Practices will allow you to build more relavant demos/POCs |60|
