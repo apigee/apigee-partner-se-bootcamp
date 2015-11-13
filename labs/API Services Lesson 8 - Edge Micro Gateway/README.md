@@ -13,7 +13,6 @@ Typically, Edge Microgateway is installed within a trusted network in close prox
 - **Network proximity:** You can install and manage Edge Microgateway in the same machine, subnet, or data center as the backend target APIs with which Edge Microgateway interacts.
 - **Analytics:** Edge Microgateway asynchronously delivers API execution data to Apigee Edge, where it is processed by the Edge Analytics system. You can use the full suite of Edge Analytics metrics, dashboards, and APIs.
 - **Reduced latency:** All communication with Apigee Edge is asynchronous and does not happen as part of processing client API requests. This allows Edge Microgateway to collect API data and send it to Apigee Edge without affecting latency.
-- **Familiarity:** Edge Microgateway uses and interacts with Apigee Edge features that Edge administrators already understand well, such as proxies, products, and developer apps.
 
 ##Objectives
 In this lab you will go through configuring, get working Edge Microgateway installation capable of processing an API. You'll make several secure, test API calls through Edge Microgateway to the API's backend service and see how Apigee Edge processes analytics data from Edge Microgateway.
