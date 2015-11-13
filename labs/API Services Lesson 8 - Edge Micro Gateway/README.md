@@ -25,6 +25,7 @@ node -v
 v4.2.1
 ```
 - [x] Have access to Edge Org
+- [x] The Node.js service you have created in [Lesson 6](../API%20Services%20Lesson%206%20-%20Create%20a%20Node.js%20Proxy) is up and running. This lesson uses that servics as a backend
 
 ##Estimated Time: 60 mins
 
