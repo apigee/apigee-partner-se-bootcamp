@@ -83,7 +83,7 @@ function sendError(res, code, msg) {
 }
 
 // start the server
-app.listen(process.env.PORT || 9000);
+app.listen(process.env.PORT || 7000);
 console.log('The server is running!');
 ```
 
@@ -107,7 +107,7 @@ All of the HTTP requests get processed by the HTTP server that is started on por
 
 - Go back to your terminal window and in the `apigee/node-api/weather` directory, run the following commands:
 
-```sh
+```sh 
 npm init
 ```
 
@@ -117,7 +117,7 @@ Provide the following values during the interactive npm init session to create a
  - version: 1.0.0
  - description: Apigee API facade to a Yahoo weather service
  - entry point: weather.js
- - test command: curl http://<host>/v1/weather/forecast?zipcode=<zipcode>
+ - test command: curl -i http://<host>/v1/weather/forecast?zipcode=<zipcode>
  - git repository: 
  - keywords:
  - author: <your name>
@@ -150,7 +150,11 @@ node weather.js
  ```
  The server should start within a few seconds with a message `The server is running!` on the console
 
- - Go to the Postman tool and run the ‘/GET forecast - localhost’ request. If everything is working correctly, you should see a response similar to the following: `http://localhost:9000/forecast?zipcode=95113`
+ - Go to the Postman tool and run the ‘/GET forecast - localhost’ request. If everything is working correctly, you should see a response similar to the following: `http://localhost:7000/forecast?zipcode=95113`
+ ```
+ curl -i http://localhost:7000/forecast?zipcode=95113
+ ```
+
  ```json
 {
     "location": {

@@ -169,7 +169,7 @@ With the above brief introduction to API Products, Developers and Developer Apps
  - Click on `+ Product` button to add a new product
  - In the `Product Details` section of the new product screen, enter or select the following values for the various fields:
 
-   	- Display Name: **Hospitality Basic Product** 
+   	- Display Name: **<your initials> Hospitality Basic Product** 
    	- Description: **API Bundle for a basic Hospitality App.**
    	- Environment: **Test**
    	- Access: **Public**
@@ -180,7 +180,7 @@ With the above brief introduction to API Products, Developers and Developer Apps
 
  - In the `Resources` section select the following values for the various fields:
 
- 	- API Proxy: **hotels** 
+ 	- API Proxy: **<your initials>_hotels** 
   	- Revision: **1**
   	- Resource Path: **/**
 
@@ -220,7 +220,7 @@ You will be learning more about how Developers can go through a self-service reg
  - Click on `+ Developer App` button to add a new product
  - In the `Developer App Details` section, enter or select the following values for the various fields:
 
-  	- Display Name: **iExplore App**
+  	- Display Name: **<your initials> iExplore App**
   	- Developer: **Marco Polo**
   	- Callback URL: **Leave it blank**
 
