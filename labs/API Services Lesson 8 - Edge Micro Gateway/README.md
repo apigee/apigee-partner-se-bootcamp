@@ -118,11 +118,13 @@ edgemicro agent proc -c start -k <key> -s <secret>
 - If the micro gateway is started successfully, you will see the following console output
 
 ```json
-{ pid: 8666,
-  uid: 'MTQ0NzQ0NjgwNzkxOQ',
-  running: true,
-  restarts: 0,
-  since: '2015-11-13T20:33:27.931Z' }
+{
+    "pid": 9104,
+    "uid": "MTQ0NzQ1MjU4Nzk0MQ",
+    "running": "true",
+    "restarts": 0,
+    "since": "2015-11-13T22: 09: 47.959Z"
+}
 ```
 **Note:** The **UID** is the unique id for this instance of Edge Microgateway. You use this ID when retrieving log and monitoring information about Edge Microgateway. See the *Edge Microgateway Administrator*'s Guide for more information.
 
@@ -231,6 +233,8 @@ curl -i -H "Authorization:Bearer <JWT Token>" http://localhost:8000/v1/weather/f
     ]
 }
 ```
+
+You have used the credentials you received from your Edge org on cloud and you have used them on your local Micro Gateway. You are able to manage your APIs centrally, while the enforcement is happening locally.
 
 ##Summary
 That completes this hands-on lesson. In this lesson you learned about setting up an Edge Micro Gateway, creating an API Proxy and corresponding life cycle on your Edge org. You now have a fully functioning and secure Edge Microgateway that can run your APIs locally, picking up the security credentials from your Edge org.
