@@ -91,7 +91,7 @@ Log in to your organization on Apigee Edge.
 - Update target endpoint
   - Switch to the `Develop` tab of the API Proxy
   - From the `Navigator` pane, select `Target Endpoints → Default
-  - In the `code' view, update the `HTTPTargetConnection` → `URL` to `http://localhost:7000` 
+  - In the `code` view, update the `HTTPTargetConnection` → `URL` to `http://localhost:7000` 
   ![3_update_target_endpoint.png](./images/3_update_target_endpoint.png)
 - Click on the `Save` button to save and deploy the changes to the `hotels` API Proxy
 - We have created an API Proxy that will be fetched by Edge Micro gateway, when it starts locally
