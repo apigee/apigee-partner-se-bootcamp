@@ -227,7 +227,7 @@ node weather.js
  - In the terminal, ensure that you are in the `apigee/node-api/weather` directory
  - Run the following command:
  ```sh
-apigeetool deploynodeapp -n weather-<your-initials> -d . -m weather.js -o your-org -e test -b /<your-initials>/v1/weather
+apigeetool deploynodeapp -n {your-initials}_weather -d . -m weather.js -o your-org -e test -b /{your-initials}/v1/weather
  ```
 
  ***Note:*** Replace `your-org` in the above command with the actual name of your Apigee Edge organization.

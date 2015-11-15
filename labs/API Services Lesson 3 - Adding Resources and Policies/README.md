@@ -24,7 +24,7 @@ Each Policy type is documented in detail in the [Policy reference overview](http
 ##Objectives
 The goal of this lesson is to get you familiar with how to use the Management UI to design and configure different types of policies to the API Proxy that we created in the previous lab. We will primarily work with mediation and extensibility policies in this lesson. 
 
-By the end of this lesson, you will have enhanced the `hotels` proxy to accept a `zipcode` and a `radius` (in meters) query parameter, use those parameters to return a list of hotels that match the criteria, and format the results to filter out some metadata from the BaaS result.
+By the end of this lesson, you will have enhanced the `{your-initials}_hotels` proxy to accept a `zipcode` and a `radius` (in meters) query parameter, use those parameters to return a list of hotels that match the criteria, and format the results to filter out some metadata from the BaaS result.
 
 **Note:** Now that you are familiar with the Apigee Edge Management UI navigation, the instructions will become terse and will be provided without screenshots unless a new concept is being introduced.
 
@@ -61,7 +61,7 @@ After setting those properties, click on the `Checkbox` in the `Actions` column 
 ###Adding Policies to a Proxy
 is done from the `Design` tab of the API Proxy.
 - Now that you have an API Proxy configured with a couple of resources, you will add logic to the `Get Hotels` resource using policies. 
- The goal is to have the proxy perform a geo-location query against our `hotels` BaaS data collection to return results within a certain radius of a zipcode (zipcode and radius both being query parameters provided when calling the `/v1/hotels` API).
+ The goal is to have the proxy perform a geo-location query against our `hotels` BaaS data collection to return results within a certain radius of a zipcode (zipcode and radius both being query parameters provided when calling the `/{your-initials}/v1/hotels` API).
  API BaaS supports the ability to retrieve entities within a specified distance of any geocoordinate based on its location property:
 ```
 location within <distance_in_meters> of <latitude>, <longitude>
@@ -257,11 +257,11 @@ All the policies depicted in the diagram earlier in this lesson for the request 
 
 Though you could have tested each policy iteratively as they were being added to the flow, you have sufficient logic in the flow to test the behavior of the flow to see if the results being returned from the API BaaS are as expected. 
 
-- Click on the `Save` button to save and deploy the changes to the `hotels` API Proxy
+- Click on the `Save` button to save and deploy the changes to the `{your-initials}_hotels` API Proxy
 
 ![5_save_proxies](./images/5_save_proxies.png)
 
-- Wait for the `Successfully saved API Proxy` message to appear and verify that the ‘hotels’ proxy is deployed to the `test` environment
+- Wait for the `Successfully saved API Proxy` message to appear and verify that the ‘{your-initials}_hotels’ proxy is deployed to the `test` environment
 - Go to the `Trace` tab and start a trace session by clicking the `Start Trace Session` button
 - Use Postman to test the `/GET hotels` request with the following query parameters combinations and review the results being returned
  - zipcode=98101&radius=1000
@@ -278,7 +278,7 @@ Notice that the responses being returned by the API BaaS for the various query p
 
 Many times the response coming from the backend target endpoint is not exactly what you want to send to the calling client. The response may need to be transformed, filtered, or augmented. For example, as you review the response being returned from the API BaaS for this lesson, you will notice that it has several metadata attributes (e.g. `application`, `path`, `organization`, `applicationName`, etc.) that you may want to filter out prior to sending the response. You will use a simple Javascript policy, similar to the one used before to create the location query variable, to create a customized response.
 
-- Go to the `Design` tab of `hotels` proxy in the Apigee Edge Management UI.
+- Go to the `Design` tab of `{your-initials}_hotels` proxy in the Apigee Edge Management UI.
 - From the `New Policy` drop-down, select the `Javascript` policy and add it with the following properties:
 
  - Policy Display Name: Create Final Response

@@ -56,7 +56,7 @@ Identifying an API consumer is beneficial from an analytics and audit perspectiv
 
 ###Adding an API Key Verification Policy 
 - Go to the Apigee Edge Management UI browser tab
-- Using the `New Policy` drop-down from the `Design` tab of the `hotels` proxy, add the `Verify API Key` policy with the following properties:
+- Using the `New Policy` drop-down from the `Design` tab of the `{your-initials}_hotels` proxy, add the `Verify API Key` policy with the following properties:
  - Policy Display Name: **Verify API Key**
  - Policy Name: **Verify-API-Key**
  - Attach Policy: **Checked**
@@ -85,7 +85,7 @@ Identifying an API consumer is beneficial from an analytics and audit perspectiv
 
 ###Removing the API Key from the query parameters
 
-- Using the `New Policy` drop-down from the `Design` tab of the `hotels` proxy, add the `Assign Message` policy with the following properties:
+- Using the `New Policy` drop-down from the `Design` tab of the `{your-initials}_hotels` proxy, add the `Assign Message` policy with the following properties:
 
  - Policy Display Name: **Remove APIKey QP** 
  - Policy Name: **Remove-APIKey-QP**
@@ -120,7 +120,7 @@ As a security measure, the `Remove APIKey QP` policy simply removes the `apikey`
 
 Until now anyone with the URL to the `hotel` API Proxy has been able to make a request with appropriate parameters and get a response back. Now that you have added the API Key Verification policy, that will no longer be the case. 
 
-- Start the `Trace` session for the `hotels` proxy
+- Start the `Trace` session for the `{your-initials}_hotels` proxy
 b)	Now that the API Key Verification policy has been added to the proxy, try and send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200`
 
 - You will notice that the following fault is returned since an API Key has not been provided as a request query parameter:
@@ -138,13 +138,13 @@ b)	Now that the API Key Verification policy has been added to the proxy, try and
 The above response shows that the API Key Verification policy is being enforced as expected.
 
 - Review the `Trace` for the proxy and the returned response to ensure that the flow is working as expected.
-- Stop the `Trace` session for the `hotels` proxy
+- Stop the `Trace` session for the `{your-initials}_hotels` proxy
 
 ###Obtaining an API Key 
 
-Up to now you have been playing the role of an API Developer configuring various policies in the `hotels` proxy. 
+Up to now you have been playing the role of an API Developer configuring various policies in the `{your-initials}_hotels` proxy. 
 
-To understand the concept of an API Key and associated concepts such as API Products, Developer and Developer Apps, you need to now think about the role of an App Developer. This Developer needs an API Key that can be used whenever their app needs to use the `hotels` proxy. 
+To understand the concept of an API Key and associated concepts such as API Products, Developer and Developer Apps, you need to now think about the role of an App Developer. This Developer needs an API Key that can be used whenever their app needs to use the `{your-initials}_hotels` proxy. 
 
 To make it easier for Developers to consume APIs, Apigee Edge provides the capability of publishing APIs. Publishing is the process of making your APIs available to Developers for consumption. Publishing APIs can be broadly defined by the following tasks:
 - Create the API Products on Apigee Edge that bundle your APIs.
@@ -161,7 +161,7 @@ The following table defines some of the terms used to register apps and generate
 | App | A client-side app that a developer registers to access an API product. Registering the app with the API product generates the API key for accessing the APIs in that product.      |
 | API key | A string with authorization information that a client-side app uses to access the resources exposed by the API product. The API key is generated when a registered app is associated with an API product.      |
 
-With the above brief introduction to API Products, Developers and Developer Apps, you will now create one of each to obtain a valid API Key that can be used to call the `hotels` proxy
+With the above brief introduction to API Products, Developers and Developer Apps, you will now create one of each to obtain a valid API Key that can be used to call the `{your-initials}_hotels` proxy
 
 - **Publishing an API Product**
 
@@ -169,7 +169,7 @@ With the above brief introduction to API Products, Developers and Developer Apps
  - Click on `+ Product` button to add a new product
  - In the `Product Details` section of the new product screen, enter or select the following values for the various fields:
 
-   	- Display Name: **<your initials> Hospitality Basic Product** 
+   	- Display Name: **{your-initials} Hospitality Basic Product** 
    	- Description: **API Bundle for a basic Hospitality App.**
    	- Environment: **Test**
    	- Access: **Public**
@@ -180,13 +180,13 @@ With the above brief introduction to API Products, Developers and Developer Apps
 
  - In the `Resources` section select the following values for the various fields:
 
- 	- API Proxy: **<your initials>_hotels** 
+ 	- API Proxy: **{your-initials}_hotels** 
   	- Revision: **1**
   	- Resource Path: **/**
 
 	![4_product_add_resources.png](./images/4_product_add_resources.png)
 
- - Click on `Import Resources` to add the `/` resource of the `hotels` proxy to the `Hospitality Basic Product`
+ - Click on `Import Resources` to add the `/` resource of the `{your-initials}_hotels` proxy to the `{your-initials} Hospitality Basic Product`
  - **Repeat** the above two steps for the ‘/**’ resource
  - Click `Save` to save the API Product. The new product should now be listed on the `Products` page.
 
@@ -225,7 +225,7 @@ You will be learning more about how Developers can go through a self-service reg
   	- Callback URL: **Leave it blank**
 
  - In the `Products` section, click on the `+ Product` button
- - From the `Product` drop-down, select `Hospitality Basic Product`
+ - From the `Product` drop-down, select `{your-initials} Hospitality Basic Product`
  - Click the `check-mark` button in the `Actions` column to accept the changes
 
  ![7_add_product_to_app.png](./images/7_add_product_to_app.png)
@@ -233,26 +233,26 @@ You will be learning more about how Developers can go through a self-service reg
 
  - Click `Save` to save the Developer App. The new app should now be listed on the `Developer Apps` page
  - From the `Developer Apps` page, select the `iExplore App` to view the details page for the app
- - In the `Products` section, next to the entry for `Hospitality Basic Product`, click `Show` in the `Consumer Key` and `Consumer Secret` columns to display the generated keys
+ - In the `Products` section, next to the entry for `{your-initials} Hospitality Basic Product`, click `Show` in the `Consumer Key` and `Consumer Secret` columns to display the generated keys
 
  **Note:** Since you selected `Key Approval Type: Automatic` when you created the API product, the API key is automatically approved and you can view it immediately
 
 If you had selected `Approval Type: Manual`, you would need to click `Approve` in the `Actions` column to approve the API key.
 
-The way the `hotels` proxy is configured, as of now, the Consumer Key (i.e. the API Key) is the only key that the `iExplore App` will need to access the `hotels` proxy resources. You will use the Consumer Secret (i.e. the API Secret) in the next section when the security policy is changed from API Key Verification to an OAuth Token Validation policy.
+The way the `{your-initials}_hotels` proxy is configured, as of now, the Consumer Key (i.e. the API Key) is the only key that the `iExplore App` will need to access the `{your-initials}_hotels` proxy resources. You will use the Consumer Secret (i.e. the API Secret) in the next section when the security policy is changed from API Key Verification to an OAuth Token Validation policy.
 
 ###Re-testing the API Key Verification Policy
 
-Now that you have a valid API Key associated with a Developer App (`iExplore App`) with access to the API Product (`Hospitality Basic Product`) that bundles the `hotels` proxy, test the API Key Verification policy to ensure that everything works as expected.
+Now that you have a valid API Key associated with a Developer App (`iExplore App`) with access to the API Product (`{your-initials} Hospitality Basic Product`) that bundles the `{your-initials}_hotels` proxy, test the API Key Verification policy to ensure that everything works as expected.
 
 - Copy the `Consumer Key` associated with the `iExplore App` by going to Publish → Developer Apps → iExplore App 
-- Start the Trace session for the `hotels` proxy
+- Start the Trace session for the `{your-initials}_hotels` proxy
 - Send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200&apikey={iExplore App Consumer Key}`
 
 **Note:** Replace the {iExplore App Consumer Key} with the actual Consumer Key. As you copy-paste, be sure to remove any spaces before and after the Consumer Key 
 
 - Review the Trace for the proxy and the returned response to ensure that the flow is working as expected.
-- Stop the Trace session for the ‘hotels’ proxy
+- Stop the Trace session for the ‘{your-initials}_hotels’ proxy
 
 ###Stepping-up security using OAuth 2.0: Client Credentials Grant
 
@@ -269,11 +269,11 @@ To support use cases with grant types other than client credentials, the OAuth p
 - **Adding an OAuth 2.0 Token Validation Policy** 
 
  - Go to the Apigee Edge Management UI browser tab
- - Since you will be adding an OAuth v2.0 policy, the API Key Verification policy is no longer necessary. Delete the `Verify API Key` policy from the ‘hotels’ proxy default proxy endpoint preflow.
+ - Since you will be adding an OAuth v2.0 policy, the API Key Verification policy is no longer necessary. Delete the `Verify API Key` policy from the ‘{your-initials}_hotels’ proxy default proxy endpoint preflow.
 
  ![8_detach_api_key.png](./images/8_detach_api_key.png) 
 
- - Using the `New Policy` drop-down from the `Design` tab of the `hotels` proxy, add the `OAuth v2.0` policy with the following properties:
+ - Using the `New Policy` drop-down from the `Design` tab of the `{your-initials}_hotels` proxy, add the `OAuth v2.0` policy with the following properties:
   	- Policy Display Name: **Validate OAuth v2 Token**
   	- Policy Name: **Validate-OAuth-v2-Token**
   	- Attach Policy: **Checked**
@@ -306,7 +306,7 @@ The value of the `<ExternalAuthorization>` element is set to `false`, indicating
 
 - **Removing the Authorization Header After Validating the OAuth Token** 
 
- - Using the `New Policy` drop-down from the `Design` tab of the `hotels` proxy, add the `Assign Message` policy with the following properties:
+ - Using the `New Policy` drop-down from the `Design` tab of the `{your-initials}_hotels` proxy, add the `Assign Message` policy with the following properties:
 
   	- Policy Display Name:**Remove Authorization Header** 
   	- Policy Name: **Remove-Authorization-Header**
@@ -339,7 +339,7 @@ As a security measure, the `Remove Authorization Header` policy removes the `Aut
 - **Testing the OAuth 2.0 Token Validation Policy without a Token**
 
  - Copy the `Consumer Key` associated with the `iExplore App` by going to Publish → Developer Apps → iExplore App
- - Start a `Trace` session for the `hotels` proxy
+ - Start a `Trace` session for the `{your-initials}_hotels` proxy
  - Send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200&apikey={iExplore App Consumer Key}`
  - As expected, a fault will be returned since a valid OAuth Token has not been provided as part of the request:
 
@@ -357,7 +357,7 @@ As a security measure, the `Remove Authorization Header` policy removes the `Aut
  The above response shows that the OAuth Verification policy is being enforced as expected.
 
  - Review the `Trace` for the proxy and the `returned response` to ensure that the flow is working as expected.
- - Stop the `Trace` session for the `hotels` proxy
+ - Stop the `Trace` session for the `{your-initials}_hotels` proxy
 
 - **Testing the OAuth 2.0 Token Validation Policy with a Valid Token**
 
@@ -392,7 +392,7 @@ As a security measure, the `Remove Authorization Header` policy removes the `Aut
 }
  ```
 
- - Start a Trace session for the `hotels` proxy
+ - Start a Trace session for the `{your-initials}_hotels` proxy
  - Set up the `/GET hotels` request in Postman with the following query parameters **AND header**: 
 
   	- **Query Parameters:**
@@ -408,7 +408,7 @@ As a security measure, the `Remove Authorization Header` policy removes the `Aut
 
  - Send the `Postman` request. 
  - Review the `Trace` for the proxy and the returned response to ensure that the flow is working as expected.
- - Stop the `Trace` session for the `hotels` proxy
+ - Stop the `Trace` session for the `{your-initials}_hotels` proxy
 
 
 ##Summary

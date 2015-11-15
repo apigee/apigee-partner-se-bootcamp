@@ -33,7 +33,7 @@ The various caching policies supported by Apigee Edge are:
 **Invalidate Cache Policy:** Configures how the cached values should be purged from the cache. For policy reference information, see [Invalidate Cache policy](http://apigee.com/docs/api-services/reference/invalidate-cache-policy).
 
 ##Objectives
-The goal of this lesson is to introduce you to Traffic Management policies and applying a couple of these policies to the ‘hotels’ API Proxy you created in the previous lesson.
+The goal of this lesson is to introduce you to Traffic Management policies and applying a couple of these policies to the ‘{your-initials}_hotels’ API Proxy you created in the previous lesson.
 
 ##Pre-Requisites
 - [x] API Services - Lesson 3 completed
@@ -42,7 +42,7 @@ The goal of this lesson is to introduce you to Traffic Management policies and a
 
 ###Adding a Spike Arrest Policy
 - Go to the Apigee Edge Management UI browser tab
-- Using the `New Policy` drop-down from the `Develop` tab of the `hotels` proxy, add the `Spike Arrest` policy with the following properties:
+- Using the `New Policy` drop-down from the `Develop` tab of the `{your-initials}_hotels` proxy, add the `Spike Arrest` policy with the following properties:
 
  - Policy Display Name: **Spike Arrest 10pm**
  - Policy Name: **Spike-Arrest-10pm**
@@ -69,7 +69,7 @@ What actually happens, then? To prevent spike-like behavior, Spike Arrest smooth
 ###Adding Response Cache Policy
 Adding Response Cache Policyto reduce external service calls, reduce network traffic and improve performance
 
-- Using the `New Policy` drop-down from the `Develop` tab of the `hotels` proxy, add the `Response Cache` policy with the following properties:
+- Using the `New Policy` drop-down from the `Develop` tab of the `{your-initials}_hotels` proxy, add the `Response Cache` policy with the following properties:
  - Policy Display Name: **Cache Hotels Data**
  - Policy Name: **Cache-Hotels-Data**
  - Attach Policy: **Unchecked**
