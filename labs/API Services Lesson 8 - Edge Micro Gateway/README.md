@@ -8,11 +8,12 @@ Typically, Edge Microgateway is installed within a trusted network in close prox
 ![1_edge_micro_architecture.png](./images/1_edge_micro_architecture.png)
 
 ###Key features and benefits
-- **Security:** Edge Microgateway authenticates requests with a signed bearer token or API key issued to each client app by Apigee Edge.
-- **Rapid deployment:** Unlike a full deployment of Apigee Edge, you can deploy and run an instance of Edge Microgateway within a matter of minutes.
-- **Network proximity:** You can install and manage Edge Microgateway in the same machine, subnet, or data center as the backend target APIs with which Edge Microgateway interacts.
+- **Traffic management:** APIs proxied through Edge Microgateway never need to leave the perimeter of your corporate network. You get the Analytics and security capabilities of Apigee Edge public cloud, without sending your transaction data over public networks. 
+- **Security:** Edge Microgateway authenticates requests with a signed bearer token or API key issued to each client app by Apigee Edge. This means you can secure your internal-to-internal APIs without writing new server-side code. 
+- **Rapid deployment:** Unlike a full deployment of Apigee Edge, you can deploy and run an instance of Edge Microgateway within a matter of minutes. 
+- **Network proximity:** You can install and manage Edge Microgateway in the same machine, subnet, or data center as the backend target APIs with which Edge Microgateway interacts. Same-machine proxy deployment means that proxied traffic does not incur additional network capacity, and does not require an additional VM. Super low footprint.  
 - **Analytics:** Edge Microgateway asynchronously delivers API execution data to Apigee Edge, where it is processed by the Edge Analytics system. You can use the full suite of Edge Analytics metrics, dashboards, and APIs.
-- **Reduced latency:** All communication with Apigee Edge is asynchronous and does not happen as part of processing client API requests. This allows Edge Microgateway to collect API data and send it to Apigee Edge without affecting latency.
+- **Reduced latency:** All proxy activity is done on the local datacenter network, meaning the overhead of the proxy is very very low. All communication with Apigee Edge is asynchronous and does not happen as part of the client request pipeline. This allows Edge Microgateway to collect API data and send it to Apigee Edge without affecting latency of the runtime transactions.
 
 ##Objectives
 In this lab you will go through configuring, get working Edge Microgateway installation capable of processing an API. You'll make several secure, test API calls through Edge Microgateway to the API's backend service and see how Apigee Edge processes analytics data from Edge Microgateway.
