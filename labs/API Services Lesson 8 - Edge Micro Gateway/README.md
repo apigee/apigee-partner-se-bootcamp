@@ -18,12 +18,12 @@ Typically, Edge Microgateway is installed within a trusted network in close prox
 In this lab you will go through configuring, get working Edge Microgateway installation capable of processing an API. You'll make several secure, test API calls through Edge Microgateway to the API's backend service and see how Apigee Edge processes analytics data from Edge Microgateway.
 
 ##Prerequisites
-- [x] Edge Micro ZIP File is downloaded to local folder
+- [x] Edge Micro ZIP File is downloaded to local folder. download from [here](https://www.dropbox.com/s/02jdmvzfozugkoo/apigee-edge-micro-1.1.0.zip?dl=0)
 - [x] Node 4.2.1 or later is installed
 ```
 node -v
 v4.2.1
-```
+```  
 - [x] Have access to Edge Org
 - [x] The Node.js service you have created in [Lesson 6](../API%20Services%20Lesson%206%20-%20Create%20a%20Node.js%20Proxy) is up and running. This lesson uses that servics as a backend
 
