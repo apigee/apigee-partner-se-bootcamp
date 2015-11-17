@@ -1,4 +1,4 @@
-#API Services: Lesson 3 - Adding Resources and Policies
+#API Services: Lesson 3 - Adding Flows and Policies
 
 ##Overview
 Apigee Edge enables you to 'program' API behavior without writing any code, by using 'policies'. A policy is like a module that implements a specific, limited management function. Policies are designed to let you add common types of management capabilities to an API easily and reliably. Policies provide features like security, rate-limiting, transformation, and mediation capabilities, saving you from having to code and maintain this functionality on your own. 
@@ -33,8 +33,10 @@ By the end of this lesson, you will have enhanced the `{your-initials}_hotels` p
 
 ##Estimated Time: 90 mins
 
-###Adding Resources to a Policy
-Adding Resources to a Policy is done from the `Overview` tab of the API Proxy
+###Adding Flows to an API Proxy
+A "flow" in an Apigee Edge API Proxy is one branch of the condition tree that processes inbound requests.  In general, an API Proxy will have one or more flows, and the API Proxy will perform different logic steps in each flow. A "passthrough" proxy may have zero flows, and will simply pass the inbound request unchanged to the backend system.
+
+Adding Flows to an API Proxy is done from the `Overview` tab of the API Proxy
 - Go to the Apigee Edge Management UI browser tab
 - Go to the `hotel` proxy’s `Overview` tab
 - From the `resources` section, click on the `+ Resources` button
@@ -169,15 +171,15 @@ Here's a brief description of the elements that were modified in this policy. Yo
 <ExtractVariables async="false" continueOnError="false" enabled="true" name="Extract-Geo-Codes">
     <DisplayName>Extract Geo Codes</DisplayName>
     <Source>GeocodingResponse</Source>
-  	<VariablePrefix>geocodeResponse</VariablePrefix>
-  	<JSONPayload>
-    	<Variable name="latitude">
-       		<JSONPath>$.results[0].geometry.location.lat</JSONPath>
-    	</Variable>
-    	<Variable name="longitude">
-       		<JSONPath>$.results[0].geometry.location.lng</JSONPath>
-    	</Variable>
-  	</JSONPayload>
+        <VariablePrefix>geocodeResponse</VariablePrefix>
+        <JSONPayload>
+        <Variable name="latitude">
+                <JSONPath>$.results[0].geometry.location.lat</JSONPath>
+        </Variable>
+        <Variable name="longitude">
+                <JSONPath>$.results[0].geometry.location.lng</JSONPath>
+        </Variable>
+        </JSONPayload>
 </ExtractVariables>
 ```
 Here's a brief description of the elements that were modified in this policy. You can read more about this policy in [Extract Variables policy](http://apigee.com/docs/api-services/reference/extract-variables-policy).
@@ -311,11 +313,11 @@ if (hotelsResponse != null) {
   }
   // set current results cursor
   if (hotelsJSON.params != null && hotelsJSON.params.cursor != null && hotelsJSON.params.cursor != "") {
-  	finalResponse.hotels.resultsMetadata.currentCursor = hotelsJSON.params.cursor[0];
+        finalResponse.hotels.resultsMetadata.currentCursor = hotelsJSON.params.cursor[0];
   }
   // set next results cursor
   if (hotelsJSON.cursor != null && hotelsJSON.cursor != "") {
-  	finalResponse.hotels.resultsMetadata.nextCursor = hotelsJSON.cursor;
+        finalResponse.hotels.resultsMetadata.nextCursor = hotelsJSON.cursor;
   }
   // set the list of hotels
   finalResponse.hotels.entities = hotelsJSON.entities;
