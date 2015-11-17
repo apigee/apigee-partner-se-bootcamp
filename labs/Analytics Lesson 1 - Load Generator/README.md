@@ -22,9 +22,9 @@ Prerequisites
 --------------
 
 - API Services - Lesson 1 completed
-- The [weather-quota API Proxy](https://github.com/DinoChiesa/se-partner-bootcamp/blob/master/loadgen/weather-quota.zip) , which includes an oauth token verification policy.
-- The [oauth API Proxy](https://github.com/DinoChiesa/se-partner-bootcamp/blob/master/loadgen/oauth.zip), which dispenses oauth tokens via the client_credentials flow. 
-- The [runload-1 API Proxy](https://github.com/DinoChiesa/se-partner-bootcamp/blob/master/loadgen/runload-1.zip) , which contains the runLoad.js script which generates load
+- The [weather-quota API Proxy](./weather-quota.zip) , which includes an oauth token verification policy.
+- The [oauth API Proxy](./oauth.zip), which dispenses oauth tokens via the client_credentials flow. 
+- The [runload-1 API Proxy](./runload-1.zip) , which contains the runLoad.js script which generates load
 a tool to invoke single APIs, like curl, Postman, or Advanced REST Client
 
 Estimated Total Time for all Phases: 45 minutes
@@ -38,10 +38,10 @@ Estimated Total Time for all Phases: 45 minutes
   c. From the Environment drop-down, select "test"  
   d. From the main menu, select APIs   
   e. you should see a list of API Proxies. Click the "+ API Proxy" button
-  ![Plus API Proxy](https://raw.githubusercontent.com/DinoChiesa/se-partner-bootcamp/master/loadgen/images/plus-API-Proxy.png)
+  ![Plus API Proxy](./images/plus-API-Proxy.png)
 
   f. In the New API Proxy panel, select "API Bundle". 
-  ![New API Proxy](https://raw.githubusercontent.com/DinoChiesa/se-partner-bootcamp/master/loadgen/images/New-API-Proxy.png)
+  ![New API Proxy](./images/New-API-Proxy.png)
 
   g. Select "Choose file" and upload the oauth.zip bundle . The name of the proxy will be pre-populated with the word "oauth".  That's good.  Click "Build".
 
@@ -50,17 +50,17 @@ Estimated Total Time for all Phases: 45 minutes
   i. In the resulting list of API Proxies, click the "oauth" proxy. 
 
   j. Click the Deployment drop-down, and select "test".  This will deploy the oauth proxy to the test environment.
-  ![New API Proxy](https://raw.githubusercontent.com/DinoChiesa/se-partner-bootcamp/master/loadgen/images/deployment-dropdown.png)
+  ![New API Proxy](./images/deployment-dropdown.png)
 
 2. Import and Deploy the weather-quota apiproxy the same way.  
 
 3. Import the runload-1 apiproxy the same way. EXCEPT - do not deploy the runload-1 proxy.  We'll deploy it in a few moments. 
 
 4. Using the "new API Proxy editor", examine the oauth proxy you have imported - you will see that it has exactly two flows: the first is named AccessTokenClientCredential, which accepts a POST to /token. Apps can use this to request a bearer token which will be verified by the weather-quota proxy. The second is a "default flow" which matches all other inbound requests.  This one just returns an "Unknown request" error (404)  to the caller. 
-![oauth proxy](https://raw.githubusercontent.com/DinoChiesa/se-partner-bootcamp/master/loadgen/images/oauth-proxy.png)
+![oauth proxy](./images/oauth-proxy.png)
 
 5. Now examine the weather-quota proxy in the same way.  You will see that it has two flows - the first queries the weather. This request is protected by an oauth token verification.  The second is again an "unknown request" flow, which gets executed for all other requests. 
-![weather-quota proxy](https://raw.githubusercontent.com/DinoChiesa/se-partner-bootcamp/master/loadgen/images/weather-quota-proxy.png)
+![weather-quota proxy](./images/weather-quota-proxy.png)
 
 6. In the Edge UI, create a new Product, containing the weather-quota proxy: 
 
@@ -72,7 +72,7 @@ Estimated Total Time for all Phases: 45 minutes
   f. set the quota to be 1000 requests for every 1 minute  
   g. ignore the oauth scopes section; it is not used in this exercise.  
   h. add a proxy by clicking the "+ API Proxy" button
-  ![new product](https://raw.githubusercontent.com/DinoChiesa/se-partner-bootcamp/master/loadgen/images/create-new-product-20150630-211843.png)  
+  ![new product](./images/create-new-product-20150630-211843.png)  
 
   i. select the weather-quota apiproxy.  
   j. click Save to save the API Product
@@ -85,7 +85,7 @@ Estimated Total Time for all Phases: 45 minutes
   d. select any developer you like from the dropdown  
   e. ignore the callback URL; it is not used for this exercise.   
   f. click "+ Product"
-  ![new app](https://raw.githubusercontent.com/DinoChiesa/se-partner-bootcamp/master/loadgen/images/create-developer-app-add-product-20150630-212308.png)  
+  ![new app](./images/create-developer-app-add-product-20150630-212308.png)  
   g. select the WeatherQuota-1 product you just created.  
   h. be sure to click the checkmark on the right-hand-side of the form  
   i. click Save  
@@ -98,7 +98,7 @@ Estimated Total Time for all Phases: 45 minutes
 
 
 9. Now examine the runload-1 proxy, in the API Proxy editor. Scroll the left-hand-side project navigator panel all the way down.  Select the runLoad.js file. This is the file that contains the generic logic for the load generator. You can browse the source of this nodejs module. It's about 36k of code. 
-![runload-1 proxy](https://raw.githubusercontent.com/DinoChiesa/se-partner-bootcamp/master/loadgen/images/runload-1-proxy-runloadjs.png)
+![runload-1 proxy](./images/runload-1-proxy-runloadjs.png)
 
 10. You don't need to understand all the code, but you should be aware of the design of runload.js, which is as follows:
 
@@ -111,7 +111,7 @@ Estimated Total Time for all Phases: 45 minutes
 
 
 11. Now, back in the Edge UI, viewing the runload-1 proxy, select the model.json file in that lower panel.  
-![runload-1 proxy](https://raw.githubusercontent.com/DinoChiesa/se-partner-bootcamp/master/loadgen/images/runload-1-proxy-modeljson.png)
+![runload-1 proxy](./images/runload-1-proxy-modeljson.png)
 
 12. This shows some basic configuration for runload. The json looks like this: 
 ```
@@ -240,7 +240,7 @@ Some further notes:
 
 2. runload need not send requests to an API hosted in Apigee Edge. It can be any HTTP target. We use it for Apigee Edge so that we can generate Analytics data. 
 
-3. There is a complete readme for the runload tool, explaining its behavior and configuration, available [here](https://github.com/DinoChiesa/se-partner-bootcamp/blob/master/loadgen/Runload-README.md). There are many more possibilities that we haven't explored here. Also, we suggest that you play around with different values for the rates, and different values for the weights of input, to generate different load profiles. Experiment! 
+3. There is a complete readme for the runload tool, explaining its behavior and configuration, available [here](./Runload-README.md). There are many more possibilities that we haven't explored here. Also, we suggest that you play around with different values for the rates, and different values for the weights of input, to generate different load profiles. Experiment! 
 
 4. You can download the runload API Proxy and re-use it in any organization. We recommend running it for a week or more, to generate reasonable data and Analytis charts that are worth demonstrating. For example: 
-![Plus API Proxy](https://raw.githubusercontent.com/DinoChiesa/se-partner-bootcamp/master/loadgen/images/resulting-chart-20150630-221032.png)
+![Plus API Proxy](./images/resulting-chart-20150630-221032.png)

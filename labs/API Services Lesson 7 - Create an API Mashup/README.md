@@ -10,9 +10,9 @@ Apigee enables you to quickly combine results from multiple APIs to create innov
 API mashups are at the heart of creating consumable APIs. These ‘mashed-up’ APIs provide an overall utility and value-add that is greater than the individual APIs. Apigee Edge enables developers to create API mashups easily using a variety of policies. 
 
 ##Objectives
-You have already seen an example in [Lab 3](../API%20Services%20Lesson%203%20-%20Adding%20Resources%20and%20Policies) where a `Service Callout policy` was used to convert a zip code to geolocation coordinates. That is, in-a-way, an example of a mashup even though the response from that API was not directly used to create the final response sent to the API consumer. The objective of this lesson is create a new proxy (`hotelspro`) that mashups the hotel data with weather data before sending the response to the API consumer.
+You have already seen an example in [Lab 3](../API%20Services%20Lesson%203%20-%20Adding%20Resources%20and%20Policies) where a `Service Callout policy` was used to convert a zip code to geolocation coordinates. That is, in-a-way, an example of a mashup even though the response from that API was not directly used to create the final response sent to the API consumer. The objective of this lesson is create a new proxy (`{your-initials}_hotelspro`) that mashups the hotel data with weather data before sending the response to the API consumer.
 
-To keep things simple for this lesson, you will create a copy of the `hotels` proxy to create a `hotelspro` proxy. You will then modify the `hotelspro` proxy to add the weather data mashup, create a new API Product (`Hospitality Pro Product`) that bundles the `hotelspro` proxy, and then create a new Developer App (`iExplore Pro App`) that has access to the `Hospitality Pro Product`.
+To keep things simple for this lesson, you will create a copy of the `hotels` proxy to create a `{your-initials}_hotelspro` proxy. You will then modify the `{your-initials}_hotelspro` proxy to add the weather data mashup, create a new API Product (`Hospitality Pro Product`) that bundles the `{your-initials}_hotelspro` proxy, and then create a new Developer App (`iExplore Pro App`) that has access to the `Hospitality Pro Product`.
 
 ##Prerequisites
 - [x] API Services - Lesson 5 & 6 completed 
@@ -27,13 +27,13 @@ To keep things simple for this lesson, you will create a copy of the `hotels` pr
 
 ![1_save_as](./images/1_save_as.png)
 
-- In the `Save as new API Proxy` dialog, specify the `API Proxy Name` as `hotelspro` and click `Add`
+- In the `Save as new API Proxy` dialog, specify the `API Proxy Name` as `{your-initials}_hotelspro` and click `Add`
 - You will be taken to the `Overview` tab of the `hotelspro` proxy. Click on the `Edit Revision Summary` button and change the revision properties as follows:
  - Description: **Facade to the BaaS hotels data with weather mashup**
- - Default Proxy Endpoint Base Path: **/v1/hotelspro**
+ - Default Proxy Endpoint Base Path: **/{your-initials}/v1/hotelspro**
 
 - Click on the `Accept` button for the revision property changes to be accepted
-- Go to the `Develop` tab of the `hotelspro` proxy
+- Go to the `Develop` tab of the `{your-initials}_hotelspro` proxy
 - From the `New Policy` drop-down, select the `Assign Message` policy
 - In the `New Policy - Assign Message` dialog box provide the following information:
  - Policy Display Name: **Create Weather Request**
@@ -86,7 +86,7 @@ This request is being prepared for the next step where a Service Callout policy 
     <Response>WeatherResponse</Response>
     <HTTPTargetConnection>
         <Properties/>
-      <URL>http://{your-org}-test.apigee.net/v1/weather/forecast</URL>
+      <URL>http://{your-org}-test.apigee.net/{your-initials}/v1/weather/forecast</URL>
     </HTTPTargetConnection>
 </ServiceCallout>
 ```
@@ -112,8 +112,8 @@ if (weatherResponse != null) {
 ```
 
 The above lines of Javascript mashes-up the Weather information with the Hotel information in the final response that is being sent to the API consumer. 
-- Click on the `Save` button to save the changes made to the `hotelspro` proxy 
-- Click on the `Deployment` drop down and select `test` to deploy the `hotelspro` proxy to the test environment.
+- Click on the `Save` button to save the changes made to the `{your-initials}_hotelspro` proxy 
+- Click on the `Deployment` drop down and select `test` to deploy the `{your-initials}_hotelspro` proxy to the test environment.
 
 ###Creating the `Pro` API Product
 
@@ -130,7 +130,7 @@ Product Details
 Resources 
  - Paths: **/ & /****
  - Revision: **1**
- - API Proxy: **hotelspro**
+ - API Proxy: **{your-initials}_hotelspro**
 
 
 ###Creating the “iExplore Pro App”  Developer App 
@@ -144,10 +144,10 @@ Resources
  - Products : Click the +Product to add a product. Select **Hospitality Pro** Product from drop down and then click symbol `√` . Save the developer App.
 
 
-###Testing the ‘hotelspro’ Proxy
+###Testing the ‘{your-initials}_hotelspro’ Proxy
 
 - Using Postman, obtain the access_token using the Consumer Key and Consumer Secret of the iExplore Pro App
-- Start a Trace session for the `hotelspro` proxy
+- Start a Trace session for the `{your-initials}_hotelspro` proxy
 - Set up the `/GET hotelspro` request in Postman with the following query parameters and header: 
 
  - Query Parameters:
@@ -160,7 +160,7 @@ Resources
 
 - Send the `Postman` request. 
 - Review the `Trace` for the proxy and the returned response to ensure that the flow is working as expected. Scroll towards the bottom of the returned response to ensure that weather related information is also included for the appropriate zipcode.
-- Stop the `Trace` session for the `hotelspro` proxy
+- Stop the `Trace` session for the `{your-initials}_hotelspro` proxy
 
 ##Summary
 That completes this hands-on lesson. In this lesson you learned how to create a mashup using a Service Callout and merging responses from two different APIs into one before sending it to the API consumer. Using this approach you can obtain additional information from various callouts and add it to the final response to create mashups of different data as appropriate for your consuming apps.

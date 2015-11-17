@@ -1,0 +1,122 @@
+{
+	"id": "7dd0689e-98f2-2edd-3762-37331ec413a8",
+	"name": "SE Technical Enablement",
+	"description": "",
+	"order": [
+		"c8505b5e-e878-76f1-2922-250c6904f0d8",
+		"51b83f4c-2695-031b-b4fd-bfba6df06d65",
+		"b76b59cb-860f-0db8-6019-5c4c2797faf3",
+		"f37e5d41-a085-cf65-c506-8b19da68c030",
+		"1fdf1b0a-0dad-3117-fe87-efd6810dc3cc"
+	],
+	"folders": [],
+	"timestamp": 1414263531207,
+	"synced": false,
+	"requests": [
+		{
+			"id": "1fdf1b0a-0dad-3117-fe87-efd6810dc3cc",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "https://{{org}}-{{env}}.apigee.net/oauth2/token?grant_type=client_credentials",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "client_id",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_secret",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1414957349851,
+			"name": "/POST OAuth Token - Client Cred",
+			"description": "",
+			"collectionId": "7dd0689e-98f2-2edd-3762-37331ec413a8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "51b83f4c-2695-031b-b4fd-bfba6df06d65",
+			"headers": "Content-Type: text/plain\n",
+			"url": "http://{{org}}-{{env}}.{{domain}}/{{initials}}/v1/hotelspro?zipcode&radius",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1414988744968,
+			"name": "/GET hotelspro",
+			"description": "",
+			"collectionId": "7dd0689e-98f2-2edd-3762-37331ec413a8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "b76b59cb-860f-0db8-6019-5c4c2797faf3",
+			"headers": "Content-Type: text/plain\n",
+			"url": "http://localhost:9000/forecast?zipcode=98101",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "/GET forecast - localhost",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1414389970688,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "7dd0689e-98f2-2edd-3762-37331ec413a8",
+			"synced": false
+		},
+		{
+			"id": "c8505b5e-e878-76f1-2922-250c6904f0d8",
+			"headers": "Content-Type: text/plain\n",
+			"url": "http://{{org}}-{{env}}.{{domain}}/{{initials}}/v1/hotels?zipcode&radius",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1414962776658,
+			"name": "/GET hotels",
+			"description": "",
+			"collectionId": "7dd0689e-98f2-2edd-3762-37331ec413a8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "f37e5d41-a085-cf65-c506-8b19da68c030",
+			"headers": "Content-Type: text/plain\n",
+			"url": "http://{{org}}-{{env}}.{{domain}}/{{initials}}/v1/weather/forecast?zipcode=98101",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "/GET forecast - Apigee Edge",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1414392690646,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "7dd0689e-98f2-2edd-3762-37331ec413a8",
+			"synced": false
+		}
+	]
+}

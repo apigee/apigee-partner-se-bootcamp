@@ -117,13 +117,13 @@ Provide the following values during the interactive npm init session to create a
  - version: 1.0.0
  - description: Apigee API facade to a Yahoo weather service
  - entry point: weather.js
- - test command: curl -i http://<host>/v1/weather/forecast?zipcode=<zipcode>
+ - test command: curl -i http://<host>/<your-initials>/v1/weather/forecast?zipcode=<zipcode>
  - git repository: 
  - keywords:
  - author: <your name>
  - license: ISC
 
-**Note:** You do not have to replace **only** the `<host>` with the actual value
+**Note:** You do not have to replace **only** the `<host>` and `<your-initials>` with the actual value
 
 ```sh
 npm install express@3.x.x --save
@@ -245,7 +245,7 @@ Password: Your Apigee Edge Org. Admin password
   deployed
   environment = test
   base path = /
-  URI = http://demo37-test.apigee.net/v1/weather
+  URI = http://demo37-test.apigee.net/{your-initials}/v1/weather
  ```
 
  - Go to the Postman tool and run the `/GET forecast - Apigee Edge` request. If everything is working correctly, you should see a response similar to the one received from weather API running on your localhost.

@@ -80,7 +80,7 @@ Log in to your organization on Apigee Edge.
  - Starting Point Type: **Backend Service**
  - Backend Service URL: **https://weather.yahoo.com**
  - Name: edgemicro_{your_initials}_weather
- - Project Base Path: /v1/weather
+ - Project Base Path: /{your-initials}/v1/weather
  - Description: Edge Micro Proxy that will run locally to the node.js service
  - Features: None
 
@@ -150,7 +150,7 @@ With this information, Edge Microgateway knows which proxies and proxy paths are
 - To test our API Proxy, call the 
 
 ```
-curl -i http://localhost:8000/v1/weather/forecastrss?w=12797282
+curl -i http://localhost:8000/{your-initials}/v1/weather/forecastrss?w=12797282
 ```
 
 - If you will see an authorization error, your Micro Gateway is listening for the API you have configured in the previous step
@@ -166,7 +166,7 @@ curl -i -X POST "http://<org name>-test.apigee.net/edgemicro-auth/token" -H "Con
 - Make the API Call with a bearer token you received in the step above
 
 ```
-curl -i -H "Authorization:Bearer <JWT Token>" http://localhost:8000/v1/weather/forecast?zipcode=95113
+curl -i -H "Authorization:Bearer <JWT Token>" http://localhost:8000/{your-initials}/v1/weather/forecast?zipcode=95113
 ```
 
 - You should see the response json
