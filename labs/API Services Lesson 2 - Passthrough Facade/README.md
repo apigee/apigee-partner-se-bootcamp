@@ -48,7 +48,7 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
         ![5_deployment.png](./images/5_deployment.png)
  - The green dot in the dropdown indicates that the proxy we just created is deployed to the `test` environment
  - Click on the `test` environment name. This undeploys the proxy from the `test` environment
- - Click on the `Deployment` drop-down again and select the `test` environment. This re-deploys the proxy to the `test` environment.
+ - Click on the `Deployment` drop-down again. Notice the dot adjacent to the test environment is now greyed. Select the `test` environment. This re-deploys the proxy to the `test` environment.
 - **Tracing the execution of a proxy** can also be done easily from the Management UI. This is a very powerful capability of the product since it makes it easy to troubleshoot and monitor API proxies running on Apigee Edge. Trace lets you probe the details of each step through an API proxy flow. 
  - From the `hotels` API Proxy page, click on the `Trace` tab
         ![6_trace.png](./images/6_trace.png)
