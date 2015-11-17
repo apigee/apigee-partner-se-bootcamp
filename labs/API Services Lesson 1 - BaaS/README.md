@@ -102,7 +102,7 @@ https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels
  - Go back to the BaaS portal
  - While in the `hotels` collection, use the `GET` method to query for hotels in the city of `Burlingame`
  ```
- select name where city = 'Burlingame'
+ select * where city = 'Burlingame'
  ```
  ![Select App](./images/5_query_editor.png)
  - Run the query and review the results. You’ll notice that only those hotels with the city attribute matching `Burlingame` are returned.
