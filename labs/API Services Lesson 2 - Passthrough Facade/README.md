@@ -43,12 +43,12 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
  - Review the information on the resulting API Proxy page
  	![4_api_overview.png](./images/4_api_overview.png)
  - That’s it! With those few steps, you’ve deployed a simple passthrough API Proxy which acts as a facade to our BaaS `hotels` data collection
-- **Deploying & Undeploying a Proxy** to a given environment from the Management UI is simple too.
- - Click on the `Deploy` drop-down on the API Proxy page
+- **Deployment** - deploying and undeploying a proxy makes the proxy available for use at runtime, and makes it unavailable, respectively. These deplpoyment actions  apply to a particular {proxy, environment} pair. It's easy to do from the Management UI.
+ - Click on the `Deployment` drop-down on the API Proxy page
  	![5_deployment.png](./images/5_deployment.png)
  - Notice that the proxy we just created is deployed to the `test` environment
  - Click on the `test` environment name. This undeploys the proxy from the `test` environment
- - Click on the `Deploy` drop-down again and select the `test` environment. This re-deploys the proxy to the `test` environment
+ - Click on the `Deployment` drop-down again and select the `test` environment. This re-deploys the proxy to the `test` environment
 - **Tracing the execution of a proxy** can also be done easily from the Management UI. This is a very powerful capability of the product since it makes it easy to troubleshoot and monitor API proxies running on Apigee Edge. Trace lets you probe the details of each step through an API proxy flow. 
  - From the `hotels` API Proxy page, click on the `Trace` tab
  	![6_trace.png](./images/6_trace.png)
