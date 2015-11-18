@@ -115,31 +115,32 @@ This request is being prepared for the next step where a Service Callout policy 
 - From the Apigee Edge Management UI, go to `Publish` → `Products`
 - Add a new API Product with the following Product Details & Resources:
 
-Product Details
- - Display Name: **Hospitality Pro Product**
- - Description: **API Bundle for a Pro Hospitality App.**
- - Environment: **Test**
- - Access: **Public**
- - Key Approval Type: **Automatic**
+  Product Details
+    - Display Name: **Hospitality Pro Product**
+    - Description: **API Bundle for a Pro Hospitality App.**
+    - Environment: **Test**
+    - Access: **Public**
+    - Key Approval Type: **Automatic**
 
-Resources 
- - Paths: **/ & /****
- - Revision: **1**
- - API Proxy: **{your-initials}_hotelspro**
+  Resources 
+    - Paths: **/ & /****
+    - Revision: **1**
+    - API Proxy: **{your-initials}_hotelspro**
 
 
-###Creating the “iExplore Pro App”  Developer App 
+### Creating the “iExplore Pro App”  Developer App 
+
 - From the Apigee Edge Management UI go to `Publish`->`Developer Apps`
 - Add a new Developer Apps with following app details:
- - Name : **iExplore Pro App**
- - Display Name: **iExplore Pro App** 
- - Developer: Select a developer from Dropdown. In case no developer is present , create a new Internal developer from **Publish->Developers**
- - Callback Url: 
- - Notes: 
- - Products : Click the +Product to add a product. Select **Hospitality Pro** Product from drop down and then click symbol `√` . Save the developer App.
+  - Name : **iExplore Pro App**
+  - Display Name: **iExplore Pro App** 
+  - Developer: Select a developer from Dropdown. In case no developer is present , create a new Internal developer from **Publish->Developers**
+  - Callback Url: 
+  - Notes: 
+  - Products : Click the +Product to add a product. Select **Hospitality Pro** Product from drop down and then click symbol `√` . Save the developer App.
 
 
-###Testing the ‘{your-initials}_hotelspro’ Proxy
+### Testing the ‘{your-initials}_hotelspro’ Proxy
 
 - Using Postman, obtain the access_token using the Consumer Key and Consumer Secret of the iExplore Pro App. If you do not have the Postman collection, you can use curl, like so: 
   ```
