@@ -290,7 +290,7 @@ Here's a brief description of the elements in this policy. You can read more abo
 
 - Once again, "+ Step" 
 
-- In the Add Setep dialog box, scroll and select the `Assign Message` policy. Specify the following properties:
+- In the Add Step dialog box, scroll and select the `Assign Message` policy. Specify the following properties:
   ```
   Display Name: Set Query Parameters
   Name: Set-Query-Parameters
@@ -326,18 +326,20 @@ Here's a brief description of the elements in this policy. You can read more abo
 
 ### Testing the API Proxy with the location query after deploying changes
 
-All the policies depicted in the diagram earlier in this lesson for the request flow have been implemented. Your `Get Hotels` Proxy should look as follows:
+All the policies depicted in the diagram earlier in this lesson for the request flow have been implemented. Your Proxy Editor should look as follows:
 
-![4_policies_added](./images/4_policies_added.png)
+![16_all_steps_added](./images/16_all_steps_added.png)
 
-Though you could have tested each policy iteratively as they were being added to the flow, you have sufficient logic in the flow to test the behavior of the flow to see if the results being returned from the API BaaS are as expected. 
+You could have tested the proxy in stages, as you added each policy to the flow. Instead, we added a set of policies in a group before testing. Now there is complete logic in the flow to allowing testing the behavior of the flow to see if the results being returned from the API BaaS are as expected. 
 
 - Click on the `Save` button to save and deploy the changes to the `{your-initials}_hotels` API Proxy
 
-![5_save_proxies](./images/5_save_proxies.png)
+  ![17_click_save](./images/17_click_save.png)
 
 - Wait for the `Successfully saved API Proxy` message to appear and verify that the ‘{your-initials}_hotels’ proxy is deployed to the `test` environment
-- Go to the `Trace` tab and start a trace session by clicking the `Start Trace Session` button
+
+- Click the `Trace` tab and start a trace session by clicking the `Start Trace Session` button
+
 - Use Postman to test the `/GET hotels` request with the following query parameters combinations and review the results being returned
  - zipcode=98101&radius=1000
  - zipcode=98101&radius=200
@@ -347,80 +349,89 @@ Though you could have tested each policy iteratively as they were being added to
 Notice that the responses being returned by the API BaaS for the various query parameter combinations are different as the location-based query finds hotels that match the criteria.
 
 - Switch back to the `Trace` tab in the Apigee Edge Management UI. Review the executed policies and associated headers & variable data to better understand the flow
-- Note that when the proxy is called without any query parameters now, it returns an fault indicating that the `zipcode` query parameter could not be resolved
 
-###Modifying the response sent to the API client
+- Note that when the proxy is called without any query parameters now, it returns an fault indicating that the `zipcode` query parameter could not be resolved. You could customize this error message or add a condition to check for missing query paramters. We'll leave that as an exercise for the reader. 
+
+### Modifying the response sent to the API client
 
 Many times the response coming from the backend target endpoint is not exactly what you want to send to the calling client. The response may need to be transformed, filtered, or augmented. For example, as you review the response being returned from the API BaaS for this lesson, you will notice that it has several metadata attributes (e.g. `application`, `path`, `organization`, `applicationName`, etc.) that you may want to filter out prior to sending the response. You will use a simple Javascript policy, similar to the one used before to create the location query variable, to create a customized response.
 
-- Go to the `Design` tab of `{your-initials}_hotels` proxy in the Apigee Edge Management UI.
-- From the `New Policy` drop-down, select the `Javascript` policy and add it with the following properties:
+- Click back to the `Develop` tab of `{your-initials}_hotels` proxy in the Apigee Edge Management UI.
 
- - Policy Display Name: Create Final Response
- - Policy Name: Create-Final-Response
+- Insure the "Get Hotels" flow is selected in the left-hand-side navigator. 
+
+- in the center panel, click and drag the divider downward.  Then click the "+ Step" in the response flow. 
+  ![18_one_more_js_policy](./images/18_one_more_js_policy.png)
+
+- In the dialog, scroll and select the `JavaScript` policy, and specify these values: 
+
+ - Display Name: Create Final Response
+ - Name: Create-Final-Response
  - Script File: Create new script
  - Script Name: Create-Final-Response.js
- - Attach Policy: Checked
- - Flow: Flow Get Hotels, Proxy Endpoint default
- - Segment: Response
-- Add the following code to the `Create-Final-Response.js` script:
 
-```javascript
-var hotelsResponse = context.getVariable("response.content"),
-    zipcode = context.getVariable("zipcode"),
-    radius = context.getVariable("radius"),
-    finalResponse = {};
+- at the bottom of the left-hand-side Nav, click to select the `Create-Final-Response.js` resource
 
-// initialize hotels response
-finalResponse.hotels = {};
-// add queryparams used as part of the hotels response
-finalResponse.hotels.queryparams = JSON.parse('{ ' + '"zipcode" : "' + zipcode + '", "radius" : "' + radius + '" }');
-// add the hotels response   
-if (hotelsResponse != null) {
-  var hotelsJSON = JSON.parse(hotelsResponse);
-  finalResponse.hotels.resultsMetadata = {};
-  // set results count
-  finalResponse.hotels.resultsMetadata.count = 0;
-  if (hotelsJSON.count != null && hotelsJSON.count != "") {
-      finalResponse.hotels.resultsMetadata.count = hotelsJSON.count;
-  }
-  // set current results cursor
-  if (hotelsJSON.params != null && hotelsJSON.params.cursor != null && hotelsJSON.params.cursor != "") {
-        finalResponse.hotels.resultsMetadata.currentCursor = hotelsJSON.params.cursor[0];
-  }
-  // set next results cursor
-  if (hotelsJSON.cursor != null && hotelsJSON.cursor != "") {
-        finalResponse.hotels.resultsMetadata.nextCursor = hotelsJSON.cursor;
-  }
-  // set the list of hotels
-  finalResponse.hotels.entities = hotelsJSON.entities;
-}
+- in the lower half of the center panel, copy-paste the following JS code: 
+    ```javascript
+    var hotelsResponse = context.getVariable("response.content"),
+        // initialize hotels response
+        finalResponse = {
+          hotels : {
+            queryparams : {
+              zipcode : context.getVariable("zipcode"),
+              radius : context.getVariable("radius")
+            }
+          }
+        };
 
-// update the response that will be returned to the client
-context.setVariable("response.content", JSON.stringify(finalResponse));
-```
+    // add the hotels response
+    if (hotelsResponse !== null) {
+      var hotelsJSON = JSON.parse(hotelsResponse);
+      var md = {count : hotelsJSON.count || 0};
 
-The above script creates a customized JSON response by merging information from the query parameters received in the original request and certain attributes from the API BaaS response. The final JSON format being created and returned is as follows:
-
-```json
-{
-    "hotels": {
-        "queryparams": {
-            "zipcode": "zip code value",
-            "radius": "radius value"
-        },
-        "resultsMetadata": {
-            "count": "count value",
-            "currentCursor": "current cursor value",
-            "nextCursor": "next cursor value"
-        },
-        "entities": [
-            "Array of hotel entities"
-        ]
+      // set current results cursor
+      if (hotelsJSON.params && hotelsJSON.params.cursor) {
+        md.currentCursor = hotelsJSON.params.cursor[0];
+      }
+      // set next results cursor
+      if (hotelsJSON.cursor) {
+        md.nextCursor = hotelsJSON.cursor;
+      }
+      finalResponse.hotels.resultsMetadata = md;
+      // set the list of hotels
+      finalResponse.hotels.entities = hotelsJSON.entities;
     }
-}
-```
-- Save the changes to the API Proxy, wait for it to successfully deploy and test again using Postman as described in Step 8 earlier in the lesson.
 
-##Summary
-That completes this hands-on lesson. You learned how to use a variety of transformation and extensibility policies to a proxy to create an API facade that has a more consumable interface than the raw backend target endpoint interface. You also learned how to call external services within the flow using the Service Callout extensibility policy and to use the results to augment the request to the target endpoint. Finally you learned how to quickly incorporate Javascript code to transform and manipulate data before sending it to the API consumer.
+    // update the response that will be returned to the client
+    context.setVariable("response.content", JSON.stringify(finalResponse));
+    ```
+
+  The above script creates a customized JSON response by merging information from the query parameters received in the original request and certain attributes from the API BaaS response. The final JSON format being created and returned is as follows:
+
+    ```json
+    {
+        "hotels": {
+            "queryparams": {
+                "zipcode": "98010",
+                "radius": "1000"
+            },
+            "resultsMetadata": {
+                "count": "211",
+                "currentCursor": "ABCDEFG126528",
+                "nextCursor": "9198198191jskjskjs"
+            },
+            "entities": [
+                ...Array of hotel entities...
+            ]
+        }
+    }
+    ```
+
+- Save the changes to the API Proxy, wait for it to successfully deploy and test again using Postman as described in the earlier in the lesson.
+
+## Summary
+
+That completes this hands-on lesson. 
+
+In this lesson you learned how to use a variety of transformation and extensibility policies within Apigee Edge to create an API Proxy that acts as a facade for an existing  backend system. The facade exposes a more consumable interface than the raw backend. You also learned how to call external services within the flow using the Service Callout extensibility policy and to use the results to augment the request to the target endpoint. Finally you learned how to quickly incorporate Javascript code to transform and manipulate data before sending it to the API consumer.
