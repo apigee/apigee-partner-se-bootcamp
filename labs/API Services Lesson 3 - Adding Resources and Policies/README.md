@@ -106,15 +106,25 @@ Now let’s implement the policies.
 
 ![3_add_step](./images/3_add_step.png)
 
-- In the `New Policy - Assign Message` dialog box provide the following information:
+- In the resulting dialog box, Scroll and choose the assign message policy
+
+![3_choose_assign_message](./images/3_choose_assign_message.png)
+
+- Specify these values for the `Assign Message` policy customizations. 
 ```
- Policy Display Name: Create Geo Coding Request
- Policy Name: Create-Geo-Coding-Request
- Attach Policy: Checked
- Flow: Flow Get Hotels, Proxy Endpoint default
- Segment: Request
+ Display Name: Create Geo Coding Request
+ Name: Create-Geo-Coding-Request
 ``` 
-- Click on the `Create Geo Coding Request` policy in the pipeline and modify the XML configuration in the `Code: Create-Geo-Coding-Request` section, which appears underneath the Map as follows:
+
+- You will now see a policy icon appearing in the flow canvas. Click it.  
+![3_am_policy_icon](./images/3_am_policy_icon.png)
+
+- Make sure you have selected the policy icon and that it is highlighted. 
+![3_verify_am_policy](./images/3_verify_am_policy.png)
+
+- In the lower panel beneath the canvas, modify the XML configuration. 
+
+  in the `Code: Create-Geo-Coding-Request` section, which appears underneath the Map as follows:
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <AssignMessage async="false" continueOnError="false" enabled="true" name="Create-Geo-Coding-Request">
