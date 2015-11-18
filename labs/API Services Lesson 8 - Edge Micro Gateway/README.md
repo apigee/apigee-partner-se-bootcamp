@@ -153,6 +153,7 @@ Log in to your organization on Apigee Edge.
   MTQ0NzQ0NjgwNzkxOQ edge micro listening on port 8000
   ```
 
+
 At this point, the agent retrieves a payload of Edge Microgateway configuration information from Apigee Edge. This information includes:
 - [x] The public key we created and stored previously in the Apigee vault.
 - [x] A JSON representation of all Edge Microgateway­aware proxies that exist in the organization/environment. These are all proxies that are named with the prefix edgemicro_. 
