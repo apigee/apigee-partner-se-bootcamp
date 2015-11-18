@@ -46,24 +46,26 @@ In this lab you will go through configuring, get working Edge Microgateway insta
   ./edgemicro -h
   ```
 
-- Put the  cli/bin directory in your PATH variable. This way, you'll be able to execute Edge Microgateway commands from anywhere
+- Put the  cli/bin directory in your PATH variable. This way, you'll be able to execute Edge Microgateway commands from anywhere.
   ```
   export PATH=<Edge_Micro_Gateway_Installaton_Folder>/cli/bin:$PATH
   echo $PATH
   ```
 
-  **Note:** Throughout the tutorial, we assume that the  cli/bin directory is in your  PATH. If you do not put it in your  PATH, then you need to execute CLI commands from the `cli/bin` directory.
+  **Note:** Throughout the tutorial, we assume that the  `cli/bin` directory is in your  PATH. If you do not put it in your  PATH, then you need to execute CLI commands from the `cli/bin` directory.  OR, you need to prepend the ./cli/bin directory to all `edgemicro` commands. 
 
 - Configure the micro gateway to talk to the Edge deployment on public/private cloud
   ```
-  ./edgemicro configure -o <org­name> -e <env-name> -u <your Apigee email>
+  ./edgemicro configure -o <org-name> -e <env-name> -u <your Apigee email>
   ```
-- **Copy the** `Key`, `Secret` and `vault info`, for later parts of the exercise
+- **Copy the** `Key`, `Secret` and `vault info`, for later parts of the exercise. 
 
-- Verify that the edge micro is configured with the Edge Cloud org
+- Using the key and secret you just viewed, verify that the edge micro is configured correctly with the Edge Cloud org.
   ```
-  ./edgemicro verify -o <org­name> -e <env-name> -k <key> -s <secret>
+  ./edgemicro verify -o <org-name> -e <env-name> -k <key> -s <secret>
   ```
+
+
 
 ### Start the Edge Micro agent
 
@@ -181,8 +183,8 @@ Log in to your organization on Apigee Edge.
     -H "Content-Type:application/json" \
    -d '{
     "grant_type": "client_credentials", 
-    "client_id":"<client_id>", 
-    "client_secret": "<client_secret"
+    "client_id":"...CLIENT_ID_HERE...", 
+    "client_secret": "...CLIENT_SECRET_HERE..."
   }'
   ```
 
