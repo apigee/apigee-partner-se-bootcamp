@@ -126,62 +126,61 @@ Identifying an API consumer is beneficial from an analytics and audit perspectiv
 
 ### Removing the API Key from the query parameters
 
-- Using the `New Policy` drop-down from the `Design` tab of the `{your-initials}_hotels` proxy, add the `Assign Message` policy with the following properties:
+- Once again, click "+ Step"
 
- - Policy Display Name: **Remove APIKey QP** 
- - Policy Name: **Remove-APIKey-QP**
- - Attach Policy: **Checked**
- - Flow: **Flow PreFlow, Proxy Endpoint default**
- - Segment: **Request**
+- In the "Add Step" dialog, scroll and select the `Assign Message` policy. Specify the following values:
 
-- The `Remove APIKey QP` policy will get added after the `Response Cache` policy. **Drag and move** the `Remove APIKey QP` policy to be _**before the**_ `Response Cache` policy
+  - Display Name: **Remove APIKey QP** 
+  - Name: **Remove-APIKey-QP**
 
-![2_remove_api_key_policy.png](./images/2_remove_api_key_policy.png)
+- The `Remove APIKey QP` policy will get added after the `Response Cache` policy. **Drag and move** the `Remove APIKey QP` policy to be _**before the**_ `Response Cache` policy. It should appear like this: 
+
+  ![05_with_assign_message](./images/05_with_assign_message.png)
  
-
 - For the `Remove APIKey QP` policy, change the XML configuration of the policy using the `Code: Remove APIKey QP` panel as follows:
 
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<AssignMessage async="false" continueOnError="false" enabled="true" name="Remove-APIKey-QP">
-    <DisplayName>Remove APIKey QP</DisplayName>
-    <Remove>
+  ```xml
+  <AssignMessage name="Remove-APIKey-QP">
+      <DisplayName>Remove APIKey QP</DisplayName>
+      <Remove>
         <QueryParams>
-            <QueryParam name="apikey"></QueryParam>
+          <QueryParam name="apikey"></QueryParam>
         </QueryParams>
-    </Remove>
-    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
-    <AssignTo createNew="false" transport="http" type="request"/>
-</AssignMessage>
-```
+      </Remove>
+      <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+      <AssignTo createNew="false" transport="http" type="request"/>
+  </AssignMessage>
+  ```
 
-As a security measure, the `Remove APIKey QP` policy simply removes the `apikey` query parameter from the HTTP request message attached to the flow so it is not sent to the backend service. In this scenario we are removing the `apikey` immediately after verify API Key policy, but depending on your use case, removing the `apikey` may need to be done at a later stage in the flow.
+  As a security measure, the `Remove APIKey QP` policy simply removes the `apikey` query parameter from the HTTP request message attached to the flow so it is not sent to the backend service. In this scenario we are removing the `apikey` immediately after verify API Key policy, but depending on your use case, removing the `apikey` may need to be done at a later stage in the flow.
 
-###Testing the API Key Verification Policy
+### Testing the API Key Verification Policy
 
 Until now anyone with the URL to the `hotel` API Proxy has been able to make a request with appropriate parameters and get a response back. Now that you have added the API Key Verification policy, that will no longer be the case. 
 
 - Start the `Trace` session for the `{your-initials}_hotels` proxy
-b)      Now that the API Key Verification policy has been added to the proxy, try and send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200`
+
+- send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200`
 
 - You will notice that the following fault is returned since an API Key has not been provided as a request query parameter:
-
-```json
-{
+  ```json
+  {
     "fault": {
-        "faultstring": "Failed to resolve API Key variable request.queryparam.apikey",
-        "detail": {
-            "errorcode": "steps.oauth.v2.FailedToResolveAPIKey"
-        }
+      "faultstring": "Failed to resolve API Key variable request.queryparam.apikey",
+      "detail": {
+        "errorcode": "steps.oauth.v2.FailedToResolveAPIKey"
+      }
     }
-}
-```
-The above response shows that the API Key Verification policy is being enforced as expected.
+  }
+  ```
+
+  The above response shows that the API Key Verification policy is being enforced as expected.
 
 - Review the `Trace` for the proxy and the returned response to ensure that the flow is working as expected.
+
 - Stop the `Trace` session for the `{your-initials}_hotels` proxy
 
-###Obtaining an API Key 
+### Obtaining an API Key 
 
 Up to now you have been playing the role of an API Developer configuring various policies in the `{your-initials}_hotels` proxy. 
 
