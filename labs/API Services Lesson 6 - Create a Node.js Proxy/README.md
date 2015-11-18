@@ -227,33 +227,29 @@ This command downloads the `urlparse` module locally and updates the dependencie
 
   As mentioned in the Overview section, running on Edge, Node.js apps take advantage of Edge's enterprise-grade cloud operations like traffic management, security, deployment tools, revision control, logging, and analytics. You can deploy an existing Node.js API application, including any dependent Node.js modules, from your local system to Apigee Edge using a command-line utility called `apigeetool`. The utility automatically bundles the application and its dependencies into an API proxy and deploys it on Edge. To deploy the weather API to Apigee Edge:
 
- - In the terminal, ensure that you are in the `apigee/node-api/weather` directory
- - Run the following command:
- ```sh
-apigeetool deploynodeapp -n {your-initials}_weather -d . -m weather.js -o your-org -e test -b /{your-initials}/v1/weather
- ```
-
- ***Note:*** Replace `your-org` in the above command with the actual name of your Apigee Edge organization.
-
- Provide the following when prompted:
- ```
-Username: Your Apigee Edge Org. Admin username
-Password: Your Apigee Edge Org. Admin password
- ```
-
- - Wait for the `apigeetool` to deploy the API to Apigee Edge. `apigeetool` uses the administrative APIs exposed by Apigee Edge to import and then deploy the API proxy for this nodejs server. 
-
-If the API is deployed successfully, you should see a message similar to the following:
-
-  ```
-  "weather" Revision 1
-    deployed
-    environment = test
-    base path = /
-    URI = http://ORGNAME-ENVNAME.apigee.net/{your-initials}/v1/weather
+  - In the terminal, ensure that you are in the `apigee/node-api/weather` directory
+  - Run the following command:
+  ```sh
+  apigeetool deploynodeapp -n {your-initials}_weather -d . -m weather.js -o YOUR-ORG -e test -b /{your-initials}/v1/weather
   ```
 
- - Go to the Postman tool and run the `/GET forecast - Apigee Edge` request. If everything is working correctly, you should see a response similar to the one received from weather API running on your localhost.
+  ***Note:*** Replace `YOUR-ORG` in the above command with the actual name of your Apigee Edge organization.
+
+  Provide the Apigee Edge Org. Admin username and password when prompted.
+
+  - Wait for the `apigeetool` to deploy the API to Apigee Edge. `apigeetool` uses the administrative APIs exposed by Apigee Edge to import and then deploy the API proxy for this nodejs server. 
+
+  If the API is deployed successfully, you should see a message similar to the following:
+
+    ```
+    "weather" Revision 1
+      deployed
+      environment = test
+      base path = /
+      URI = http://ORGNAME-ENVNAME.apigee.net/{your-initials}/v1/weather
+    ```
+
+- Go to the Postman tool and run the `/GET forecast - Apigee Edge` request. If everything is working correctly, you should see a response similar to the one received from weather API running on your localhost.
 
 
 ## Extra Credit
