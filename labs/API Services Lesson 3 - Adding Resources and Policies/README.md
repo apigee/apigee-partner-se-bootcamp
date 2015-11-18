@@ -34,42 +34,55 @@ By the end of this lesson, you will have enhanced the `{your-initials}_hotels` p
 ##Estimated Time: 90 mins
 
 ###Adding Flows to an API Proxy
-A "flow" in an Apigee Edge API Proxy is one branch of the condition tree that processes inbound requests.  In general, an API Proxy will have one or more flows, and the API Proxy will perform different logic steps in each flow. A "passthrough" proxy may have zero flows, and will simply pass the inbound request unchanged to the backend system.
+A "flow" in an Apigee Edge API Proxy is one branch of the condition tree that processes inbound requests. In general, an API Proxy will have one or more flows, and the API Proxy will perform a distinct set of logic steps, or "policies", in each flow. A "passthrough" proxy may have zero flows, and will simply pass the inbound request unchanged to the backend system.
 
-Adding Flows to an API Proxy is done from the `Overview` tab of the API Proxy
+Adding Flows to an API Proxy is done from the `Develop` tab in the Edge UI. 
 - Go to the Apigee Edge Management UI browser tab
-- Go to the `hotel` proxy’s `Overview` tab
-- From the `resources` section, click on the `+ Resources` button
+- Click the "APIs" dropdown, and select "API Proxies"
+- Click your hotels proxy, the one named {yourinitials}_hotels 
+- You will now be viewing the  `xx_hotel` proxy’s `Overview` tab
+- Click the `Develop` tab  
+![0_develop_tab](./images/0_develop_tab.png)  
+
+- In the left-hand-side navigator, find the "Proxy Endpoints" section.  Click the + adjacent to the "default" proxy endpoint. 
+![0_new_flow](./images/0_new_flow.png)  
+
 - In the new resource row, provide the following properties:
 
 ```
- Name: Get Hotels
- Proxy Endpoint: Default
- Method: GET
+ Flow Name: Get Hotels
+ Description: Get Hotels
+ Condition Type: Path and Verb
  Path: /
+ Verb: GET
 ```
-After setting those properties, click on the `Checkbox` in the `Actions` column to complete adding the resource 
+After setting those properties, click on the `Add` button to complete adding the Flow. 
+![1_add_flow](./images/1_add_flow.png)
 
-![1_add_resources](./images/1_add_resources.png)
-
-- Add another resource with the following properties:
+- Follow the above steps to add another Flow with the following properties:
 ```
- Name: Get Individual Hotel
- Proxy Endpoint: Default
- Method: GET
+ Flow Name: Get Individual Hotel
+ Description: Get Individual Hotel
+ Condition Type: Path and Verb
  Path: /{hotel-uuid}
+ Verb: GET
 ```
 
 ###Adding Policies to a Proxy
-is done from the `Design` tab of the API Proxy.
-- Now that you have an API Proxy configured with a couple of resources, you will add logic to the `Get Hotels` resource using policies. 
- The goal is to have the proxy perform a geo-location query against our `hotels` BaaS data collection to return results within a certain radius of a zipcode (zipcode and radius both being query parameters provided when calling the `/{your-initials}/v1/hotels` API).
+Policies are logic steps. Apigee Edge provides 30+ out of the box policies. Many can be configured to customize their behavior. To add intelligence of behavior to an API Proxy, you add policies. This is done from the `Develop` tab of the API Proxy Editor UI.
+
+Now that you have an API Proxy configured with several flows, you will add logic to the `Get Hotels` flow using policies. 
+
+The goal is to have the proxy perform a geo-location query against our `hotels` BaaS data collection to return results within a certain radius of a zipcode. The zipcode and radius will both  be passed as query parameters for the inbound API, when invoking `/{your-initials}/v1/hotels`.
+
  API BaaS supports the ability to retrieve entities within a specified distance of any geocoordinate based on its location property:
 ```
 location within <distance_in_meters> of <latitude>, <longitude>
 ````
- As you can see, you need to provide the latitude and longitude information to perform the query. 
+ As you can see, you need to provide the latitude and longitude information to perform the query.
+
  For mobile applications meant for smartphones, obtaining geocode information is easy and can be provided directly as part of an API call. For this lesson, assume that this API interface is being created for devices and applications that cannot easily provide the geocoordinate information, but simply requests the user to provide the zipcode. In such a situation, the first thing is to obtain the geocoordinate for the zipcode provided before doing further processing. Below is the initial logic to implement in the proxy:
+
   - Retrieve the zipcode and radius from the request query parameter
   - Use the zipcode as an input parameter to call an external service that converts the zipcode to the geocoordinate
   - Extract the latitude and longitude geocoordinate information from the response of the external service call 
