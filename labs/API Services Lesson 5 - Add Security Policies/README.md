@@ -325,15 +325,15 @@ Client credentials has very specific use cases, and is not the grant type most c
 
 To support use cases with grant types other than client credentials, the OAuth proxy must be configured with authorization endpoints. For additional information, see [configuring authorization endpoints](http://apigee.com/docs/api-services/content/oauth-endpoints) and [authorizing requests using OAuth 2.0](http://apigee.com/docs/api-services/reference/authorize-requests-using-oauth-20). 
 
-- **Adding an OAuth 2.0 Token Validation Policy** 
+## Adding an OAuth 2.0 Token Validation Policy
 
- - Go to the Apigee Edge Management UI browser tab
+- Go to the Apigee Edge Management UI browser tab
 
- - Since you will be adding an OAuth v2.0 policy, the API Key Verification policy is no longer necessary. Delete the `Verify API Key` policy from the ‘{your-initials}_hotels’ proxy default proxy endpoint preflow.
+- Since you will be adding an OAuth v2.0 policy, the API Key Verification policy is no longer necessary. Delete the `Verify API Key` policy from the ‘{your-initials}_hotels’ proxy default proxy endpoint preflow.
 
- ![8_detach_api_key.png](./images/8_detach_api_key.png) 
+  ![10_detach_api_key.png](./images/10_detach_api_key.png) 
 
- - Using the `New Policy` drop-down from the `Design` tab of the `{your-initials}_hotels` proxy, add the `OAuth v2.0` policy with the following properties:
+- Using the `New Policy` drop-down from the `Design` tab of the `{your-initials}_hotels` proxy, add the `OAuth v2.0` policy with the following properties:
         - Policy Display Name: **Validate OAuth v2 Token**
         - Policy Name: **Validate-OAuth-v2-Token**
         - Attach Policy: **Checked**
