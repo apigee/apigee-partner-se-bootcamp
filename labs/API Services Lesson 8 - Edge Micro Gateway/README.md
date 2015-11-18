@@ -75,7 +75,9 @@ In this lab you will go through configuring, get working Edge Microgateway insta
 - Execute this command to start the server:
   ```
   npm start
-
+  ```
+  You will see an output from that command: 
+  ```
   edge micro agent listening on 9000
   ```
 
