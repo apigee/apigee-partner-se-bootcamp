@@ -45,30 +45,27 @@ Adding Flows to an API Proxy is done from the `Develop` tab in the Edge UI.
 ![00_click_develop_tab](./images/00_click_develop_tab.png)  
 
 - In the left-hand-side navigator, find the "Proxy Endpoints" section.  Click the + adjacent to the "default" proxy endpoint. 
-![01_new_flow](./images/01_new_flow.png)  
+![01_new_flow](./images/01_new_flow.png)
 
 - In the new resource row, provide the following properties:
+  - Flow Name: Get Hotels
+  - Description: Get Hotels
+  - Condition Type: Path and Verb
+  - Path: /
+  - Verb: GET
 
-```
- Flow Name: Get Hotels
- Description: Get Hotels
- Condition Type: Path and Verb
- Path: /
- Verb: GET
-```
-After setting those properties, click on the `Add` button to complete adding the Flow. 
-![02_add_flow](./images/02_add_flow.png)
+  After setting those properties, click on the `Add` button to complete adding the Flow. 
+  ![02_add_flow](./images/02_add_flow.png)
 
 - Follow the above steps to add another Flow with the following properties:
-```
- Flow Name: Get Individual Hotel
- Description: Get Individual Hotel
- Condition Type: Path and Verb
- Path: /{hotel-uuid}
- Verb: GET
-```
+  - Flow Name: Get Individual Hotel
+  - Description: Get Individual Hotel
+  - Condition Type: Path and Verb
+  - Path: /{hotel-uuid}
+  - Verb: GET
 
-###Adding Policies to a Proxy
+### Adding Policies to a Proxy
+
 Policies are logic steps. Apigee Edge provides 30+ out of the box policies. Many can be configured to customize their behavior. To add intelligence of behavior to an API Proxy, you add policies. This is done from the `Develop` tab of the API Proxy Editor UI.
 
 Now that you have an API Proxy configured with several flows, you will add logic to the `Get Hotels` flow using policies. 
