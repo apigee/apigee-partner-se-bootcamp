@@ -113,21 +113,18 @@ Identifying an API consumer is beneficial from an analytics and audit perspectiv
 
   **Note:** Typically API Key verification should be one of the first policies in the flow. In this scenario, we verify the API Key before the Response Cache policy to ensure that an API Consumer whose API Key may have been revoked is not able to get the data from the cache.  IF the Key verification was placed after the Response cache, then callers with revoked or invalid keys would be able to get real results from the Edge Cache. 
 
-- Examine the XML configuration in the `Code` panel (or properties using the `Property Inspector` panel) associated with the `Verify API Key` policy. The XML for the policy should look something like this:
+- Examine the XML configuration in the `Code` panel (or properties using the `Property Inspector` panel) associated with the `Verify API Key` policy. copy-paste the following XML into the lower panel:
 
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<VerifyAPIKey async="false" continueOnError="false" enabled="true" name="Verify-API-Key">
-    <DisplayName>Verify API Key</DisplayName>
-    <FaultRules/>
-    <Properties/>
-    <APIKey ref="request.queryparam.apikey"/>
-</VerifyAPIKey>
-```
+  ```xml
+  <VerifyAPIKey name="Verify-API-Key">
+      <DisplayName>Verify API Key</DisplayName>
+      <APIKey ref="request.queryparam.apikey"/>
+  </VerifyAPIKey>
+  ```
 
-**Note** the `<APIKey>` element, which identifies where the policy should check for the API key. In this example, the policy looks for the API key in a `query parameter` named `apikey`. API keys can be located in a query parameter, a form parameter, or an HTTP header. Apigee Edge provides a message variable for each type of location. For policy reference information, see [Verify API Key policy](http://apigee.com/docs/api-services/reference/verify-api-key-policy).
+  The `<APIKey>` element identifies where the policy should check for the API key. In this example, the policy looks for the API key in a query parameter named `apikey`. API keys can be located in a query parameter, a form parameter, or an HTTP header, or even in the message body or URL path element. Apigee Edge provides message-variable access for query or form parameters, or for headers. For using URL Path elements or message body, you will have to use an Extract Variables policy. For policy reference information, see [Verify API Key policy](http://apigee.com/docs/api-services/reference/verify-api-key-policy).
 
-###Removing the API Key from the query parameters
+### Removing the API Key from the query parameters
 
 - Using the `New Policy` drop-down from the `Design` tab of the `{your-initials}_hotels` proxy, add the `Assign Message` policy with the following properties:
 
