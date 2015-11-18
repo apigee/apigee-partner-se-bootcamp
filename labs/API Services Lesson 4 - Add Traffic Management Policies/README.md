@@ -138,7 +138,7 @@ Now we will add a ResponseCache policy to reduce external service calls, reduce 
  
 - click the first transaction. The transaction map should look as follows:
 
-  ![4_transaction_map_no_cache](./images/4_transaction_map_no_cache.png)
+  ![5_transaction_map_no_cache](./images/5_transaction_map_no_cache.png)
 
   This depiction indicates that the full logic of the API Proxy was executed. Specifically, the cache check resulted in a miss, and then the requests were sent out. The backend response got inserted into cache. The results were combined, and then finally sent to the originall client. The Trace tool is a key differentiator for Apigee Edge! 
  
