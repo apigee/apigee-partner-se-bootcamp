@@ -89,19 +89,27 @@ Identifying an API consumer is beneficial from an analytics and audit perspectiv
 
 - Go to the Apigee Edge Management UI browser tab
 
-- Using the `New Policy` drop-down from the `Design` tab of the `{your-initials}_hotels` proxy, add the `Verify API Key` policy with the following properties:
+- Insure you have selected APIs → API Proxies  → the `{your-initials}_hotels` proxy.
 
- - Policy Display Name: **Verify API Key**
- - Policy Name: **Verify-API-Key**
- - Attach Policy: **Checked**
- - Flow: **Flow PreFlow, Proxy Endpoint default**
- - Segment: **Request**
+- click the `Develop` tab
+
+- in the left-hand-side navigator, in the Proxy Endpoints section, under the default proxy, highlight the Pre-Flow. 
+  ![01_select_preflow](./images/01_select_preflow.png)
+
+- In the center canvas, click the "+ Step" in the request flow. 
+  ![02_new_step](./images/02_new_step.png)
+
+- In the resulting dialog, scroll and select the `Verify API Key` policy. Specify the following values:
+
+  - Display Name: **Verify API Key**
+  - Name: **Verify-API-Key**
+
 - The `Verify API Key` policy will get added after the `Response Cache` policy. **Drag and move** the `Verify API Key` policy to be _**before**_ the `Response Cache` policy
 
-![1_add_api_key_policy.png](./images/1_add_api_key_policy.png)
+![03_click_and_drag](./images/03_click_and_drag.png)
  
 
-  **Note:** It depends on your use case, but typically API Key verification should be one of the first policies in the flow. In this scenario, we verify the API Key before the Response Cache policy to ensure that an API Consumer whose API Key may have been revoked is not able to get the data from the cache.
+  **Note:** Typically API Key verification should be one of the first policies in the flow. In this scenario, we verify the API Key before the Response Cache policy to ensure that an API Consumer whose API Key may have been revoked is not able to get the data from the cache.  IF the Key verification was placed after the Response cache, then callers with revoked or invalid keys would be able to get real results from the Edge Cache. 
 
 - Examine the XML configuration in the `Code` panel (or properties using the `Property Inspector` panel) associated with the `Verify API Key` policy. The XML for the policy should look something like this:
 
