@@ -262,14 +262,20 @@ You will be learning more about how Developers can go through a self-service reg
 
  - Click `Save` to save the Developer. The new developer should now be listed on the `Developers` page.
 
-## Registering a Developer App
+## Creating a Registered Developer App
 
- Now that you have an API product and a developer, you can register a Developer App with the API product. Registering the Developer App generates the API key for the API products associated with the app. You can then distribute the key to app developers so they can access the features in the API products from the app.
+ Now that you have an API product and a developer, you can create a Developer App that has access to the API product. Registering the Developer App generates the API key for the API products associated with the app. You can then distribute the key to app developers so they can access the features in the API products from the app.
 
  As mentioned earlier, you will learn about self-registering apps as a developer using Developer Services Portal in later lessons. For the continuity of this lesson, the following steps describe the process of registering Developer Apps using the Apigee Edge Management UI.
 
-- From the Apigee Edge Management UI, go to Publish → Developer Apps
-- Click on `+ Developer App` button to add a new product
+- From the Apigee Edge Management UI, click to Publish → Developer Apps.  
+
+  ![09_hover_click_devapps](./images/09_hover_click_devapps.png) 
+
+- You should see a list of developer apps. Click on `+ Developer App` button to add a new product. 
+
+  ![09_plus_devapp](./images/09_plus_devapp.png) 
+
 - In the `Developer App Details` section, enter or select the following values for the various fields:
 
   - Display Name: **<your initials> iExplore App**
@@ -407,7 +413,7 @@ As a security measure, the `Remove Authorization Header` policy removes the `Aut
 
   ![15_click_revision_dropdown](./images/15_click_revision_dropdown.png) 
 
-  
+ 
 - Select the revision deployed to the test environment.  This might be revision 1 for you. 
 
 - Select the Deployment dropdown, to UNdeploy the older revision from the test environment. Confirm the UNdeploy. 
