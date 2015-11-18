@@ -233,32 +233,41 @@ With the above brief introduction to API Products, Developers and Developer Apps
  - **Repeat** the above two steps for the ‘/**’ resource
  - Click `Save` to save the API Product. The new product should now be listed on the `Products` page.
 
-- **Registering a Developer**
+## Registering a Developer
 
  Developers access your APIs through apps. When the developer registers an app, they receive a single API key that allows them to access all of the API products associated with the app. However, developers must be registered before they can register an app.
+
  Developers typically have several ways of registering:
+
  - If you have a paid Edge account, through a Developer Services portal. See [Add and manage user accounts](http://apigee.com/docs/developer-services/content/add-and-manage-user-accounts) for more.
- - By accessing a form that uses the Edge management API to register the developer. See [Using the Edge management API to Publish APIs](http://apigee.com/docs/developers-services/content/using-edge-management-api-publish-apis) for more.
- - By a back-end administrator using the Edge management UI.
+
+ - By accessing a form or application that uses the Edge management API to register the developer. See [Using the Edge management API to Publish APIs](http://apigee.com/docs/developers-services/content/using-edge-management-api-publish-apis) for more.
+
+ - By a back-end administrator using the Edge management UI. This is really just a special case of the above. 
 
 You will be learning more about how Developers can go through a self-service registration process using Developer Services Portal in later lessons. For the continuity of this lesson, the following steps describe the process of registering Developers and Developer Apps using the Apigee Edge Management UI.
- - From the Apigee Edge Management UI, go to Publish → Developers
- - Click on `+ Developer` button to add a new product
- - Add a new developer with the following properties:
 
-        - First Name: **Marco** 
-        - Last Name: **Polo**
-        - Email: **{your email}+mpolo@gmail.com**
-        - Username: **mpolo**
+- From the Apigee Edge Management UI, go to Publish → Developers
 
-        ![5_create_developer.png](./images/5_create_developer.png)
+- Click on `+ Developer` button to add a new product
+
+- Add a new developer with the following properties:
+
+    - First Name: **Marco** 
+    - Last Name: **Polo**
+    - Email: **{your email}+mpolo@gmail.com**
+    - Username: **mpolo**
+
+    ![5_create_developer.png](./images/5_create_developer.png)
 
  - Click `Save` to save the Developer. The new developer should now be listed on the `Developers` page.
 
-- **Registering a Developer App**
+## Registering a Developer App
 
  Now that you have an API product and a developer, you can register a Developer App with the API product. Registering the Developer App generates the API key for the API products associated with the app. You can then distribute the key to app developers so they can access the features in the API products from the app.
+
  As mentioned earlier, you will learn about self-registering apps as a developer using Developer Services Portal in later lessons. For the continuity of this lesson, the following steps describe the process of registering Developer Apps using the Apigee Edge Management UI.
+
  - From the Apigee Edge Management UI, go to Publish → Developer Apps
  - Click on `+ Developer App` button to add a new product
  - In the `Developer App Details` section, enter or select the following values for the various fields:
