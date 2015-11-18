@@ -167,7 +167,7 @@ Log in to your organization on Apigee Edge.
 - To test our API Proxy, call the 
 
   ```
-  curl -i http://localhost:8000/{your-initials}/v1/weather/forecastrss?w=12797282
+  curl -i http://localhost:8000/{your-initials}/v1/weather/forecast?zipcode=98101
   ```
 
 - If you will see an authorization error, your Micro Gateway is listening for the API you have configured in the previous step
@@ -177,7 +177,13 @@ Log in to your organization on Apigee Edge.
 
 - Run the following command to get the JWT Token
   ```
-  curl -i -X POST "http://<org name>-test.apigee.net/edgemicro-auth/token" -H "Content-Type:application/json" -d '{"grant_type": "client_credentials", "client_id":"<client_id>", "client_secret": "<client_secret"}'
+  curl -i -X POST "http://<org name>-test.apigee.net/edgemicro-auth/token" \
+    -H "Content-Type:application/json" \
+   -d '{
+    "grant_type": "client_credentials", 
+    "client_id":"<client_id>", 
+    "client_secret": "<client_secret"
+  }'
   ```
 
 - Make the API Call with a bearer token you received in the step above
