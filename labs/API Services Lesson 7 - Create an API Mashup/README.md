@@ -10,18 +10,17 @@ Apigee enables you to quickly combine results from multiple APIs to create innov
 - Amazon’s Product Advertising APIs used by affiliates in their applications to earn affiliate revenue
 API mashups are at the heart of creating consumable APIs. These ‘mashed-up’ APIs provide an overall utility and value-add that is greater than the individual APIs. Apigee Edge enables developers to create API mashups easily using a variety of policies. 
 
-##Objectives
+## Objectives
 You have already seen an example in [Lab 3](../API%20Services%20Lesson%203%20-%20Adding%20Resources%20and%20Policies) where a `Service Callout policy` was used to convert a zip code to geolocation coordinates. That is, in-a-way, an example of a mashup even though the response from that API was not directly used to create the final response sent to the API consumer. The objective of this lesson is create a new proxy (`{your-initials}_hotelspro`) that mashups the hotel data with weather data before sending the response to the API consumer.
 
 To keep things simple for this lesson, you will create a copy of the `hotels` proxy to create a `{your-initials}_hotelspro` proxy. You will then modify the `{your-initials}_hotelspro` proxy to add the weather data mashup, create a new API Product (`Hospitality Pro Product`) that bundles the `{your-initials}_hotelspro` proxy, and then create a new Developer App (`iExplore Pro App`) that has access to the `Hospitality Pro Product`.
 
-##Prerequisites
+## Prerequisites
 - [x] API Services - Lesson 5 & 6 completed 
 
-##Estimated Time: 30 mins
+## Estimated Time: 30 mins
 
-
-###Creating the ‘Pro’ Mashup Proxy
+### Creating the ‘Pro’ Mashup Proxy
 
 - From the Apigee Edge Management UI, go to `APIs` → `API Proxies` → `hotels proxy`
 - From the `Project` drop-down, select the `Save as new API Proxy...` option
@@ -30,18 +29,18 @@ To keep things simple for this lesson, you will create a copy of the `hotels` pr
 
 - In the `Save as new API Proxy` dialog, specify the `API Proxy Name` as `{your-initials}_hotelspro` and click `Add`
 - You will be taken to the `Overview` tab of the `hotelspro` proxy. Click on the `Edit Revision Summary` button and change the revision properties as follows:
- - Description: **Facade to the BaaS hotels data with weather mashup**
- - Default Proxy Endpoint Base Path: **/{your-initials}/v1/hotelspro**
+  - Description: **Facade to the BaaS hotels data with weather mashup**
+  - Default Proxy Endpoint Base Path: **/{your-initials}/v1/hotelspro**
 
 - Click on the `Accept` button for the revision property changes to be accepted
 - Go to the `Develop` tab of the `{your-initials}_hotelspro` proxy
 - From the `New Policy` drop-down, select the `Assign Message` policy
 - In the `New Policy - Assign Message` dialog box provide the following information:
- - Policy Display Name: **Create Weather Request**
- - Policy Name: **Create-Weather-Request**
- - Attach Policy: **Checked**
- - Flow: **Flow Get Hotels, Proxy Endpoint default**
- - Segment: **Response**
+  - Policy Display Name: **Create Weather Request**
+  - Policy Name: **Create-Weather-Request**
+  - Attach Policy: **Checked**
+  - Flow: **Flow Get Hotels, Proxy Endpoint default**
+  - Segment: **Response**
 
 - Drag-and-drop the `Create Weather Response` policy so that it is to the right of the `Create Final Response` policy
 
@@ -50,8 +49,7 @@ To keep things simple for this lesson, you will create a copy of the `hotels` pr
 - Modify the XML configuration of the `Create Weather Request` as follows:
 
 ```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<AssignMessage async="false" continueOnError="false" enabled="true" name="Create-Weather-Request">
+<AssignMessage name="Create-Weather-Request">
   <DisplayName>Create Weather Request</DisplayName>
   <AssignTo createNew="true" type="request">WeatherRequest</AssignTo>
         <Set>
@@ -79,8 +77,7 @@ This request is being prepared for the next step where a Service Callout policy 
 - Modify the XML configuration of the `Call Weather API` policy as follows:
 
 ```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ServiceCallout async="false" continueOnError="false" enabled="true" name="Call-Weather-API">
+<ServiceCallout name="Call-Weather-API">
     <DisplayName>Call Weather API</DisplayName>
     <Request clearPayload="true" variable="WeatherRequest">
     </Request>
@@ -94,29 +91,26 @@ This request is being prepared for the next step where a Service Callout policy 
 
 **Note:** Replace `{your-org}` with the actual name of your Apigee Edge organization.
 
-- Modify the Javascript code in the `Create-Final-Response.js` file by adding the following few lines of code right before the comment line: 
-```
-// update the response that will be returned to the client 
-```
+- Modify the Javascript code in the `Create-Final-Response.js` file.  Look in the file for this comment line, on or around line 12: 
+  ```
+  // add the hotels response
+  ```
 
-New Code:
-```javascript
-// get the weather response received from the service callout
-var weatherResponse = context.getVariable("WeatherResponse.content");
-// initialize the weather response to be sent in the final response
-finalResponse.weather = {};
-// add the weather response to the final response
-if (weatherResponse != null) {
-  var weatherJSON = JSON.parse(weatherResponse);
-  finalResponse.weather = weatherJSON
-}
-```
+  Add the following few lines of code right *before* this line:
+  ```javascript
+  // get the weather response received from the service callout
+  var weatherResponse = context.getVariable("WeatherResponse.content");
+  finalResponse.weather = (weatherResponse !== null) ? 
+    JSON.parse(weatherResponse) : {} ;
+  ```
 
-The above lines of Javascript mashes-up the Weather information with the Hotel information in the final response that is being sent to the API consumer. 
+  The above lines of Javascript mashes-up the Weather information with the Hotel information in the final response that is being sent to the API consumer. 
+
 - Click on the `Save` button to save the changes made to the `{your-initials}_hotelspro` proxy 
+
 - Click on the `Deployment` drop down and select `test` to deploy the `{your-initials}_hotelspro` proxy to the test environment.
 
-###Creating the `Pro` API Product
+### Creating the `Pro` API Product
 
 - From the Apigee Edge Management UI, go to `Publish` → `Products`
 - Add a new API Product with the following Product Details & Resources:
