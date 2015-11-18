@@ -145,84 +145,87 @@ This command downloads the `urlparse` module locally and updates the dependencie
 
 - To test the weather API locally:
  - Start the `weather.js` module from the command line as follows: 
- ```sh
-node weather.js
- ```
- The server should start within a few seconds with a message `The server is running!` on the console
+   ```sh
+  node weather.js
+   ```
+  The server should start within a few seconds with a message `The server is running!` on the console
 
- - Go to the Postman tool and run the ‘/GET forecast - localhost’ request. If everything is working correctly, you should see a response similar to the following: `http://localhost:7000/forecast?zipcode=95113`
- ```
- curl -i http://localhost:7000/forecast?zipcode=95113
- ```
+ - Go to the Postman tool and run the ‘/GET forecast - localhost’ request.  Alternatively, you can invoke the command from another terminal window, with something like this: 
+   ```
+   curl -i http://localhost:7000/forecast?zipcode=95113
+   ```
 
- ```json
-{
-    "location": {
-        "city": "Seattle",
-        "country": "US",
-        "region": "WA"
-    },
-    "units": {
-        "distance": "mi",
-        "pressure": "in",
-        "speed": "mph",
-        "temperature": "F"
-    },
-    "condition": {
-        "code": "29",
-        "date": "Sun, 26 Oct 2014 9:53 pm PDT",
-        "temp": "49",
-        "text": "Partly Cloudy"
-    },
-    "forecast": [
-        {
-            "code": "29",
-            "date": "26 Oct 2014",
-            "day": "Sun",
-            "high": "55",
-            "low": "46",
-            "text": "Partly Cloudy"
-        },
-        {
-            "code": "28",
-            "date": "27 Oct 2014",
-            "day": "Mon",
-            "high": "58",
-            "low": "51",
-            "text": "Mostly Cloudy"
-        },
-        {
-            "code": "11",
-            "date": "28 Oct 2014",
-            "day": "Tue",
-            "high": "59",
-            "low": "53",
-            "text": "Showers"
-        },
-        {
-            "code": "30",
-            "date": "29 Oct 2014",
-            "day": "Wed",
-            "high": "59",
-            "low": "51",
-            "text": "Partly Cloudy"
-        },
-        {
-            "code": "12",
-            "date": "30 Oct 2014",
-            "day": "Thu",
-            "high": "59",
-            "low": "53",
-            "text": "Rain"
-        }
-    ]
-}
- ```
+ - If everything is working correctly, you should see a response similar to the following: 
 
-- Stop the locally running weather API by pressing `ctrl-c` in the terminal window.
+   ```json
+   {
+     "location": {
+         "city": "Seattle",
+         "country": "US",
+         "region": "WA"
+     },
+     "units": {
+         "distance": "mi",
+         "pressure": "in",
+         "speed": "mph",
+         "temperature": "F"
+     },
+     "condition": {
+         "code": "29",
+         "date": "Sun, 26 Oct 2014 9:53 pm PDT",
+         "temp": "49",
+         "text": "Partly Cloudy"
+     },
+     "forecast": [
+         {
+             "code": "29",
+             "date": "26 Oct 2014",
+             "day": "Sun",
+             "high": "55",
+             "low": "46",
+             "text": "Partly Cloudy"
+         },
+         {
+             "code": "28",
+             "date": "27 Oct 2014",
+             "day": "Mon",
+             "high": "58",
+             "low": "51",
+             "text": "Mostly Cloudy"
+         },
+         {
+             "code": "11",
+             "date": "28 Oct 2014",
+             "day": "Tue",
+             "high": "59",
+             "low": "53",
+             "text": "Showers"
+         },
+         {
+             "code": "30",
+             "date": "29 Oct 2014",
+             "day": "Wed",
+             "high": "59",
+             "low": "51",
+             "text": "Partly Cloudy"
+         },
+         {
+             "code": "12",
+             "date": "30 Oct 2014",
+             "day": "Thu",
+             "high": "59",
+             "low": "53",
+             "text": "Rain"
+         }
+     ]
+    }
+    ```
+
+- Stop the locally running node process by pressing `ctrl-c` in the appropriate terminal window.
+
 - To deploy the weather API to Apigee Edge you will use the `apigeetool`. 
 
- As mentioned in the Overview section, running on Edge, Node.js apps take advantage of Edge's enterprise-grade cloud operations like traffic management, security, deployment tools, revision control, logging, and analytics. You can deploy an existing Node.js API application, including any dependent Node.js modules, from your local system to Apigee Edge using a command-line utility called `apigeetool`. The utility automatically bundles the application and its dependencies into an API proxy and deploys it on Edge. To deploy the weather API to Apigee Edge:
+  As mentioned in the Overview section, running on Edge, Node.js apps take advantage of Edge's enterprise-grade cloud operations like traffic management, security, deployment tools, revision control, logging, and analytics. You can deploy an existing Node.js API application, including any dependent Node.js modules, from your local system to Apigee Edge using a command-line utility called `apigeetool`. The utility automatically bundles the application and its dependencies into an API proxy and deploys it on Edge. To deploy the weather API to Apigee Edge:
 
  - In the terminal, ensure that you are in the `apigee/node-api/weather` directory
  - Run the following command:
