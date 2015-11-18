@@ -103,13 +103,13 @@ In the implementation for the `GET /forecast` resource, the URL is parsed using 
 
 The response from the yql call is processed in a callback function. This callback function extracts relevant information from the yql response to create a final response to be sent to the API consumer.
 
-All of the HTTP requests get processed by the HTTP server that is started on port 9000 with the app.listen(portNumber) code.
+All of the HTTP requests get processed by the HTTP server that is started on port 9000 with the `app.listen(portNumber)` code.
 
 - Go back to your terminal window and in the `apigee/node-api/weather` directory, run the following commands:
 
-```sh 
-npm init
-```
+  ```sh 
+  npm init
+  ```
 
 Provide the following values during the interactive npm init session to create a package.json file for the Node module that you will be deploying to Apigee Edge:
 
@@ -117,24 +117,24 @@ Provide the following values during the interactive npm init session to create a
  - version: 1.0.0
  - description: Apigee API facade to a Yahoo weather service
  - entry point: weather.js
- - test command: curl -i http://<host>/<your-initials>/v1/weather/forecast?zipcode=<zipcode>
+ - test command: curl -i http://HOSTNAME/YOUR-INITIALS/v1/weather/forecast?zipcode=ZIPCODE
  - git repository: 
  - keywords:
- - author: <your name>
- - license: ISC
+ - author: YOUR-NAME
+ - license: MIT
 
 **Note:** You do not have to replace **only** the `<host>` and `<your-initials>` with the actual value
 
 ```sh
 npm install express@3.x.x --save
 ```
-	
+        
 This command downloads the `express` module and updates the dependencies list in the `package.json` file.
 
 ```sh
 npm install yql@1.x.x --save
 ```
-	
+        
 This command downloads Yahoo’s `yql` module locally and updates the dependencies list in the `package.json` file.
 
 ```sh
