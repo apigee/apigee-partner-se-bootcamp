@@ -31,11 +31,10 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
  - From the `Environment` drop-down, select `test`
  - From the main menu, select APIs → API Proxies
    ![02_click_APIs.png](./images/02_click_APIs.png)
-
- - To create a new API proxy, select the `+ API Proxy` button to add a new proxy.
+ - You will then see a list of API Proxies configured in your organization. To create a new API proxy, select the `+ API Proxy` button.
    ![03_plus_api_proxy](./images/03_plus_api_proxy.png)
 
- - On the `New API Proxy` form that is displayed, provide information needed to generate an API proxy
+ -  On the `New API Proxy` form that is displayed, provide information needed to generate an API proxy
         ![3_api_create.png](./images/3_api_create.png)
         
         - Starting Point Type: **Backend Service**
