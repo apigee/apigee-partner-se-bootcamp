@@ -102,9 +102,9 @@ Now let’s implement the policies.
 
 ###Using Assign Message Policy to prepare the service callout request
 
-- From the `New Policy` drop-down, select the `Assign Message` policy
+- From the flow canvas, click the "+ Step" box within the Request flow. 
 
-![3_add_policy](./images/3_add_policy.png)
+![3_add_step](./images/3_add_step.png)
 
 - In the `New Policy - Assign Message` dialog box provide the following information:
 ```
