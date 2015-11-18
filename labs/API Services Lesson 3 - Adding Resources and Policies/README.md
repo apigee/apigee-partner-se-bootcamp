@@ -209,6 +209,7 @@ Here's a brief description of the elements in this policy. You can read more abo
 ### Parse the service callout response, using the Extract Message Policy
 
 - Again click "+ Step" 
+![12_again_new_step](./images/12_again_new_step.png)
 
 - Scroll to select the  `Extract Variables` policy, specify the following properties:
   ```
@@ -244,41 +245,45 @@ Here's a brief description of the elements in this policy. You can read more abo
 
   - **```<JSONPayload>```** - This element retrieves the response data that is of interest and puts it into named variables. In fact, the Google Geocoding API returns much more information than latitude and longitude. However, these are the only values needed for these lessons. You can see a complete rendering of the JSON in the [Google Geocoding API documentation](https://developers.google.com/maps/documentation/geocoding/). The values of `geometry.location.lat` and `geometry.location.lng` are simply two of the many fields in the returned JSON object.
 
-  This configuration of the  ```ExtractVariables``` policy produces two context variables whose names consist of the variable prefix (`geocodeResponse`) and the actual variable names that are specified in the policy. The resulting variable names are: `geocodeResponse.latitude` & `geocodeResponse.longitude` .  These variables are set into the request context at runtime, and will be available to other policies within the proxy flow, as you will see. 
+  This configuration of the  ```ExtractVariables``` policy produces two context variables whose names consist of the variable prefix (`geocodeResponse`) and the actual variable names that are specified in the policy. The resulting variable names are: `geocodeResponse.latitude` & `geocodeResponse.longitude` .  These variables are set into the request context at runtime, and will be available to subsequent policies that execute within the proxy flow, as you will see. 
 
 ###  Using the Javascript Policy to create the Location Query to send to the BaaS target endpoint
 
-- DINO RESUME HERE
+- Again click "+ Step" 
 
-- From the `New Policy` drop-down, select the `Javascript` policy and add it with the following properties:
+- Scroll to select the `JavaScript` policy, specify the following values:
 ```
- Policy Display Name: Create Location Query
- Policy Name: Create-Location-Query
+ Display Name: Create Location Query
+ Name: Create-Location-Query
  Script File: Create new script
  Script Name: Create-Location-Query.js
- Attach Policy: Checked
- Flow: Flow Get Hotels, Proxy Endpoint default**
- Segment: Request
 ```
-- Once the policy has been added, from the `Navigator` panel go to `Scripts → Javascript` section and select the `Create-Location-Query.js` script file
-- Add the following code to the `Create-Location-Query.js` script in the `Code: Create Location Query` panel:
-```javascript
-var latitude = context.getVariable("geocodeResponse.latitude"),
-    longitude = context.getVariable("geocodeResponse.longitude"),
-    radius = context.getVariable("radius");
 
-// set default (0 meters)
-radius = (radius == "") ? "0" : radius;
+- Click Add; observe that the new policy icon appears in the flow canvas.
 
-// set BaaS query
-var baasQL = "location within " + radius + " of " + latitude + "," + longitude;
-context.setVariable("baasQL", baasQL);
-```
-This Javascript code uses the `context` object, which is part of the [Apigee Edge Javascript object model](http://apigee.com/docs/api-services/reference/javascript-object-model) to retrieve 3 variables - `geocodeResponse.latitude`, `geoCodeResponse.latitude`, `radius` - that were set by policies earlier in the flow. 
-It sets a default in case the variables are empty strings, creates a new query variable called `baasQL` using the API BaaS query language syntax for a location query, and adds the ‘baasQL’ variable to the `context` object to be used later in the flow by the Assign Message policy to set the query parameter before the API BaaS target endpoint is invoked.
-You can read more about this policy in [Javascript policy](http://apigee.com/docs/api-services/reference/javascript-policy).
+- From the `Navigator` panel on the left-hand-side, go to `Scripts → Javascript` and click to select the `Create-Location-Query.js` script file
+![13_select_js](./images/13_select_js.png)
 
-###Using the Assign Message Policy to add the Location Query to the query parameter before BaaS target endpoint invocation
+- in the code panel, center of the screen beneath the canvas, copy-paste the following code:
+    ```javascript
+    var latitude = context.getVariable("geocodeResponse.latitude"),
+        longitude = context.getVariable("geocodeResponse.longitude"),
+        radius = context.getVariable("radius");
+
+    // set default (0 meters)
+    radius = (radius === "") ? "0" : radius;
+
+    // set BaaS query
+    var baasQL = "location within " + radius + " of " + latitude + "," + longitude;
+    context.setVariable("baasQL", baasQL);
+    ```
+
+- This Javascript code uses the `context` object, which is part of the [Apigee Edge Javascript object model](http://apigee.com/docs/api-services/reference/javascript-object-model), to retrieve 3 variables: `geocodeResponse.latitude`, `geoCodeResponse.latitude`, `radius`.  All of these variables had been set by policies occurring earlier in the flow. 
+
+  It sets a default in case the variables are empty strings, creates a new query variable called `baasQL` using the API BaaS query language syntax for a location query, and adds the ‘baasQL’ variable, by calling `context.setVariable()`.  This new variable can then be used later in the flow. 
+  You can read more about this policy in [the online documentation for the Javascript policy](http://apigee.com/docs/api-services/reference/javascript-policy).
+
+### Using the Assign Message Policy to add the Location Query to the query parameter before BaaS target endpoint invocation
 
 - From the `New Policy` drop-down, select the `Assign Message` policy and add it with the following properties:
 ```
