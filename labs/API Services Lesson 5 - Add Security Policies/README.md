@@ -479,7 +479,7 @@ As a security measure, the `Remove Authorization Header` policy removes the `Aut
 
 - Start a Trace session for the `{your-initials}_hotels` proxy
 
-- Set up the `/GET hotels` request in Postman with the following query parameters **AND header**: 
+- Set up the `/GET hotels` request in Postman with the following query parameters and header: 
 
   - **Query Parameters:**
     - zipcode: **98101**
