@@ -121,17 +121,17 @@ Log in to your organization on Apigee Edge.
 
 - Open a new terminal window (not the one where the agent is running) and print out help info for the  agentproc command. We're going to use the -c, -k, and -s options to start Edge Microgateway.
   ```
-  edgemicro agent proc -h
+  ./edgemicro agent proc -h
   ```
 
   **Note:** The tutorial assumes that the cli/bin directory is in your  PATH. If you do not put it in your  PATH, then you need to execute CLI commands from the `cli/bin` directory (`cd ../cli/bin` and run `./edgemicro agent proc -h`).
 
-- Start Edge Microgateway by executing the following command, substituting the key and secretvalues in the -k and -s parameters.
+- Start Edge Microgateway by executing the following command, providing the key and secret values with the -k and -s parameters, respectively.
   ```
-  edgemicro agent proc -c start -k <key> -s <secret>
+  ./edgemicro agent proc -c start -k <key> -s <secret>
   ```
 
-- If the micro gateway is started successfully, you will see the following console output
+- If the micro gateway is started successfully, you will see something like the following console output:
   ```json
   {
     "pid": 9104,
@@ -183,7 +183,7 @@ Log in to your organization on Apigee Edge.
 - Make the API Call with a bearer token you received in the step above
 
   ```
-  curl -i -H "Authorization:Bearer <JWT Token>" http://localhost:8000/{your-initials}/v1/weather/forecast?zipcode=95113
+  curl -i -H "Authorization:Bearer JWT_TOKEN_HERE" http://localhost:8000/{your-initials}/v1/weather/forecast?zipcode=95113
   ```
 
 - You should see the response json: 
