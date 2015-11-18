@@ -59,10 +59,10 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
  - From the `hotels` API Proxy page, click on the `Trace` tab
         ![06_trace.png](./images/06_trace.png)
  - Once on the `Trace` tab, pick the correct environment from the ‘Deployment to Trace’ drop-down. In your case there should only be one environment to pick - `Environment test, Revision 1`
-        ![7_start_trace.png](./images/7_start_trace.png)
+   ![07_start_trace.png](./images/07_start_trace.png)
  - Click on the `Start Trace Session` button
  - After the trace session starts, click on the `Send` button in the `Send Requests` section
-        ![8_send_request.png](./images/8_send_request.png)
+   ![08_send_request.png](./images/08_send_request.png)
  - You will see the a transaction appear in the `Transactions` section and a visual representation of the executed proxy flow in the `Transaction Map` section
  - The `Transaction Map` is interactive - click on the various execution steps within the flow and review the information provided in the `Phase Details` section. You will notice that for each step information such as headers, variables, payload, properties and other relevant information is available. This helps you quickly understand exactly what is happening within the proxy flow.
         ![9_trace_message.png](./images/9_trace_message.png)
