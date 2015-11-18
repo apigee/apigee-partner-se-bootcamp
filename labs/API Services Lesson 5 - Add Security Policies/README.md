@@ -288,7 +288,6 @@ You will be learning more about how Developers can go through a self-service reg
 
  - In the `Products` section, next to the entry for `{your-initials} Hospitality Basic Product`, click `Show` in the `Consumer Key` and `Consumer Secret` columns to display the generated keys
 
-
  **Note:** Since you selected `Key Approval Type: Automatic` when you created the API product, the API key is automatically approved and you can view it immediately. 
 
 If you had selected `Approval Type: Manual`, you would need to click `Approve` in the `Actions` column to approve the API key, before it could be used. 
@@ -318,7 +317,7 @@ For convenience, all organizations on Apigee Edge come preconfigured with a set 
 
 This section of the lesson explains how to protect an API using this default `oauth` proxy configuration.
 
-**About the client credentials grant type**
+### About the client credentials grant type
 
 The client credentials grant type defines a procedure for issuing access tokens in exchange for *App credentials*. These app credentials are the consumer key and secret pair that Apigee Edge issues for each app that is registered in an organization. 
 
@@ -332,40 +331,45 @@ To support use cases with grant types other than client credentials, the OAuth p
 
 - Go to the Apigee Edge Management UI browser tab
 
-- Since you will be adding an OAuth v2.0 policy, the API Key Verification policy is no longer necessary. Delete the `Verify API Key` policy from the ‘{your-initials}_hotels’ proxy default proxy endpoint preflow.
+- Insure you have selected APIs → API Proxies  → the `{your-initials}_hotels` proxy.
 
-  ![10_detach_api_key.png](./images/10_detach_api_key.png) 
+- click the `Develop` tab
 
-- Using the `New Policy` drop-down from the `Design` tab of the `{your-initials}_hotels` proxy, add the `OAuth v2.0` policy with the following properties:
+- in the left-hand-side navigator, in the Proxy Endpoints section, under the default proxy, highlight the Pre-Flow. 
+  ![01_select_preflow](./images/01_select_preflow.png)
 
-        - Policy Display Name: **Validate OAuth v2 Token**
-        - Policy Name: **Validate-OAuth-v2-Token**
-        - Attach Policy: **Checked**
-        - Flow: **Flow PreFlow, Proxy Endpoint default**
-        - Segment: **Request**
+- Since you will be adding an OAuth v2.0 policy, the API Key Verification policy is no longer necessary. Delete the `Verify API Key` policy from the ‘{your-initials}_hotels’ proxy default proxy endpoint preflow. Do this by hovering over the icon, and clicking the X character. 
 
- - The `Validate OAuth v2 Token` policy will get added after the `Response Cache` policy. **Drag and move** the `Validate OAuth v2 Token` policy to be _**before**_ the `Remove APIKey QP` policy
+  ![10_hover_and_click_delete](./images/10_hover_and_click_delete.png) 
 
- ![9_add_oauth.png](./images/9_add_oauth.png) 
+- In the canvas showing the request flow, click the "+ Step" button
 
- - Review the XML configuration and/or the properties associated with the `Validate OAuth v2 Token` policy.
+  ![11_add_step](./images/11_add_step.png) 
 
- ```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<OAuthV2 async="false" continueOnError="false" enabled="true" name="Validate-OAuth-v2-Token">
-    <DisplayName>Validate OAuth v2 Token</DisplayName>
-    <FaultRules/>
-    <Properties/>
-    <Attributes/>
-    <ExternalAuthorization>false</ExternalAuthorization>
-    <Operation>VerifyAccessToken</Operation>
-    <SupportedGrantTypes/>
-    <GenerateResponse enabled="true"/>
-    <Tokens/>
-</OAuthV2>
- ```
+- In the "Add Step" dialog, scroll and choose the `OAuth v2.0` policy. Specify the following values:
 
-The value of the `<Operation>` element indicates the action to take - in this case, verification of the access token. 
+  - Display Name: **Validate OAuth v2 Token**
+  - Name: **Validate-OAuth-v2-Token**
+
+- The `Validate OAuth v2 Token` policy will get added after the `Response Cache` policy. **Drag and move** the `Validate OAuth v2 Token` policy to be _**before**_ the `Remove APIKey QP` policy. The result should look like this in the canvas: 
+
+  ![12_policy_sequence](./images/12_policy_sequence.png) 
+
+- Click the icon for the `Validate OAuth v2 Token` policy. In the lower panel, copy-paste the following XML configuration for the policy.
+
+   ```xml
+  <OAuthV2 name="Validate-OAuth-v2-Token">
+      <DisplayName>Validate OAuth v2 Token</DisplayName>
+      <ExternalAuthorization>false</ExternalAuthorization>
+      <Operation>VerifyAccessToken</Operation>
+      <SupportedGrantTypes/>
+      <GenerateResponse enabled="true"/>
+      <Tokens/>
+  </OAuthV2>
+   ```
+
+The value of the `<Operation>` element indicates the action to take - in this case, verifying the access token. 
+
 The value of the `<ExternalAuthorization>` element is set to `false`, indicating that Apigee Edge should validate the OAuth Token rather than delegating it to an external validator.
 
 - **Removing the Authorization Header After Validating the OAuth Token** 
