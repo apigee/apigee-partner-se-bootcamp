@@ -123,8 +123,7 @@ Now let’s implement the policies.
 ![3_verify_am_policy](./images/3_verify_am_policy.png)
 
 - In the lower panel beneath the canvas, modify the XML configuration. 
-
-  in the `Code: Create-Geo-Coding-Request` section, which appears underneath the Map as follows (copy this text and paste it into the editor):
+Copy the text below and paste it into the editor:  
     ```xml
     <AssignMessage name="Create-Geo-Coding-Request">
         <DisplayName>Create Geo Coding Request</DisplayName>
@@ -150,24 +149,36 @@ Now let’s implement the policies.
     </AssignMessage>
     ```
 
-Here's a brief description of the elements in this policy. You can read more about this policy in [Assign Message policy](http://apigee.com/docs/api-services/reference/assign-message-policy).
-**<AssignMessage name>** - Gives this policy a name. The name is used when the policy is referenced in a flow. 
-**<AssignTo>** - Creates a named variable called `GeocodingRequest` of type `Request`. This variable encapsulates the request object that will be sent by the ServiceCallout policy. 
-**<Set><QueryParams>** - Sets the query parameters that are needed for the service callout API call. In this case, the Google Geocoding API needs to know the location, which is expressed with a zipcode. The API calling client supplies this information, and we simply extract it here. The region and sensor parameters are by the API, and we just hardcode it to certain values here.
+Here's a brief description of the elements in this policy. You can read more about this policy in [the online docs for the Assign Message policy](http://apigee.com/docs/api-services/reference/assign-message-policy).
+
+**```<AssignMessage name="xxx">```** - Gives this policy a name. The name is used when the policy is referenced in a flow. 
+**<AssignTo>** - Creates a named *context variable* called `GeocodingRequest` of type `Request`. This variable encapsulates the request object that will be sent by the ServiceCallout policy. 
+**<Set><QueryParams>** - Sets the query parameters that are needed for the service callout API call. In this case, the Google Geocoding API needs to know the location, which is expressed with a zipcode. The original inbound request supplies this information, and we simply embed it here. The region and sensor parameters are required by the Google API, and we just hardcode it to certain values here.
 **<Verb>** - In this case, we are making a simple GET request to the API. 
 **<AssignVariable>** - zipcode and radius are new variables being created to store values being passed to the API. In this example, the variables will be accessed later in the proxy flow. 
-**Note:** The properties associated with the `Assign Message` policy could have been modified using the `Property Inspector` panel that’s presented in the `Design` tab on the right. Any changes made in the `Code` panel are reflected in the `Property Inspector` panel and vice-versa. We will use the `Property Inspector` panel to set properties for some of the policies as the lesson progresses.
+**Note:** The properties associated with the `Assign Message` policy could have been modified using the `Property Inspector` panel that’s presented in the far right panel of the `Develop` tab. Any changes made in the `Code` panel are reflected in the `Property Inspector` panel and vice-versa. We will use the `Property Inspector` panel to set properties for some of the policies as the lesson progresses.
 
 ###Using the Service Callout Policy to invoke the Google GeoCoding API
-- From the `New Policy` drop-down, select the `Service Callout` policy and add it with the following properties:
+- Click the "+ Step" button again
+![4_add_step_again](./images/4_add_step_again.png)
+
+- Scroll to select the Service Callout policy
+![4_select_service_callout](./images/4_select_service_callout.png)
+
+- Specify these values:
 ```
- Policy Display Name: Call Geo Coding API
- Policy Name: Call-Geo-Coding-API
- Attach Policy: Checked
- Flow: Flow Get Hotels, Proxy Endpoint default
- Segment: Request
+ Display Name: Call Geo Coding API
+ Name: Call-Geo-Coding-API
 ``` 
-- For the `Call Geo Coding API` policy, change the values of the following properties in the `Property Inspector`:
+
+- Click Add. The policy icon appears in the flow canvas. 
+
+- Click the new icon to make sure it is selected and highlighted. 
+![5-service-callout-policy-in-canvas](./images/5-service-callout-policy-in-canvas.png)
+
+- DINO RESUME HERE
+
+- FOR the `Call Geo Coding API` policy, change the values of the following properties in the `Property Inspector`:
 ```
  Request variable: GeocodingRequest
  Response: GeocodingResponse
