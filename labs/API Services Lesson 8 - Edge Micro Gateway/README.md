@@ -65,6 +65,7 @@ In this lab you will go through configuring, get working Edge Microgateway insta
   ./edgemicro verify -o <org-name> -e <env-name> -k <key> -s <secret>
   ```
 
+  You should see happy messages. If not, you'll need to stop, and diagnose. 
 
 
 ### Start the Edge Micro agent
