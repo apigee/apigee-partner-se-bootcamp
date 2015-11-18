@@ -81,12 +81,12 @@ location within <distance_in_meters> of <latitude>, <longitude>
 ````
  As you can see, you need to provide the latitude and longitude information to perform the query.
 
- For mobile applications meant for smartphones, obtaining geocode information is easy and can be provided directly as part of an API call. For this lesson, assume that this API interface is being created for devices and applications that cannot easily provide the geocoordinate information, but simply requests the user to provide the zipcode. In such a situation, the first thing is to obtain the geocoordinate for the zipcode provided before doing further processing. Below is the initial logic to implement in the proxy:
+ For mobile applications meant for smartphones, obtaining geocode information is easy and can be provided directly as part of an API call. For this lesson, assume that this API interface is being created for devices and applications that cannot easily provide the geocoordinate information, but simply requests the user to provide the zipcode. In such a situation, the first thing for the server or intelligent proxy to do is obtain the geocoordinates for the zipcode provided. Below is the initial logic to implement in the proxy:
 
   - Retrieve the zipcode and radius from the request query parameter
-  - Use the zipcode as an input parameter to call an external service that converts the zipcode to the geocoordinate
-  - Extract the latitude and longitude geocoordinate information from the response of the external service call 
-  - Use the geocoordinate to create the geo-location query 
+  - Use the zipcode as an input parameter to call an external service that converts the zipcode to the geocoordinates
+  - Extract the latitude and longitude information from the response of the external service call 
+  - Use the latitude/longitude to create the geo-location query string
   - Add the location query as a query parameter before the target BaaS service is invoked. 
  A pictorial representation of the logic is depicted below:
  
@@ -97,7 +97,8 @@ location within <distance_in_meters> of <latitude>, <longitude>
 Now let’s implement the policies.
 
 - Switch to the `Develop` tab of the API Proxy
-- From the `Navigator` pane, select `Proxy Endpoints → Default → Get Hotels` 
+- From the `Navigator` pane, select `Proxy Endpoints → default → Get Hotels` 
+ ![2_select_flow](./images/2_select_flow.png)
 
 ###Using Assign Message Policy to prepare the service callout request
 
