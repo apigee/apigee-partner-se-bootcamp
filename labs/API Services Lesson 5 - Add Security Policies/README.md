@@ -104,10 +104,12 @@ Identifying an API consumer is beneficial from an analytics and audit perspectiv
   - Display Name: **Verify API Key**
   - Name: **Verify-API-Key**
 
-- The `Verify API Key` policy will get added after the `Response Cache` policy. **Drag and move** the `Verify API Key` policy to be _**before**_ the `Response Cache` policy
+- The `Verify API Key` policy will get added after the `Response Cache` policy. **Drag and move** the `Verify API Key` policy so that it appears _**before**_ the `Response Cache` policy
 
-![03_click_and_drag](./images/03_click_and_drag.png)
+  ![03_click_and_drag](./images/03_click_and_drag.png)
  
+- The result should look like this: 
+  ![04_resulting_verify_api_key](./images/04_resulting_verify_api_key.png)
 
   **Note:** Typically API Key verification should be one of the first policies in the flow. In this scenario, we verify the API Key before the Response Cache policy to ensure that an API Consumer whose API Key may have been revoked is not able to get the data from the cache.  IF the Key verification was placed after the Response cache, then callers with revoked or invalid keys would be able to get real results from the Edge Cache. 
 
