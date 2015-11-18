@@ -124,32 +124,31 @@ Now let’s implement the policies.
 
 - In the lower panel beneath the canvas, modify the XML configuration. 
 
-  in the `Code: Create-Geo-Coding-Request` section, which appears underneath the Map as follows:
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<AssignMessage async="false" continueOnError="false" enabled="true" name="Create-Geo-Coding-Request">
-    <DisplayName>Create Geo Coding Request</DisplayName>
-    <AssignTo createNew="true" type="request">GeocodingRequest</AssignTo>
-    <Set>
-        <QueryParams>
-            <QueryParam name="address">{request.queryparam.zipcode}</QueryParam>
-            <QueryParam name="region">US</QueryParam>
-            <QueryParam name="sensor">false</QueryParam>
-        </QueryParams>
-        <Verb>GET</Verb>
-    </Set>
-    <!-- Set variables for use in the flow -->
-    <AssignVariable>
-        <Name>zipcode</Name>
-        <Ref>request.queryparam.zipcode</Ref>
-    </AssignVariable>
-    <AssignVariable>
-        <Name>radius</Name>
-        <Value>0</Value>
-        <Ref>request.queryparam.radius</Ref>
-    </AssignVariable>
-</AssignMessage>
-```
+  in the `Code: Create-Geo-Coding-Request` section, which appears underneath the Map as follows (copy this text and paste it into the editor):
+    ```xml
+    <AssignMessage name="Create-Geo-Coding-Request">
+        <DisplayName>Create Geo Coding Request</DisplayName>
+        <AssignTo createNew="true" type="request">GeocodingRequest</AssignTo>
+        <Set>
+            <QueryParams>
+                <QueryParam name="address">{request.queryparam.zipcode}</QueryParam>
+                <QueryParam name="region">US</QueryParam>
+                <QueryParam name="sensor">false</QueryParam>
+            </QueryParams>
+            <Verb>GET</Verb>
+        </Set>
+        <!-- Set variables for use in the flow -->
+        <AssignVariable>
+            <Name>zipcode</Name>
+            <Ref>request.queryparam.zipcode</Ref>
+        </AssignVariable>
+        <AssignVariable>
+            <Name>radius</Name>
+            <Value>0</Value>
+            <Ref>request.queryparam.radius</Ref>
+        </AssignVariable>
+    </AssignMessage>
+    ```
 
 Here's a brief description of the elements in this policy. You can read more about this policy in [Assign Message policy](http://apigee.com/docs/api-services/reference/assign-message-policy).
 **<AssignMessage name>** - Gives this policy a name. The name is used when the policy is referenced in a flow. 
