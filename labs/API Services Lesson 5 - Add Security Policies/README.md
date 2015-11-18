@@ -410,11 +410,11 @@ As a security measure, the `Remove Authorization Header` policy removes the `Aut
   
 - Select the revision deployed to the test environment.  This might be revision 1 for you. 
 
-- Select the Deployment dropdown, to UNdeploy the older revision from the test environment. 
+- Select the Deployment dropdown, to UNdeploy the older revision from the test environment. Confirm the UNdeploy. 
 
 - Click the revision dropdown again, and select the latest revision.
 
-- Again select the Deployment dropdown, to Deploy the newest revision to the test environment. 
+- Again select the Deployment dropdown, to Deploy the newest revision to the test environment. Confirm the Deploy.
 
 
 ## Testing the OAuth 2.0 Token Validation Policy without a Token
@@ -453,7 +453,7 @@ As a security measure, the `Remove Authorization Header` policy removes the `Aut
 
   ![16_postman_get_oauth.png](./images/16_postman_get_oauth.png)
 
-  **Note:** Copy-paste the Consumer Key and Consumer Secret from the `iExplore App`’s detail page in the Apigee Edge UI. As you copy-paste, remove any spaces before and after the values of the Consumer Key and Consumer Secret.
+  **Note:** copy-paste the Consumer Key and Consumer Secret from the `iExplore App`’s detail page in the Apigee Edge UI. As you copy-paste, remove any spaces before and after the values of the Consumer Key and Consumer Secret.
 
 - Review the response within Postman. It should look something like this: 
 
