@@ -41,8 +41,8 @@ Adding Flows to an API Proxy is done from the `Develop` tab in the Edge UI.
 - Click the "APIs" dropdown, and select "API Proxies"
 - Click your hotels proxy, the one named {yourinitials}_hotels 
 - You will now be viewing the  `xx_hotel` proxy’s `Overview` tab
-- Click the `Develop` tab  
-![00_develop_tab](./images/00_develop_tab.png)  
+- Click the `Develop` tab 
+![00_click_develop_tab](./images/00_click_develop_tab.png)  
 
 - In the left-hand-side navigator, find the "Proxy Endpoints" section.  Click the + adjacent to the "default" proxy endpoint. 
 ![01_new_flow](./images/01_new_flow.png)  
