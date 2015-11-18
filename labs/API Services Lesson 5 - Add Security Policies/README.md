@@ -212,22 +212,22 @@ With the above brief introduction to API Products, Developers and Developer Apps
 
 - In the `Product Details` section of the new product screen, enter or select the following values for the various fields:
 
-    - Display Name: **{your-initials} Hospitality Basic Product** 
-    - Description: **API Bundle for a basic Hospitality App.**
-    - Environment: **Test**
-    - Access: **Public**
-    - Key Approval Type: **Automatic**
+  - Display Name: **{your-initials} Hospitality Basic Product** 
+  - Description: **API Bundle for a basic Hospitality App.**
+  - Environment: **Test**
+  - Access: **Public**
+  - Key Approval Type: **Automatic**
 
-      ![06_create_product.png](./images/06_create_product.png)
+    ![06_create_product.png](./images/06_create_product.png)
  
 
  - In the `Resources` section select the following values for the various fields:
 
-        - API Proxy: **{your-initials}_hotels** 
-        - Revision: **1**
-        - Resource Path: **/**
+   - API Proxy: **{your-initials}_hotels** 
+   - Revision: **1**
+   - Resource Path: **/**
 
-        ![07_product_add_resources.png](./images/07_product_add_resources.png)
+   ![07_product_add_resources.png](./images/07_product_add_resources.png)
 
  - Click on `Import Resources` to add the `/` resource of the `{your-initials}_hotels` proxy to the `{your-initials} Hospitality Basic Product`
  - **Repeat** the above two steps for the ‘/**’ resource
@@ -253,12 +253,12 @@ You will be learning more about how Developers can go through a self-service reg
 
 - Add a new developer with the following properties:
 
-    - First Name: **Marco** 
-    - Last Name: **Polo**
-    - Email: **{your email}+mpolo@gmail.com**
-    - Username: **mpolo**
+  - First Name: **Marco** 
+  - Last Name: **Polo**
+  - Email: **{your email}+mpolo@gmail.com**
+  - Username: **mpolo**
 
-    ![08_create_developer.png](./images/08_create_developer.png)
+  ![08_create_developer.png](./images/08_create_developer.png)
 
  - Click `Save` to save the Developer. The new developer should now be listed on the `Developers` page.
 
@@ -268,20 +268,19 @@ You will be learning more about how Developers can go through a self-service reg
 
  As mentioned earlier, you will learn about self-registering apps as a developer using Developer Services Portal in later lessons. For the continuity of this lesson, the following steps describe the process of registering Developer Apps using the Apigee Edge Management UI.
 
- - From the Apigee Edge Management UI, go to Publish → Developer Apps
- - Click on `+ Developer App` button to add a new product
- - In the `Developer App Details` section, enter or select the following values for the various fields:
+- From the Apigee Edge Management UI, go to Publish → Developer Apps
+- Click on `+ Developer App` button to add a new product
+- In the `Developer App Details` section, enter or select the following values for the various fields:
 
-        - Display Name: **<your initials> iExplore App**
-        - Developer: **Marco Polo**
-        - Callback URL: **Leave it blank**
+  - Display Name: **<your initials> iExplore App**
+  - Developer: **Marco Polo**
+  - Callback URL: **Leave it blank**
 
- - In the `Products` section, click on the `+ Product` button
- - From the `Product` drop-down, select `{your-initials} Hospitality Basic Product`
- - Click the `check-mark` button in the `Actions` column to accept the changes
+- In the `Products` section, click on the `+ Product` button
+- From the `Product` drop-down, select `{your-initials} Hospitality Basic Product`
+- Click the `check-mark` button in the `Actions` column to accept the changes
 
  ![09_add_product_to_app.png](./images/09_add_product_to_app.png)
- 
 
  - Click `Save` to save the Developer App. The new app should now be listed on the `Developer Apps` page
 
@@ -290,11 +289,11 @@ You will be learning more about how Developers can go through a self-service reg
  - In the `Products` section, next to the entry for `{your-initials} Hospitality Basic Product`, click `Show` in the `Consumer Key` and `Consumer Secret` columns to display the generated keys
 
 
- **Note:** Since you selected `Key Approval Type: Automatic` when you created the API product, the API key is automatically approved and you can view it immediately
+ **Note:** Since you selected `Key Approval Type: Automatic` when you created the API product, the API key is automatically approved and you can view it immediately. 
 
-If you had selected `Approval Type: Manual`, you would need to click `Approve` in the `Actions` column to approve the API key.
+If you had selected `Approval Type: Manual`, you would need to click `Approve` in the `Actions` column to approve the API key, before it could be used. 
 
-The way the `{your-initials}_hotels` proxy is configured, as of now, the Consumer Key (i.e. the API Key) is the only key that the `iExplore App` will need to access the `{your-initials}_hotels` proxy resources. You will use the Consumer Secret (i.e. the API Secret) in the next section when the security policy is changed from API Key Verification to an OAuth Token Validation policy.
+The way the `{your-initials}_hotels` proxy is configured, as of now, the Consumer Key (i.e. the API Key) is the only key that the `iExplore App` will need to access the `{your-initials}_hotels` proxy resources. You will not use the Consumer Secret (i.e. the API Secret, or Client Secret) at this time.  You will use the `Consumer Secret` in the next section when the security policy is changed from API Key Verification to an OAuth Token Validation policy.
 
 ### Re-testing the API Key Verification Policy
 
@@ -317,14 +316,19 @@ For convenience, all organizations on Apigee Edge come preconfigured with a set 
 This section of the lesson explains how to protect an API using this default `oauth` proxy configuration.
 
 **About the client credentials grant type**
+
 The client credentials grant type defines a procedure for issuing access tokens in exchange for *App credentials*. These app credentials are the consumer key and secret pair that Apigee Edge issues for each app that is registered in an organization. 
+
 For this reason, it is relatively simple to 'step up' your API security scheme from API key validation to OAuth client credentials. Both schemes use the same consumer key and secret to validate the client app. The difference is that client credentials provides an extra layer of control, since you can easily revoke an access token when needed, without requiring you to revoke the app's consumer key. To work with the default OAuth endpoints, you can use any consumer key and secret generated for app in your organization to retrieve access tokens from the token endpoint. You can even enable client credentials for apps that already have consumer keys and secrets.
+
 Client credentials has very specific use cases, and is not the grant type most commonly used for web and mobile apps.  For a general introduction to OAuth 2.0 grant types with definitions and use cases, see [Introduction to OAuth 2.0](http://apigee.com/docs/api-services/content/oauth-introduction). 
+
 To support use cases with grant types other than client credentials, the OAuth proxy must be configured with authorization endpoints. For additional information, see [configuring authorization endpoints](http://apigee.com/docs/api-services/content/oauth-endpoints) and [authorizing requests using OAuth 2.0](http://apigee.com/docs/api-services/reference/authorize-requests-using-oauth-20). 
 
 - **Adding an OAuth 2.0 Token Validation Policy** 
 
  - Go to the Apigee Edge Management UI browser tab
+
  - Since you will be adding an OAuth v2.0 policy, the API Key Verification policy is no longer necessary. Delete the `Verify API Key` policy from the ‘{your-initials}_hotels’ proxy default proxy endpoint preflow.
 
  ![8_detach_api_key.png](./images/8_detach_api_key.png) 
