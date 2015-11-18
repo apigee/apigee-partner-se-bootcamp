@@ -189,8 +189,9 @@ Log in to your organization on Apigee Edge.
   ```
 
   The response you see will have a very long string, looking something like so: 
-
-  ```"eyJ0eXAiOiJKV1QiLc9.eyJhcHBsaWNhdGlvbl9u....kkBnE40jk_2trmZkP6uf4-mcgUw91-qKofaw"```
+  ```
+   "eyJ0eXAiOiJKV1QiLc9.eyJhcHBsaWNhdGlvbl9u....kkBnE40jk_2trmZkP6uf4-mcgUw91-qKofaw"
+  ```
 
 - Make the API Call with a bearer token you received in the step above
 
