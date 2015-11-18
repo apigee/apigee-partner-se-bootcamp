@@ -155,7 +155,7 @@ Here's a brief description of the elements in this policy. You can read more abo
 
 - **```<AssignTo>```** - Creates a named *context variable* called `GeocodingRequest` of type `Request`. This variable encapsulates the request object that will be sent by the ServiceCallout policy. 
 
-- **```<Set><QueryParams>```** - Sets the query parameters that are needed for the service callout API call. In this case, the Google Geocoding API needs to know the location, which is expressed with a zipcode. The original inbound request supplies this information, and we simply embed it here. The region and sensor parameters are required by the Google API, and we just hardcode it to certain values here.
+- **```<Set><QueryParams>```** - Sets the query parameters that are needed for the service callout API call. In this case, the Google Geocoding API needs to know the location, which is expressed with a zipcode. The original inbound request supplies this information, and we simply embed it here. The region and sensor parameters are required by the Google API, and we just hardcode it to certain values here.  Not shown here, **```<Set><Headers>```**  and **```<Set><Payload>```** which work as you would expect. Of course it wouldn't make sense to set a payload for a GET request, but you could set a payload for a POST. 
 
 - **```<Verb>```** - In this case, we are making a simple GET request to the API. 
 
@@ -182,21 +182,33 @@ Here's a brief description of the elements in this policy. You can read more abo
 - Click the new icon to make sure it is selected and highlighted. 
 ![5-service-callout-policy-in-canvas](./images/5-service-callout-policy-in-canvas.png)
 
-- DINO RESUME HERE
+- DINO RESUME HERE XXX
 
-- FOR the `Call Geo Coding API` policy, change the values of the following properties in the `Property Inspector`:
-```
- Request variable: GeocodingRequest
- Response: GeocodingResponse
- URL: http://maps.googleapis.com/maps/api/geocode/json
-```
+- Copy the text below and paste it into the editor:  
+    ```xml
+    <ServiceCallout name="Call-Geo-Coding-API">
+        <DisplayName>Call Geo Coding API</DisplayName>
+        <Properties/>
+        <Request clearPayload="true" variable="GeocodingRequest">
+            <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+        </Request>
+        <Response>GeocodingResponse</Response>
+        <HTTPTargetConnection>
+            <Properties/>
+            <URL>http://maps.googleapis.com/maps/api/geocode/json</URL>
+        </HTTPTargetConnection>
+    </ServiceCallout>
+    ```
+- Here's a brief description of the elements that were modified in this policy. You can read more about this policy in [the online documentation for the Service Callout policy](http://apigee.com/docs/api-services/reference/service-callout-policy).
 
-Here's a brief description of the elements that were modified in this policy. You can read more about this policy in [Service Callout policy](http://apigee.com/docs/api-services/reference/service-callout-policy).
-**<Request variable>** - This is the variable `GeocodingRequest` that was created in the AssignMessage policy in the previous step. It encapsulates the request going to the Google Geocoding API.
-**<Response>** - This element names a variable `GeocodingResponse` in which the response from the Google Geocoding API will be stored. As you will see, this variable will be accessed later by the ExtractVariables policy.
-*<HTTPTargetConnection><URL>* - Specifies the target URL to be used by the service callout - in this case the URL of the Google Geocoding API: `http://maps.googleapis.com/maps/api/geocode/json`
+- **```<Request variable>```** - This is the variable `GeocodingRequest` that was created in the AssignMessage policy in the previous step. It encapsulates the request going to the Google Geocoding API.
 
-###Using the Extract Message Policy to parse the service callout response
+- **```<Response>```** - This element names a variable `GeocodingResponse` in which the response from the Google Geocoding API will be stored. As you will see, this variable will be accessed later by the ExtractVariables policy.
+
+- **```<HTTPTargetConnection><URL>```** - Specifies the target URL to be used by the service callout - in this case the URL of the Google Geocoding API: `http://maps.googleapis.com/maps/api/geocode/json`
+
+
+### Using the Extract Message Policy to parse the service callout response
 - From the `New Policy` drop-down, select the `Extract Variables` policy and add it with the following properties:
 ```
  Policy Display Name: Extract Geo Codes
