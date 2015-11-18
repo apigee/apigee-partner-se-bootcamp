@@ -285,38 +285,46 @@ Here's a brief description of the elements in this policy. You can read more abo
 
 ### Using the Assign Message Policy to add the Location Query to the query parameter before BaaS target endpoint invocation
 
-- From the `New Policy` drop-down, select the `Assign Message` policy and add it with the following properties:
-```
-Policy Display Name: Set Query Parameters
-Policy Name: Set-Query-Parameters
-Attach Policy: Checked
-Flow: Flow Get Hotels, Proxy Endpoint default
-Segment: Request
-```
-- For the `Set Query Parameters` policy, change the XML configuration of the policy using the `Code: Set Query Parameters` panel as follows:
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<AssignMessage async="false" continueOnError="false" enabled="true" name="Set-Query-Parameters">
-  <DisplayName>Set Query Parameters</DisplayName>
-  <Remove>
-    <QueryParams>
-      <QueryParam name="zipcode"/>
-      <QueryParam name="radius"/>
-    </QueryParams>
-  </Remove>
-  <Set>
-    <QueryParams>
-      <QueryParam name="ql">{baasQL}</QueryParam>
-    </QueryParams>
-  </Set>
-</AssignMessage>
-```
+- Re-Select the "Get Hotels" Flow in the Navigator. 
+![14_get_hotels_flow](./images/14_get_hotels_flow.png)
 
-Here's a brief description of the elements that were modified in this policy. You can read more about this policy in [Extract Variables policy](http://apigee.com/docs/api-services/reference/extract-variables-policy).
-**<Remove><QueryParameters>** - Removes the query parameters (`zipcode` and `radius`) that were sent in the original client request to the API Proxy. 
-**<Set><QueryParameters>** - Adds a new query parameter (`ql`) with the variable `baasQL` providing the actual value. Note that the `baasQL` variable was set by the previous Javascript policy as part of the `context` object.
+- Once again, "+ Step" 
 
-###Testing the API Proxy with the location query after deploying changes
+- In the Add Setep dialog box, scroll and select the `Assign Message` policy. Specify the following properties:
+  ```
+  Display Name: Set Query Parameters
+  Name: Set-Query-Parameters
+  ```
+
+- Notice that the new icon appears in the flow.  Again, click the icon to select the newly added policy
+![15_select_assign_msg](./images/15_select_assign_msg.png)
+
+- copy-paste the follwing code in the center-lower panel: 
+    ```xml
+    <AssignMessage name="Set-Query-Parameters">
+      <DisplayName>Set Query Parameters</DisplayName>
+      <Remove>
+        <QueryParams>
+          <QueryParam name="zipcode"/>
+          <QueryParam name="radius"/>
+        </QueryParams>
+      </Remove>
+      <Set>
+        <QueryParams>
+          <QueryParam name="ql">{baasQL}</QueryParam>
+        </QueryParams>
+      </Set>
+    </AssignMessage>
+    ```
+
+- Here's a brief description of the elements that were modified in this policy. You can read more about this policy in [the online documentation for the Extract Variables policy](http://apigee.com/docs/api-services/reference/extract-variables-policy).
+
+  - **```<Remove><QueryParameters>```** - Removes the query parameters (`zipcode` and `radius`) that were sent in the original client request to the API Proxy. In Apigee Edge,  the original inbound request is implicitly copied to the request to be sent to the backend system. This step modifies the copy, so that the backend doesn't get query parameters it does not need or understand. 
+
+  - **```<Set><QueryParameters>```** - Adds a new query parameter (`ql`) with the variable `baasQL` providing the actual value. Remember, the `baasQL` variable was set by the previous Javascript policy, using `context.setVariable()`.
+
+
+### Testing the API Proxy with the location query after deploying changes
 
 All the policies depicted in the diagram earlier in this lesson for the request flow have been implemented. Your `Get Hotels` Proxy should look as follows:
 
