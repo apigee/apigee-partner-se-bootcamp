@@ -227,7 +227,7 @@ With the above brief introduction to API Products, Developers and Developer Apps
         - Revision: **1**
         - Resource Path: **/**
 
-        ![4_product_add_resources.png](./images/4_product_add_resources.png)
+        ![07_product_add_resources.png](./images/07_product_add_resources.png)
 
  - Click on `Import Resources` to add the `/` resource of the `{your-initials}_hotels` proxy to the `{your-initials} Hospitality Basic Product`
  - **Repeat** the above two steps for the ‘/**’ resource
@@ -258,7 +258,7 @@ You will be learning more about how Developers can go through a self-service reg
     - Email: **{your email}+mpolo@gmail.com**
     - Username: **mpolo**
 
-    ![5_create_developer.png](./images/5_create_developer.png)
+    ![08_create_developer.png](./images/08_create_developer.png)
 
  - Click `Save` to save the Developer. The new developer should now be listed on the `Developers` page.
 
@@ -280,12 +280,15 @@ You will be learning more about how Developers can go through a self-service reg
  - From the `Product` drop-down, select `{your-initials} Hospitality Basic Product`
  - Click the `check-mark` button in the `Actions` column to accept the changes
 
- ![7_add_product_to_app.png](./images/7_add_product_to_app.png)
+ ![09_add_product_to_app.png](./images/09_add_product_to_app.png)
  
 
  - Click `Save` to save the Developer App. The new app should now be listed on the `Developer Apps` page
+
  - From the `Developer Apps` page, select the `iExplore App` to view the details page for the app
+
  - In the `Products` section, next to the entry for `{your-initials} Hospitality Basic Product`, click `Show` in the `Consumer Key` and `Consumer Secret` columns to display the generated keys
+
 
  **Note:** Since you selected `Key Approval Type: Automatic` when you created the API product, the API key is automatically approved and you can view it immediately
 
@@ -293,20 +296,21 @@ If you had selected `Approval Type: Manual`, you would need to click `Approve` i
 
 The way the `{your-initials}_hotels` proxy is configured, as of now, the Consumer Key (i.e. the API Key) is the only key that the `iExplore App` will need to access the `{your-initials}_hotels` proxy resources. You will use the Consumer Secret (i.e. the API Secret) in the next section when the security policy is changed from API Key Verification to an OAuth Token Validation policy.
 
-###Re-testing the API Key Verification Policy
+### Re-testing the API Key Verification Policy
 
 Now that you have a valid API Key associated with a Developer App (`iExplore App`) with access to the API Product (`{your-initials} Hospitality Basic Product`) that bundles the `{your-initials}_hotels` proxy, test the API Key Verification policy to ensure that everything works as expected.
 
 - Copy the `Consumer Key` associated with the `iExplore App` by going to Publish → Developer Apps → iExplore App 
 - Start the Trace session for the `{your-initials}_hotels` proxy
-- Send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200&apikey={iExplore App Consumer Key}`
+- Send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200&apikey={INSERT CONSUMER KEY HERE}`
 
-**Note:** Replace the {iExplore App Consumer Key} with the actual Consumer Key. As you copy-paste, be sure to remove any spaces before and after the Consumer Key 
+**Note:** Be sure to insert the consumer key appropriately. As you copy-paste, be sure to remove any spaces before and after the Consumer Key. Also, don't keep the curly braces.
 
 - Review the Trace for the proxy and the returned response to ensure that the flow is working as expected.
+
 - Stop the Trace session for the ‘{your-initials}_hotels’ proxy
 
-###Stepping-up security using OAuth 2.0: Client Credentials Grant
+### Stepping-up security using OAuth 2.0: Client Credentials Grant
 
 For convenience, all organizations on Apigee Edge come preconfigured with a set of OAuth 2.0 endpoints that implement the `client credentials grant type`.  For information about the configuration of the default `oauth` proxy, review [policies in the oauth token endpoint](http://apigee.com/docs/api-services/tutorials/secure-calls-your-api-through-oauth-20-client-credentials).
 
