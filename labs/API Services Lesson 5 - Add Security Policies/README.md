@@ -419,43 +419,46 @@ As a security measure, the `Remove Authorization Header` policy removes the `Aut
 
 ## Testing the OAuth 2.0 Token Validation Policy without a Token
 
- - Copy the `Consumer Key` associated with the `iExplore App` by going to Publish → Developer Apps → iExplore App
- - Start a `Trace` session for the `{your-initials}_hotels` proxy
- - Send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200&apikey={iExplore App Consumer Key}`
- - As expected, a fault will be returned since a valid OAuth Token has not been provided as part of the request:
+- Copy the `Consumer Key` associated with the `iExplore App` by going to Publish → Developer Apps → iExplore App
+- Start a `Trace` session for the `{your-initials}_hotels` proxy
 
- ```json
-{
+- Send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200`
+
+- As expected, a fault will be returned since a valid OAuth Token has not been provided as part of the request:
+
+   ```json
+  {
     "fault": {
-        "faultstring": "Invalid access token",
-        "detail": {
-            "errorcode": "oauth.v2.InvalidAccessToken"
-        }
+      "faultstring": "Invalid access token",
+      "detail": {
+        "errorcode": "oauth.v2.InvalidAccessToken"
+      }
     }
-}
- ```
+  }
+   ```
 
- The above response shows that the OAuth Verification policy is being enforced as expected.
+  The above response shows that the OAuth Verification policy is being enforced as expected.
 
- - Review the `Trace` for the proxy and the `returned response` to ensure that the flow is working as expected.
- - Stop the `Trace` session for the `{your-initials}_hotels` proxy
+- Review the `Trace` for the proxy and the `returned response` to ensure that the flow is working as expected.
 
-- **Testing the OAuth 2.0 Token Validation Policy with a Valid Token**
+- Stop the `Trace` session for the `{your-initials}_hotels` proxy
 
- - You will obtain a valid oauth token by directly calling the `oauth` API proxy token endpoint and passing the consumer key and consumer secret of the `iExplore App` app. 
- - Send a test `/POST OAuth Token - Client Cred` request from Postman after setting appropriate values in the `x-www-form-urlencoded` section of the request:
+## Testing the OAuth 2.0 Token Validation Policy with a Valid Token
 
-        - client_id: **{iExplore App Consumer Key}**
-        - client_secret: **{iExplore App Consumer Secret}**
+- You will obtain a valid oauth token by directly calling the `oauth` API proxy token endpoint and passing the consumer key and consumer secret of the `iExplore App` app. 
+- Send a test `/POST OAuth Token - Client Cred` request from Postman after setting appropriate values in the `x-www-form-urlencoded` section of the request:
 
-        ![11_postman_get_oauth.png](./images/11_postman_get_oauth.png)
+  - client_id: **{iExplore App Consumer Key}**
+  - client_secret: **{iExplore App Consumer Secret}**
 
- **Note:** Copy-paste the Consumer Key and Consumer Secret from the `iExplore App`’s detail page. As you copy-paste, remove any spaces before and after the values of the Consumer Key and Consumer Secret.
+  ![16_postman_get_oauth.png](./images/16_postman_get_oauth.png)
 
- - Review the response of the `/POST OAuth Token - Client Cred` request. Copy the value of the `access_token` attribute to use in the next step.
+  **Note:** Copy-paste the Consumer Key and Consumer Secret from the `iExplore App`’s detail page in the Apigee Edge UI. As you copy-paste, remove any spaces before and after the values of the Consumer Key and Consumer Secret.
 
- ```json
-{
+- Review the response within Postman. It should look something like this: 
+
+  ```json
+  {
     "issued_at": "1414962637000",
     "application_name": "ef723b8b-fdb1-4aae-9418-096d8ab7fec7",
     "scope": "",
@@ -470,27 +473,34 @@ As a security measure, the `Remove Authorization Header` policy removes the `Aut
     "organization_name": "demo37",
     "refresh_token_expires_in": "0",
     "refresh_count": "0"
-}
- ```
+  }
+  ```
+- Copy the value of the `access_token` attribute to use in the next step.
 
- - Start a Trace session for the `{your-initials}_hotels` proxy
- - Set up the `/GET hotels` request in Postman with the following query parameters **AND header**: 
+- Start a Trace session for the `{your-initials}_hotels` proxy
 
-        - **Query Parameters:**
-        - zipcode: **98101**
-        - radius: **200**
-        - **Header:**
-        - Authorization: **Bearer {access_token}**
+- Set up the `/GET hotels` request in Postman with the following query parameters **AND header**: 
 
-        ![12_postman_test_oauth.png](./images/12_postman_test_oauth.png)
+  - **Query Parameters:**
+    - zipcode: **98101**
+    - radius: **200**
+  - **Header:**
+    - Authorization: **Bearer {access_token}**
+
+  ![17_postman_test_oauth.png](./images/17_postman_test_oauth.png)
  
 
- **Note:** Replace the {access_token} with the value of the `access_token` from the response in the step above.
+  **Note:** Replace the {access_token} with the value of the `access_token` that you copied from the response in the step above.
 
- - Send the `Postman` request. 
- - Review the `Trace` for the proxy and the returned response to ensure that the flow is working as expected.
- - Stop the `Trace` session for the `{your-initials}_hotels` proxy
+- Send the `Postman` request.  You should see success. 
+
+- Now, send a similar request from `Postman`, but modify the access_token so that it incudes 1 extra character. You should see a failure. 
+
+- Review the `Trace` for the proxy and the returned response to ensure that the flow is working as expected.
+
+- Stop the `Trace` session for the `{your-initials}_hotels` proxy
 
 
-##Summary
+## Summary
+
 That completes this hands-on lesson. In this lesson you learned about the various out-of-the-box security related policies that are available in Apigee Edge and to leverage a couple of those policies - API Key Verification and OAuth 2.0 client credentials grant - to secure your APIs. 
