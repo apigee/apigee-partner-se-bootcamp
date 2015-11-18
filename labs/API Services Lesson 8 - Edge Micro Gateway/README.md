@@ -56,13 +56,13 @@ In this lab you will go through configuring, get working Edge Microgateway insta
 
 - Configure the micro gateway to talk to the Edge deployment on public/private cloud
   ```
-  ./edgemicro configure -o <org­name> -e <env­name> -u <your Apigee email>
+  ./edgemicro configure -o <org­name> -e <env-name> -u <your Apigee email>
   ```
 - **Copy the** `Key`, `Secret` and `vault info`, for later parts of the exercise
 
 - Verify that the edge micro is configured with the Edge Cloud org
   ```
-  ./edgemicro verify -o <org­name> -e <env­name> -k <key> -s <secret>
+  ./edgemicro verify -o <org­name> -e <env-name> -k <key> -s <secret>
   ```
 
 ### Start the Edge Micro agent
@@ -75,7 +75,8 @@ In this lab you will go through configuring, get working Edge Microgateway insta
 - Execute this command to start the server:
   ```
   npm start
-          edge micro agent listening on 9000
+
+  edge micro agent listening on 9000
   ```
 
 The configuration done so far allows Edge Microgateway to bootstrap itself to Apigee Edge. The Edge Microgateway agent manages this bootstrapping process, which kicks off whenever you start or restart Edge Microgateway. After the bootstrapping succeeds, Edge Microgateway retrieves a payload of additional configuration information from Apigee Edge.
