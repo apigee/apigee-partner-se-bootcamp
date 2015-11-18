@@ -248,10 +248,10 @@ Password: Your Apigee Edge Org. Admin password
   deployed
   environment = test
   base path = /
-  URI = http://demo37-test.apigee.net/{your-initials}/v1/weather
+  URI = http://ORGNAME-ENVNAME.apigee.net/{your-initials}/v1/weather
  ```
 
  - Go to the Postman tool and run the `/GET forecast - Apigee Edge` request. If everything is working correctly, you should see a response similar to the one received from weather API running on your localhost.
 
-##Summary
+## Summary
 That completes this hands-on lesson. In this lesson you learned how to use Node and some of the available modules to create your API, run and test the API from your localhost and use Apigee’s apigeetool to deploy the API written in Node to Apigee Edge.
