@@ -111,7 +111,7 @@ Identifying an API consumer is beneficial from an analytics and audit perspectiv
 - The result should look like this: 
   ![04_resulting_verify_api_key](./images/04_resulting_verify_api_key.png)
 
-  **Note:** Typically API Key verification should be one of the first policies in the flow. In this scenario, we verify the API Key before the Response Cache policy to ensure that an API Consumer whose API Key may have been revoked is not able to get the data from the cache.  IF the Key verification was placed after the Response cache, then callers with revoked or invalid keys would be able to get real results from the Edge Cache. 
+  **Note:** Typically API Key verification should be one of the first policies in the flow. In this scenario, we verify the API Key before the Response Cache policy to ensure that an API Consumer whose API Key may have been revoked is not able to get the data from the cache. If the Key verification was placed after the Response cache, then callers with revoked or invalid keys would be able to get real results from the Edge Cache. 
 
 - Examine the XML configuration in the `Code` panel (or properties using the `Property Inspector` panel) associated with the `Verify API Key` policy. copy-paste the following XML into the lower panel:
 
@@ -192,6 +192,7 @@ To make it easier for Developers to consume APIs, Apigee Edge provides the capab
 - Developers register Developer Apps on Edge to access API products. In response, the developer receives an API key. Now that the developer has an API key, they can make requests to your APIs.
 
 For more, see [Publishing Overview](http://apigee.com/docs/developer-services/content/publishing-overview).
+
 The following table defines some of the terms used to register apps and generate keys:
 
 | Term        | Definition      |
