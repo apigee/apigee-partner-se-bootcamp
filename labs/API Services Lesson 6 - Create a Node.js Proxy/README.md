@@ -241,17 +241,24 @@ Username: Your Apigee Edge Org. Admin username
 Password: Your Apigee Edge Org. Admin password
  ```
 
- - Wait for the `apigeetool` to deploy the API to Apigee Edge. If the API is deployed successfully, you should see a message similar to the following:
+ - Wait for the `apigeetool` to deploy the API to Apigee Edge. `apigeetool` uses the administrative APIs exposed by Apigee Edge to import and then deploy the API proxy for this nodejs server. 
 
- ```
-"weather" Revision 1
-  deployed
-  environment = test
-  base path = /
-  URI = http://ORGNAME-ENVNAME.apigee.net/{your-initials}/v1/weather
- ```
+If the API is deployed successfully, you should see a message similar to the following:
+
+  ```
+  "weather" Revision 1
+    deployed
+    environment = test
+    base path = /
+    URI = http://ORGNAME-ENVNAME.apigee.net/{your-initials}/v1/weather
+  ```
 
  - Go to the Postman tool and run the `/GET forecast - Apigee Edge` request. If everything is working correctly, you should see a response similar to the one received from weather API running on your localhost.
+
+
+## Extra Credit
+
+Feel free to experiment with the nodejs logic. You can require other npm packages, modify the code, introduce other endpoints. Hosting nodejs logic inside Apigee Edge is a very powerful feature, and a clear differentiator for Apigee. 
 
 ## Summary
 That completes this hands-on lesson. In this lesson you learned how to use Node and some of the available modules to create your API, run and test the API from your localhost and use Apigee’s apigeetool to deploy the API written in Node to Apigee Edge.
