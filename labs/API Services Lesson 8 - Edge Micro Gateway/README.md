@@ -188,10 +188,14 @@ Log in to your organization on Apigee Edge.
   }'
   ```
 
+  The response you see will have a very long string, looking something like so: 
+
+  ```"eyJ0eXAiOiJKV1QiLc9.eyJhcHBsaWNhdGlvbl9u....kkBnE40jk_2trmZkP6uf4-mcgUw91-qKofaw"```
+
 - Make the API Call with a bearer token you received in the step above
 
   ```
-  curl -i -H "Authorization:Bearer JWT_TOKEN_HERE" http://localhost:8000/{your-initials}/v1/weather/forecast?zipcode=95113
+  curl -i -H "Authorization:Bearer VERY_LONG_JWT_TOKEN_HERE" http://localhost:8000/{your-initials}/v1/weather/forecast?zipcode=95113
   ```
 
 - You should see the response json: 
@@ -215,7 +219,8 @@ Log in to your organization on Apigee Edge.
           "temp": "63",
           "text": "Fair"
       },
-      "forecast": [ . . . 
+      "forecast": [ 
+         . . . 
       ]
   }
   ```
