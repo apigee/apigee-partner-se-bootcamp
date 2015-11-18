@@ -351,7 +351,7 @@ To support use cases with grant types other than client credentials, the OAuth p
   - Display Name: **Validate OAuth v2 Token**
   - Name: **Validate-OAuth-v2-Token**
 
-- The `Validate OAuth v2 Token` policy will get added after the `Response Cache` policy. **Drag and move** the `Validate OAuth v2 Token` policy to be _**before**_ the `Remove APIKey QP` policy. The result should look like this in the canvas: 
+- The `Validate OAuth v2 Token` policy will get added after the `Response Cache` policy. **Drag and move** the `Validate OAuth v2 Token` policy 2 steps to the left, so that it appears _**before**_ the `Remove APIKey QP` policy. The result should look like this in the canvas: 
 
   ![12_policy_sequence](./images/12_policy_sequence.png) 
 
@@ -372,39 +372,52 @@ The value of the `<Operation>` element indicates the action to take - in this ca
 
 The value of the `<ExternalAuthorization>` element is set to `false`, indicating that Apigee Edge should validate the OAuth Token rather than delegating it to an external validator.
 
-- **Removing the Authorization Header After Validating the OAuth Token** 
+## Removing the Authorization Header After Validating the OAuth Token
 
- - Using the `New Policy` drop-down from the `Design` tab of the `{your-initials}_hotels` proxy, add the `Assign Message` policy with the following properties:
+- Again, in the proxy editor, make sure you have the Preflow selected for the default proxy endpoint. 
 
-        - Policy Display Name:**Remove Authorization Header** 
-        - Policy Name: **Remove-Authorization-Header**
-        - Attach Policy: **Checked**
-        - Flow: **Flow PreFlow, Proxy Endpoint default**
-        - Segment: **Request**
+- Select the existing `Assign Message` policy in the flow. Make sure it is highlighted. 
 
- - The `Remove Authorization Header` policy will get added after the `Response Cache` policy. **Drag and move** the `Remove Authorization Header` policy to be _**before**_ the `Response Cache` policy
+  ![13_click_and_select](./images/13_click_and_select.png) 
 
- ![10_remove_auth_header.png](./images/10_remove_auth_header.png)  
+- copy-paste the following XML for this policy into the lower middle panel. 
 
- - For the `Remove Authorization Header` policy, change the XML configuration of the policy using the `Code: Remove Authorization Header` panel as follows:
+   ```xml
+  <AssignMessage name="Remove-Authorization-Header">
+      <DisplayName>Remove Authorization Header</DisplayName>
+      <Remove>
+          <Headers>
+              <Header name="Authorization"></Header>
+          </Headers>
+      </Remove>
+      <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+      <AssignTo createNew="false" transport="http" type="request"/>
+  </AssignMessage>
+   ```
 
- ```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<AssignMessage async="false" continueOnError="false" enabled="true" name="Remove-Authorization-Header">
-    <DisplayName>Remove Authorization Header</DisplayName>
-    <Remove>
-        <Headers>
-            <Header name="Authorization"></Header>
-        </Headers>
-    </Remove>
-    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
-    <AssignTo createNew="false" transport="http" type="request"/>
-</AssignMessage>
- ```
+As a security measure, the `Remove Authorization Header` policy removes the `Authorization` header from the HTTP request message so it is not sent to the backend service. In fact, if the `Authorization` header is not removed, the Backend-as-a-Service API will throw an invalid token error. This is the equivalent of removing the API Key from the outbound request, when we were using API Key security in the previous section of this lesson. 
 
-As a security measure, the `Remove Authorization Header` policy removes the `Authorization` header from the HTTP request message so it is not sent to the backend service. In fact, if the `Authorization` header is not removed, the Backend-as-a-Service API will throw an invalid token error.
+- click the blue Save button near the top left of the page. You will then see a dialog box confirming the save: 
 
-- **Testing the OAuth 2.0 Token Validation Policy without a Token**
+  ![14_confirm_save](./images/14_confirm_save.png) 
+
+- Click "Save as New Revision"
+
+- At this point you have saved a new revision of the API Proxy.  The older revision still exists, and in fact is deployed. Confirm this by clicking the Revision dropdown to see the list of revisions of the API proxy, along with the deployment status of each. 
+
+  ![15_click_revision_dropdown](./images/15_click_revision_dropdown.png) 
+
+  
+- Select the revision deployed to the test environment.  This might be revision 1 for you. 
+
+- Select the Deployment dropdown, to UNdeploy the older revision from the test environment. 
+
+- Click the revision dropdown again, and select the latest revision.
+
+- Again select the Deployment dropdown, to Deploy the newest revision to the test environment. 
+
+
+## Testing the OAuth 2.0 Token Validation Policy without a Token
 
  - Copy the `Consumer Key` associated with the `iExplore App` by going to Publish → Developer Apps → iExplore App
  - Start a `Trace` session for the `{your-initials}_hotels` proxy
