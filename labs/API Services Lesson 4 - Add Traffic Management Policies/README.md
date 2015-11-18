@@ -103,48 +103,55 @@ Now we will add a ResponseCache policy to reduce external service calls, reduce 
 
 - Back in the Apigee Edge browser tab
 
-- DINO RESUME HERE
+- Click the "+ Step" button
 
-- Using the `New Policy` drop-down from the `Develop` tab of the `{your-initials}_hotels` proxy, add the `Response Cache` policy with the following properties:
- - Policy Display Name: **Cache Hotels Data**
- - Policy Name: **Cache-Hotels-Data**
- - Attach Policy: **Unchecked**
+- in the "Add Step" dialog, scroll and select the "Response Cache" policy.  Specify these values:  
+  - Display Name: **Cache Hotels Data**
+  - Name: **Cache-Hotels-Data**
+  - Target Endpoint: **Target Endpoint default**
 
-Once the `Cache Hotels Data` policy appears in the `Navigator` panel, review its properties. Since everything else except the name was left as a default, you will notice that the Expiration Timeout in Seconds is set to 300 (i.e. 5 minutes). The timeout property along with other properties should be modified as per your use cases. For policy reference information, see [Response Cache policy](http://apigee.com/docs/api-services/reference/response-cache-policy). 
+- Click "Add"
 
-The Response Cache policy needs a Cache Resource that can be used to cache the data. Apigee Edge provides a default cache resource that can be used for quick testing, which is what is being used in this lesson. The Cache Resource to be used by Response Cache policies should also be created and configured as per your use cases. For Cache Resource configuration information, see [Manage Caches for an Environment](http://apigee.com/docs/api-services/content/manage-caches-environment). 
+  Once the `Cache Hotels Data` policy appears in the canvas, click it to review its properties. Since everything else except the name was left as a default, you will notice that the Expiration Timeout in Seconds is set to 3600, or 60 minutes. The timeout property along with other properties should be modified as per your use cases. For policy reference information, see [Response Cache policy](http://apigee.com/docs/api-services/reference/response-cache-policy). 
 
-- From the `Navigator` panel, select Proxy Endpoints → Default → PreFlow
-- Drag the `Cache Hotels Data` policy from the `Navigator` panel to the `Request` flow and drop it after the `Spike Arrest - 10pm` policy
-- Your Proxy Endpoints → Default → PreFlow should look as follows:
-
-![1_policies_added.png](./images/1_policies_added.png)
-
-- From the `Navigator` panel, select Proxy Endpoints → Default → PostFlow
-- Drag the `Cache Hotels Data` policy from the `Navigator` panel to the `Response` flow 
-- Your Proxy Endpoints → Default → PostFlow should look as follows:
-
-![2_policies_added_response.png](./images/2_policies_added_response.png) 
+  The Response Cache policy needs a Cache Resource that can be used to cache the data. Apigee Edge provides a default cache resource that can be used for quick testing, which is what is being used in this lesson. The Cache Resource to be used by Response Cache policies should also be created and configured as per your use cases. For Cache Resource configuration information, see [Manage Caches for an Environment](http://apigee.com/docs/api-services/content/manage-caches-environment). 
 
 - Save the changes to the API Proxy, wait for it to successfully deploy
 
-###Testing the Response Cache Policy
+### Testing the Response Cache Policy
 
-- Start the API Trace and send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200`
-- Wait for 6 to 10 seconds (to avoid the Spike Arrest policy from stopping your requests) and send the same request again from `Postman`
-- Go back to the Trace view and review the transaction map of both the requests including the overall elapsed time to process both requests 
+- click the Trace Tab
 
-The first transaction map should look as follows:
+- Start the API Trace 
 
-![3_trace_no_cache.png](./images/3_trace_no_cache.png)
+- switch to Postman. 
+
+- from within Postman, send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200`
+
+- Wait for about 10 seconds, to avoid the Spike Arrest policy from stopping your requests, and send the same request again from `Postman`. 
+
+- Go back to the Trace view and review the transaction map of both the requests including the overall elapsed time to process both requests.  
+
+- You should observe that the first request took substantially longer than the second request. 
+
+  ![4_trace_time_differential](./images/4_trace_time_differential.png)
  
-The second execution flow should look as follows:
+- click the first transaction. The transaction map should look as follows:
 
-![4_trace_with_cache.png](./images/4_trace_with_cache.png) 
+  ![4_transaction_map_no_cache](./images/4_transaction_map_no_cache.png)
 
-After configuring the Response Cache policy, as expected, after the initial request, the second and all other requests for the next 300 seconds will be served from the cache and hence avoid executing any other policies. Since the service callout, target service and other transformation policies are not executed, the overall transaction time has also dropped significantly. 
+  This depiction indicates that the full logic of the API Proxy was executed. Specifically, the cache check resulted in a miss, and then the requests were sent out. The backend response got inserted into cache. The results were combined, and then finally sent to the originall client. The Trace tool is a key differentiator for Apigee Edge! 
+ 
+- click the second transaction. The transaction map should look as follows:
 
-##Summary
+  ![6_trace_cache_hit](./images/6_trace_cache_hit.png) 
+
+  This indicates that there was a cache hit, and the backend request was retrieved from cache. 
+
+
+After configuring the Response Cache policy, as expected, after the initial request, the second and all other requests for the next N seconds will be served from the cache and hence avoid executing any other policies. Since the service callout, target service and other transformation policies are not executed, the overall transaction time has also dropped significantly. 
+
+## Summary
 That completes this hands-on lesson. You learned how to use the Spike Arrest to protect the environment from traffic spikes and to use the Response Cache policy to provide a better overall experience for the API consumer while reducing network traffic. Obviously like any other policy, these policies must be used appropriately based upon your use cases.
 
 
