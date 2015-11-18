@@ -65,7 +65,7 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
    ![08_send_request.png](./images/08_send_request.png)
  - You will see the a transaction appear in the `Transactions` section and a visual representation of the executed proxy flow in the `Transaction Map` section
  - The `Transaction Map` is interactive - click on the various execution steps within the flow and review the information provided in the `Phase Details` section. You will notice that for each step information such as headers, variables, payload, properties and other relevant information is available. This helps you quickly understand exactly what is happening within the proxy flow.
-        ![9_trace_message.png](./images/9_trace_message.png)
+        ![09_trace_message.png](./images/09_trace_message.png)
  - At this point, we will start to use the `Postman` tool as a client to invoke our proxy and continue to use `Postman` throughout the rest of the labs. 
     - Launch `Postman`
     - Select the `SE Technical Enablement` environment
