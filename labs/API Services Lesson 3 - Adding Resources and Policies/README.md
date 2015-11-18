@@ -1,39 +1,39 @@
 #API Services: Lesson 3 - Adding Flows and Policies
 
-##Overview
+## Overview
 Apigee Edge enables you to 'program' API behavior without writing any code, by using 'policies'. A policy is like a module that implements a specific, limited management function. Policies are designed to let you add common types of management capabilities to an API easily and reliably. Policies provide features like security, rate-limiting, transformation, and mediation capabilities, saving you from having to code and maintain this functionality on your own. 
 You're not limited to the set of policy types provided by Apigee Edge. You can also write custom scripts and code (such as JavaScript and Node.js applications), that extend API proxy functionality and enable you to innovate on top of the basic management capabilities supported by Apigee Policies.
 
-###Policy types
+### Policy types
 Technically, a policy is an XML-formatted configuration file. Each policy type's structure (for example, the required and optional configuration elements) is defined by an XML schema.
 Edge Policy types are grouped into the following functional categories:
 
-####Traffic management
+#### Traffic management
 Policies in the traffic management category enable you to control the flow of request and response messages through an API proxy. These policies support both operational- and business-level control. They give you control over raw throughput, and can also control traffic on a per-app basis. Traffic management policy types enable you to enforce quotas, and they also help you to mitigate denial of service attacks.
 
-####Mediation
+#### Mediation
 Policies in the mediation category enable you to actively manipulate messages as they flow through API proxies. They enable you to transform message formats, from XML to JSON (and vice-versa), or to transform one XML format to another XML format.  They also enable you to parse messages, to generate new messages and to change values on outbound messages. Mediation policies also interact with basic services exposed by API Services, enabling you to retrieve data about apps, developers, security tokens, and API products at runtime. 
 
-####Security
+#### Security
 Policies in the security category support authentication, authorization, as well as content-based security.
 
-####Extension 
+#### Extension 
 Policies in the extension category enable you to tap into the extensibility of API Services to implement custom behavior in the programming language of you choice.
 Each Policy type is documented in detail in the [Policy reference overview](http://apigee.com/docs/api-services/reference/reference-overview-policy). This topic demonstrates general interaction, showing you how to create Policies, and how to attach them to Flows in an API proxy configuration.
 
-##Objectives
+## Objectives
 The goal of this lesson is to get you familiar with how to use the Management UI to design and configure different types of policies to the API Proxy that we created in the previous lab. We will primarily work with mediation and extensibility policies in this lesson. 
 
 By the end of this lesson, you will have enhanced the `{your-initials}_hotels` proxy to accept a `zipcode` and a `radius` (in meters) query parameter, use those parameters to return a list of hotels that match the criteria, and format the results to filter out some metadata from the BaaS result.
 
 **Note:** Now that you are familiar with the Apigee Edge Management UI navigation, the instructions will become terse and will be provided without screenshots unless a new concept is being introduced.
 
-##Prerequisites
+## Prerequisites
 - [x] API Services - Lesson 2 completed
 
-##Estimated Time: 90 mins
+## Estimated Time: 90 mins
 
-###Adding Flows to an API Proxy
+### Adding Flows to an API Proxy
 A "flow" in an Apigee Edge API Proxy is one branch of the condition tree that processes inbound requests. In general, an API Proxy will have one or more flows, and the API Proxy will perform a distinct set of logic steps, or "policies", in each flow. A "passthrough" proxy may have zero flows, and will simply pass the inbound request unchanged to the backend system.
 
 Adding Flows to an API Proxy is done from the `Develop` tab in the Edge UI. 
@@ -42,10 +42,10 @@ Adding Flows to an API Proxy is done from the `Develop` tab in the Edge UI.
 - Click your hotels proxy, the one named {yourinitials}_hotels 
 - You will now be viewing the  `xx_hotel` proxy’s `Overview` tab
 - Click the `Develop` tab  
-![0_develop_tab](./images/0_develop_tab.png)  
+![00_develop_tab](./images/00_develop_tab.png)  
 
 - In the left-hand-side navigator, find the "Proxy Endpoints" section.  Click the + adjacent to the "default" proxy endpoint. 
-![0_new_flow](./images/0_new_flow.png)  
+![01_new_flow](./images/01_new_flow.png)  
 
 - In the new resource row, provide the following properties:
 
@@ -57,7 +57,7 @@ Adding Flows to an API Proxy is done from the `Develop` tab in the Edge UI.
  Verb: GET
 ```
 After setting those properties, click on the `Add` button to complete adding the Flow. 
-![1_add_flow](./images/1_add_flow.png)
+![02_add_flow](./images/02_add_flow.png)
 
 - Follow the above steps to add another Flow with the following properties:
 ```
@@ -90,7 +90,7 @@ location within <distance_in_meters> of <latitude>, <longitude>
   - Add the location query as a query parameter before the target BaaS service is invoked. 
  A pictorial representation of the logic is depicted below:
  
- ![2_flow_logic](./images/2_flow_logic.png)
+ ![03_flow_logic](./images/03_flow_logic.png)
 
  For the service callout to convert the zipcode to the geocoordinate, you will use the Google GeoCoding API. 
 
@@ -98,17 +98,17 @@ Now let’s implement the policies.
 
 - Switch to the `Develop` tab of the API Proxy
 - From the `Navigator` pane, select `Proxy Endpoints → default → Get Hotels` 
- ![2_select_flow](./images/2_select_flow.png)
+ ![04_select_flow](./images/04_select_flow.png)
 
 ###Using Assign Message Policy to prepare the service callout request
 
 - From the flow canvas, click the "+ Step" box within the Request flow. 
 
-![3_add_step](./images/3_add_step.png)
+![05_add_step](./images/05_add_step.png)
 
 - In the resulting dialog box, Scroll and choose the assign message policy
 
-![3_choose_assign_message](./images/3_choose_assign_message.png)
+![06_choose_assign_message](./images/06_choose_assign_message.png)
 
 - Specify these values for the `Assign Message` policy customizations. 
 ```
@@ -117,10 +117,10 @@ Now let’s implement the policies.
 ``` 
 
 - You will now see a policy icon appearing in the flow canvas. Click it.  
-![3_am_policy_icon](./images/3_am_policy_icon.png)
+![07_am_policy_icon](./images/07_am_policy_icon.png)
 
 - Make sure you have selected the policy icon and that it is highlighted. 
-![3_verify_am_policy](./images/3_verify_am_policy.png)
+![08_verify_am_policy](./images/08_verify_am_policy.png)
 
 - In the lower panel beneath the canvas, modify the XML configuration. 
 Copy the text below and paste it into the editor:  
@@ -164,12 +164,12 @@ Here's a brief description of the elements in this policy. You can read more abo
 
 **Note:** The properties associated with the `Assign Message` policy could have been modified using the `Property Inspector` panel that’s presented in the far right panel of the `Develop` tab. Any changes made in the `Code` panel are reflected in the `Property Inspector` panel and vice-versa. We will use the `Property Inspector` panel to set properties for some of the policies as the lesson progresses.
 
-###Using the Service Callout Policy to invoke the Google GeoCoding API
+### Invoke the Google GeoCoding API Using the Service Callout Policy
 - Click the "+ Step" button again
-![4_add_step_again](./images/4_add_step_again.png)
+![09_add_step_again](./images/09_add_step_again.png)
 
 - Scroll to select the Service Callout policy
-![4_select_service_callout](./images/4_select_service_callout.png)
+![10_select_service_callout](./images/10_select_service_callout.png)
 
 - Specify these values:
 ```
@@ -180,9 +180,7 @@ Here's a brief description of the elements in this policy. You can read more abo
 - Click Add. The policy icon appears in the flow canvas. 
 
 - Click the new icon to make sure it is selected and highlighted. 
-![5-service-callout-policy-in-canvas](./images/5-service-callout-policy-in-canvas.png)
-
-- DINO RESUME HERE XXX
+![11_service-callout-policy-in-canvas](./images/11_service-callout-policy-in-canvas.png)
 
 - Copy the text below and paste it into the editor:  
     ```xml
@@ -201,46 +199,56 @@ Here's a brief description of the elements in this policy. You can read more abo
     ```
 - Here's a brief description of the elements that were modified in this policy. You can read more about this policy in [the online documentation for the Service Callout policy](http://apigee.com/docs/api-services/reference/service-callout-policy).
 
-- **```<Request variable>```** - This is the variable `GeocodingRequest` that was created in the AssignMessage policy in the previous step. It encapsulates the request going to the Google Geocoding API.
+  - **```<Request variable>```** - This is the variable `GeocodingRequest` that was created in the AssignMessage policy in the previous step. It encapsulates the request going to the Google Geocoding API.
 
-- **```<Response>```** - This element names a variable `GeocodingResponse` in which the response from the Google Geocoding API will be stored. As you will see, this variable will be accessed later by the ExtractVariables policy.
+  - **```<Response>```** - This element names a variable `GeocodingResponse` in which the response from the Google Geocoding API will be stored. As you will see, this variable will be accessed later by the ExtractVariables policy.
 
-- **```<HTTPTargetConnection><URL>```** - Specifies the target URL to be used by the service callout - in this case the URL of the Google Geocoding API: `http://maps.googleapis.com/maps/api/geocode/json`
+  - **```<HTTPTargetConnection><URL>```** - Specifies the target URL to be used by the service callout - in this case the URL of the Google Geocoding API: `http://maps.googleapis.com/maps/api/geocode/json`
 
 
-### Using the Extract Message Policy to parse the service callout response
-- From the `New Policy` drop-down, select the `Extract Variables` policy and add it with the following properties:
-```
- Policy Display Name: Extract Geo Codes
- Policy Name: Extract-Geo-Codes
- Attach Policy: Checked
- Flow: Flow Get Hotels, Proxy Endpoint default
- Segment: Request
-```
-- For the `Extract Geo Codes` policy, change the XML configuration of the policy using the `Code: Extract Geo Codes` panel as follows:
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ExtractVariables async="false" continueOnError="false" enabled="true" name="Extract-Geo-Codes">
-    <DisplayName>Extract Geo Codes</DisplayName>
-    <Source>GeocodingResponse</Source>
-        <VariablePrefix>geocodeResponse</VariablePrefix>
-        <JSONPayload>
+### Parse the service callout response, using the Extract Message Policy
+
+- Again click "+ Step" 
+
+- Scroll to select the  `Extract Variables` policy, specify the following properties:
+  ```
+   Display Name: Extract Geo Codes
+   Name: Extract-Geo-Codes
+  ```
+- click Add; as with previous policy steps, the policy icon will appear in the Flow canvas. 
+
+- click the icon for the newly-added policy to select the policy. 
+
+- in the XML panel below the canvas, copy-paste the following: 
+    ```xml
+    <ExtractVariables name="Extract-Geo-Codes">
+      <DisplayName>Extract Geo Codes</DisplayName>
+      <Source>GeocodingResponse</Source>
+      <VariablePrefix>geocodeResponse</VariablePrefix>
+      <JSONPayload>
         <Variable name="latitude">
-                <JSONPath>$.results[0].geometry.location.lat</JSONPath>
+          <JSONPath>$.results[0].geometry.location.lat</JSONPath>
         </Variable>
         <Variable name="longitude">
-                <JSONPath>$.results[0].geometry.location.lng</JSONPath>
+          <JSONPath>$.results[0].geometry.location.lng</JSONPath>
         </Variable>
-        </JSONPayload>
-</ExtractVariables>
-```
-Here's a brief description of the elements that were modified in this policy. You can read more about this policy in [Extract Variables policy](http://apigee.com/docs/api-services/reference/extract-variables-policy).
-**<Source>** - Specifies the response variable `GeocodingResponse` that we created in the ServiceCallout policy. This is the variable from which this policy extracts data. 
-**<VariablePrefix>** - The variable prefix `geocodeResponse` specifies a namespace for other variables created in this policy. The prefix can be any name, except for the reserved names defined by the [Apigee Edge Platform's predefined variables](http://mktg-dev.apigee.com/docs/api-platform/api/variables-reference).
-**<JSONPayload>** - This element retrieves the response data that is of interest and puts it into named variables. In fact, the Google Geocoding API returns much more information than latitude and longitude. However, these are the only values needed for these lessons. You can see a complete rendering of the JSON in the [Google Geocoding API documentation](https://developers.google.com/maps/documentation/geocoding/). The values of `geometry.location.lat` and `geometry.location.lng` are simply two of the many fields in the returned JSON object.
-It may not be obvious, but it's important to see that ExtractVariables produces two variables whose names consist of the variable prefix (`geocodeResponse`) and the actual variable names that are specified in the policy. These variables are stored in the API proxy and will be available to other policies within the proxy flow, as you will see. The variables are: `geocodeResponse.latitude` & `geocodeResponse.longitude`
+      </JSONPayload>
+    </ExtractVariables>
+    ```
 
-###Using the Javascript Policy to create the Location Query to send to the BaaS target endpoint
+- Here's a brief description of the elements that were modified in this policy. You can read more about this policy in [the online documentation for the Extract Variables policy](http://apigee.com/docs/api-services/reference/extract-variables-policy).
+
+  - **```<Source>```** - Specifies the response variable `GeocodingResponse` that we created in the ServiceCallout policy. This is the variable from which this policy extracts data. 
+
+  - **```<VariablePrefix>```** - The variable prefix `geocodeResponse` specifies a namespace for other variables created in this policy. The prefix can be any name, except for the reserved names defined by the [Apigee Edge Platform's predefined variables](http://mktg-dev.apigee.com/docs/api-platform/api/variables-reference).
+
+  - **```<JSONPayload>```** - This element retrieves the response data that is of interest and puts it into named variables. In fact, the Google Geocoding API returns much more information than latitude and longitude. However, these are the only values needed for these lessons. You can see a complete rendering of the JSON in the [Google Geocoding API documentation](https://developers.google.com/maps/documentation/geocoding/). The values of `geometry.location.lat` and `geometry.location.lng` are simply two of the many fields in the returned JSON object.
+
+  This configuration of the  ```ExtractVariables``` policy produces two context variables whose names consist of the variable prefix (`geocodeResponse`) and the actual variable names that are specified in the policy. The resulting variable names are: `geocodeResponse.latitude` & `geocodeResponse.longitude` .  These variables are set into the request context at runtime, and will be available to other policies within the proxy flow, as you will see. 
+
+###  Using the Javascript Policy to create the Location Query to send to the BaaS target endpoint
+
+- DINO RESUME HERE
 
 - From the `New Policy` drop-down, select the `Javascript` policy and add it with the following properties:
 ```
