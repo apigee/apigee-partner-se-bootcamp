@@ -1,4 +1,4 @@
-# API Services_ Lesson 5 - Add Security Policies
+# API Services Lesson 5 - Add Security Policies
 
 ## Overview
 There are several out-of-the-box security policies that Apigee Edge provides to protect your APIs. These security policies must be used appropriately based upon your use cases. Apigee Edge supports:
