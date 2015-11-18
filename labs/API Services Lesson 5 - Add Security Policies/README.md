@@ -301,11 +301,14 @@ Now that you have a valid API Key associated with a Developer App (`iExplore App
 
 - Copy the `Consumer Key` associated with the `iExplore App` by going to Publish → Developer Apps → iExplore App 
 - Start the Trace session for the `{your-initials}_hotels` proxy
+
 - Send a test `/GET hotels` request from `Postman` with the following query parameters: `zipcode=98101&radius=200&apikey={INSERT CONSUMER KEY HERE}`
 
 **Note:** Be sure to insert the consumer key appropriately. As you copy-paste, be sure to remove any spaces before and after the Consumer Key. Also, don't keep the curly braces.
 
-- Review the Trace for the proxy and the returned response to ensure that the flow is working as expected.
+- Again from `Postman`, send the same kind of request to `/GET hotels`, but use a bogus API Key: `zipcode=98101&radius=200&apikey={INSERT BOGUS KEY HERE}`
+
+- Now switch back to the Trace tab in the browser. Review the Trace for the proxy and the returned response to ensure that the flow is working as expected. It allows requests with valid API keys and rejects requests with invalid keys. 
 
 - Stop the Trace session for the ‘{your-initials}_hotels’ proxy
 
@@ -334,6 +337,7 @@ To support use cases with grant types other than client credentials, the OAuth p
   ![10_detach_api_key.png](./images/10_detach_api_key.png) 
 
 - Using the `New Policy` drop-down from the `Design` tab of the `{your-initials}_hotels` proxy, add the `OAuth v2.0` policy with the following properties:
+
         - Policy Display Name: **Validate OAuth v2 Token**
         - Policy Name: **Validate-OAuth-v2-Token**
         - Attach Policy: **Checked**
