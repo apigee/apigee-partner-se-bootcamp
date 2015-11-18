@@ -151,11 +151,17 @@ Copy the text below and paste it into the editor:
 
 Here's a brief description of the elements in this policy. You can read more about this policy in [the online docs for the Assign Message policy](http://apigee.com/docs/api-services/reference/assign-message-policy).
 
-**```<AssignMessage name="xxx">```** - Gives this policy a name. The name is used when the policy is referenced in a flow. 
-**<AssignTo>** - Creates a named *context variable* called `GeocodingRequest` of type `Request`. This variable encapsulates the request object that will be sent by the ServiceCallout policy. 
-**<Set><QueryParams>** - Sets the query parameters that are needed for the service callout API call. In this case, the Google Geocoding API needs to know the location, which is expressed with a zipcode. The original inbound request supplies this information, and we simply embed it here. The region and sensor parameters are required by the Google API, and we just hardcode it to certain values here.
-**<Verb>** - In this case, we are making a simple GET request to the API. 
-**<AssignVariable>** - zipcode and radius are new variables being created to store values being passed to the API. In this example, the variables will be accessed later in the proxy flow. 
+- **```<AssignMessage name="xxx">```** - Gives this policy a name. The name is used when the policy is referenced in a flow. 
+
+- **```<AssignTo>```** - Creates a named *context variable* called `GeocodingRequest` of type `Request`. This variable encapsulates the request object that will be sent by the ServiceCallout policy. 
+
+- **```<Set><QueryParams>```** - Sets the query parameters that are needed for the service callout API call. In this case, the Google Geocoding API needs to know the location, which is expressed with a zipcode. The original inbound request supplies this information, and we simply embed it here. The region and sensor parameters are required by the Google API, and we just hardcode it to certain values here.
+
+- **```<Verb>```** - In this case, we are making a simple GET request to the API. 
+
+- **```<AssignVariable>```** - zipcode and radius are new variables being created to store values being passed to the API. In this example, the variables will be accessed later in the proxy flow.  NB: the **```AssignMessage```** policy is designed to assign values to a variable of type message. The **```AssignVariable```** is an optional part of **```AssignMessage```** , which sets another context variable of a primitive type - boolean, string, number. We have found that often people want to make two assignments at once. This is why these capabilities are combined into a single policy.
+
+
 **Note:** The properties associated with the `Assign Message` policy could have been modified using the `Property Inspector` panel that’s presented in the far right panel of the `Develop` tab. Any changes made in the `Code` panel are reflected in the `Property Inspector` panel and vice-versa. We will use the `Property Inspector` panel to set properties for some of the policies as the lesson progresses.
 
 ###Using the Service Callout Policy to invoke the Google GeoCoding API
