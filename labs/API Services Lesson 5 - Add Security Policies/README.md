@@ -198,25 +198,27 @@ The following table defines some of the terms used to register apps and generate
 | Term        | Definition      |
 | :------------:|:-------------:|
 | API product      | A bundle of API proxies combined with a service plan that sets limits on access to those APIs. API products are the central mechanism that Apigee Edge uses for authorization and access control to your APIs. For more, see [API Products](http://apigee.com/docs/developer-services/content/what-api-product) |
-| Developer      | The API consumer. Developers write apps the make requests to your APIs. For more, see Developer      |
-| App | A client-side app that a developer registers to access an API product. Registering the app with the API product generates the API key for accessing the APIs in that product.      |
+| Developer      | The person or party that builds applications that use the API. Developers write apps the make requests to your APIs. For more, see [Adding Developers to an API Product](http://apigee.com/docs/developer-services/content/adding-developers-your-api-product).      |
+| App | A client-side app that a developer registers to access an API product. Each developer may have zero or more registered applications. Registering an app with the API product generates the API key for accessing the APIs in that product.      |
 | API key | A string with authorization information that a client-side app uses to access the resources exposed by the API product. The API key is generated when a registered app is associated with an API product.      |
 
 With the above brief introduction to API Products, Developers and Developer Apps, you will now create one of each to obtain a valid API Key that can be used to call the `{your-initials}_hotels` proxy
 
-- **Publishing an API Product**
+## Publishing an API Product
 
- - From the Apigee Edge Management UI, go to `Publish` → `API Products`
- - Click on `+ Product` button to add a new product
- - In the `Product Details` section of the new product screen, enter or select the following values for the various fields:
+- From the Apigee Edge Management UI, go to `Publish` → `API Products`
 
-        - Display Name: **{your-initials} Hospitality Basic Product** 
-        - Description: **API Bundle for a basic Hospitality App.**
-        - Environment: **Test**
-        - Access: **Public**
-        - Key Approval Type: **Automatic**
+- Click on `+ Product` button to add a new product
 
-        ![3_create_product.png](./images/3_create_product.png)
+- In the `Product Details` section of the new product screen, enter or select the following values for the various fields:
+
+    - Display Name: **{your-initials} Hospitality Basic Product** 
+    - Description: **API Bundle for a basic Hospitality App.**
+    - Environment: **Test**
+    - Access: **Public**
+    - Key Approval Type: **Automatic**
+
+      ![06_create_product.png](./images/06_create_product.png)
  
 
  - In the `Resources` section select the following values for the various fields:
