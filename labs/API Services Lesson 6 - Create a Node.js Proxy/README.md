@@ -12,9 +12,6 @@ Enterprise developers have found many creative ways to integrate Node.js applica
 - Build **composite services** and **mashups**.
 - Rapidly develop prototypes of new APIs using frameworks like [Express](http://expressjs.com/), [Argo](http://expressjs.com/), and [Usergrid](https://npmjs.org/package/usergrid).
 
-## Objectives
-The goal of this lesson is to introduce you to Node.js, download and use Node.js modules from NPM, create a simple API using Node.js and deploy the API to your Apigee Edge environment using Apigee’s deployment tool.
-
 ## Why Node.js? 
 
 Node.js is *rapidly* growing in popularity, as this Google trends chart shows:
@@ -26,6 +23,9 @@ Also, nodejs is rapidly growing in power, as this chart from [modulecounts.com](
 ![nodejs-modulecounts](./images/nodejs-modulecounts.png) 
 
 Also, node performs well, and is being actively maintained. For all these reasons, including node.js into Apigee Edge makes a lot of sense. We think the ability to host nodejs applications in the platform, right next to the API Management capability, is a clear differentiator for Apigee Edge. 
+
+## Objectives
+The goal of this lesson is to introduce you to Node.js, download and use Node.js modules from NPM, create a simple API using Node.js and deploy the API to your Apigee Edge environment using Apigee’s deployment tool.
 
 
 ## Prerequisites
@@ -44,199 +44,171 @@ Also, node performs well, and is being actively maintained. For all these reason
 - Go to the `apigee/node-api/weather` directory that you just created
 - Using your favorite code editor, create a new file in the `apigee/node-api/weather` directory with the following Javascript code in it and save it as `weather.js`
   ```node
-  var express = require('express'),
-      YQL = require('yql'),
-      urlparse = require('url');
-
-  // Set up Express environment and enable it to read and write JavaScript
-  var app = express();
-
-  // The API starts here
-  var rootTemplate = {
-    'weather' : { 'href' : './weather' }
-  };
-
-  // GET /
-  app.get('/', function(req, res) {
-    res.jsonp(rootTemplate);
-  });
-
-  // GET /forecast
-  app.get('/forecast', function(req, res) {
-    try {
-      // parse the url and check for zipcode
-      var parsed = urlparse.parse(req.url, true);
-      if (!parsed.query.zipcode) {
-        sendError(res, 400, 'Missing query parameter "zipcode"');
-      } else {
-        // create the query per YQL module documentation & then execute the query
-        var forecastQuery = 'SELECT * FROM weather.forecast WHERE (location = ' + parsed.query.zipcode + ')';
-        var query = new YQL(forecastQuery);
-        // execute the query and create/send the final response in the anonymous callback function
-        query.exec(function(err, data) {
-          var finalResponse = {};
-          finalResponse.location = data.query.results.channel.location;
-          finalResponse.units = data.query.results.channel.units;
-          finalResponse.condition = data.query.results.channel.item.condition;
-          finalResponse.forecast = data.query.results.channel.item.forecast;
-          res.end(JSON.stringify(finalResponse));
-        });
-      }
-    } catch(err) {
-      sendError(res, 500, "Internal Server Error - " + err.message);
-    }
-  });
+  var express  = require('express'),
+      YQL      = require('yql'),
+      re1      = new RegExp('[0-9]{5}'),
+      app      = express();
 
   // Generic Send Error Function
   function sendError(res, code, msg) {
-    var o = { 'error': msg };
-    res.writeHead(code, {'Content-Type': 'application/json'});
-    res.end(JSON.stringify(o));
+    res.status(code);
+    res.json({ error: msg });
   }
 
+  // GET /forecast
+  app.get('/forecast', function(request, response) {
+    try {
+      // is the zipcode parameter present and valid?
+      if (!request.query.zipcode || !request.query.zipcode.match(re1)) {
+        sendError(response, 400, 'Missing or invalid query parameter - zipcode');
+      }
+      else {
+        // create the query per YQL module documentation & then execute the query
+        var forecastQuery = 'SELECT * FROM weather.forecast WHERE (location = ' +
+          request.query.zipcode + ')';
+        var query = new YQL(forecastQuery);
+        // execute the query and then asynchronously create/send the
+        // response in the anonymous callback function.
+        query.exec(function(error, data) {
+          if (error) {
+            sendError(response, 500, error);
+          }
+          else {
+            response.json({
+              location : data.query.results.channel.location,
+              units : data.query.results.channel.units,
+              condition : data.query.results.channel.item.condition,
+              forecast : data.query.results.channel.item.forecast
+            });
+          }
+        });
+      }
+    }
+    catch(e) {
+      sendError(response, 500, "Internal Server Error - " + e.message);
+    }
+  });
+
+  // catch and return 404
+  app.use(function(req, res, next) {
+    res.status(404);
+    res.json({ message: "Not found" });
+  });
+
   // start the server
-  app.listen(process.env.PORT || 7000);
-  console.log('The server is running!');
+  var listener = app.listen(process.env.PORT || 7000, function() {
+        var host = listener.address().address;
+        var port = listener.address().port;
+        console.log('server listening at http://%s:%s', host, port);
+      });
   ```
 
 - The above code is fairly self explanatory, but below is a brief explanation:
 
-  The first few lines declare Node modules - `express`, `yql` and `urlparse` - that the rest of code will utilize. 
+  The first few lines declare Node modules - `express` and `yql` - that the rest of code will utilize. 
 
   **Express** is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. 
 
   **yql** (Yahoo! Query Language) is a module from Yahoo that can be used to to query, filter, and combine data across the web through a single interface. It exposes a SQL-like syntax for getting the right data.
 
-  **urlparse** is a module that enables parsing of URLs to extract various parts, such as the query parameters, as necessary.
+  The code then uses the express framework to handle `HTTP GET` requests for one resource: `/forecast`.
 
-  The code then uses the express framework to handle `HTTP GET` requests for the following two resources: `/` and `/forecast`.
+  In the implementation for the `GET /forecast` resource, if the `zipcode` parameter is present and valid, then it sends a yql query to retrieve the weather for that zipcode.
 
-  In the implementation for the `GET /forecast` resource, the URL is parsed using the urlparse module to obtain the `zipcode` query parameter. If the `zipcode` parameter is available then the yql module is used to query for the weather for that zipcode.
+  The callback processes the response from the yql call. This callback function sends back to the original API caller just a relevant subset of the full yql response. 
 
-  The response from the yql call is processed in a callback function. This callback function extracts relevant information from the yql response to create a final response to be sent to the API consumer.
+  All of the HTTP requests get processed by the HTTP server that is started on port 7000 with the `app.listen(portNumber)` code.
 
-  All of the HTTP requests get processed by the HTTP server that is started on port 9000 with the `app.listen(portNumber)` code.
+- `npm` is a command-line tool that helps you manage node packages. For example the `npm install` command will download the named package and make it available in the `node_modules` subdirectory of your current directory. Any nodejs app you write will look in `node_modules` at runtime and will be able to find and use the modules you've installed.  
+  `npm` also performs other tasks.  One of them is, initializing a nodejs application directory.  Somewhat analogous to `git init`, `npm init` will prepare a directory to contain a node.js application. 
+  
+  Back in your terminal window, be sure to cd to the `apigee/node-api/weather` directory. Then, run the following commands:
 
-- `npm` is a command-line tool that helps you manage node packages. xxxx
-
-Go back to your terminal window and in the `apigee/node-api/weather` directory, run the following commands:
-
+  1.
   ```sh 
   npm init
   ```
 
-  Provide the following values during the interactive npm init session to create a package.json file for the Node module that you will be deploying to Apigee Edge:
+  This first command will run an interactive session. Provide the following values during the interactive npm init session to create a package.json file for the Node module that you will be deploying to Apigee Edge:
 
   - name: weather
   - version: 1.0.0
   - description: Apigee API facade to a Yahoo weather service
   - entry point: weather.js
-  - test command: curl -i http://HOSTNAME/YOUR-INITIALS/v1/weather/forecast?zipcode=ZIPCODE
+  - test command: 
   - git repository: 
   - keywords:
   - author: YOUR-NAME
   - license: MIT
 
-  **Note:** You do not have to replace **only** the `<host>` and `<your-initials>` with the actual value
-
+  2. 
   ```sh
-  npm install express@3.x.x --save
+  npm install express@4.13.3 --save
   ```
         
-  This command downloads the `express` module and updates the dependencies list in the `package.json` file.
+  The prior command downloads the `express` module at the specified version, and updates the dependencies list in the `package.json` file.
 
+  3. 
   ```sh
-  npm install yql@1.x.x --save
+  npm install yql@1.0.2 --save
   ```
 
   This command downloads Yahoo’s `yql` module locally and updates the dependencies list in the `package.json` file.
 
-  ```sh
-  npm install urlparse@0.x.x --save
-  ```
+  4. check the package.json file: 
+  ``` cat package.json```
 
-  This command downloads the `urlparse` module locally and updates the dependencies list in the `package.json` file.
+  Observe that the package.json file has been created, and includes a list of dependencies. The directory is now ready for running a nodejs app that uses those modules.  You could have created this file manually, with those module names and version numbers , and then run `npm install` to get the same results. 
 
 - To test the weather API locally:
 
- - Start the `weather.js` module from the command line as follows: 
-   ```sh
-  node weather.js
-   ```
-  The server should start within a few seconds with a message `The server is running!` on the console
+  - start the `weather.js` module from the command line as follows: 
+    ```sh
+    node weather.js
+    ```
+    The server should start within a few seconds with a message `The server is running!` on the console.
 
- - Go to the Postman tool and run the ‘/GET forecast - localhost’ request.  Alternatively, you can invoke the command from another terminal window, with something like this: 
-   ```
-   curl -i http://localhost:7000/forecast?zipcode=95113
-   ```
+  - Go to the Postman tool and run the ‘/GET forecast - localhost’ request.  Alternatively, you can invoke the command from another terminal window, with something like this: 
+    ```
+    curl -i http://localhost:7000/forecast?zipcode=95113
+    ```
 
- - If everything is working correctly, you should see a response similar to the following: 
+  - If everything is working correctly, you should see a response similar to the following: 
 
-   ```json
-   {
-     "location": {
-         "city": "Seattle",
-         "country": "US",
-         "region": "WA"
-     },
-     "units": {
-         "distance": "mi",
-         "pressure": "in",
-         "speed": "mph",
-         "temperature": "F"
-     },
-     "condition": {
-         "code": "29",
-         "date": "Sun, 26 Oct 2014 9:53 pm PDT",
-         "temp": "49",
-         "text": "Partly Cloudy"
-     },
-     "forecast": [
-         {
-             "code": "29",
-             "date": "26 Oct 2014",
-             "day": "Sun",
-             "high": "55",
-             "low": "46",
-             "text": "Partly Cloudy"
-         },
-         {
-             "code": "28",
-             "date": "27 Oct 2014",
-             "day": "Mon",
-             "high": "58",
-             "low": "51",
-             "text": "Mostly Cloudy"
-         },
-         {
-             "code": "11",
-             "date": "28 Oct 2014",
-             "day": "Tue",
-             "high": "59",
-             "low": "53",
-             "text": "Showers"
-         },
-         {
-             "code": "30",
-             "date": "29 Oct 2014",
-             "day": "Wed",
-             "high": "59",
-             "low": "51",
-             "text": "Partly Cloudy"
-         },
-         {
-             "code": "12",
-             "date": "30 Oct 2014",
-             "day": "Thu",
-             "high": "59",
-             "low": "53",
-             "text": "Rain"
-         }
-     ]
+    ```json
+    {
+      "location": {
+        "city": "Seattle",
+        "country": "US",
+        "region": "WA"
+      },
+      "units": {
+        "distance": "mi",
+        "pressure": "in",
+        "speed": "mph",
+        "temperature": "F"
+      },
+      "condition": {
+        "code": "29",
+        "date": "Sun, 26 Oct 2014 9:53 pm PDT",
+        "temp": "49",
+        "text": "Partly Cloudy"
+      },
+      "forecast": [
+        {
+          "code": "29",
+          "date": "26 Oct 2014",
+          "day": "Sun",
+          "high": "55",
+          "low": "46",
+          "text": "Partly Cloudy"
+        },
+          . . . 
+      ]
     }
     ```
 
-- Stop the locally running node process by pressing `ctrl-c` in the appropriate terminal window.
+  - This completes the test. Stop the locally running node process by pressing `ctrl-c` in the appropriate terminal window.
 
 - To deploy the weather API to Apigee Edge you will use the `apigeetool`. 
 
