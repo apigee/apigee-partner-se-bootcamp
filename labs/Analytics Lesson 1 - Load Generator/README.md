@@ -72,7 +72,9 @@ Estimated Total Time for all Phases: 45 minutes
 6. In the Edge UI, create a new Product, containing the weather-quota proxy: 
 
   a. Click "Publish", and select "Products" from the dropdown  
+  ![publish products](./images/publish-products.png)  
   b. click "+Product"  
+  ![plus-api-product](./images/plus-api-product.png)  
   c. name the product "WeatherQuota-1"  
   d. tick the "test" checkbox  
   e. mark it public   
