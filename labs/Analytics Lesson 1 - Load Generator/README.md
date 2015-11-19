@@ -160,8 +160,8 @@ Estimated Total Time for all Phases: 45 minutes
 1. Modify the configuration in model.json in this way: 
 
   a. set the "host" property to point to the DNS name of your Apigee Edge organization   
-  b. Replace CLIENT_ID_HERE with the client_id you saved earlier  
-  c. Likewise replace CLIENT_SECRET_HERE with the client_secret value  
+  b. Replace CLIENT_ID_HERE with the consumer id value you saved earlier  
+  c. Likewise replace CLIENT_SECRET_HERE with the consumer secret value from earlier
 
 2. Save the apiproxy. 
 
