@@ -57,7 +57,7 @@ Estimated Total Time for all Phases: 45 minutes
   i. In the resulting list of API Proxies, click the "oauth" proxy. 
 
   j. Click the Deployment drop-down, and select "test".  This will deploy the oauth proxy to the test environment.
-  ![New API Proxy](./images/deployment-dropdown.png)
+  ![Deployment dropdown](./images/deployment-dropdown-then-click.png)
 
 2. Import and Deploy the weather-quota apiproxy the same way.  
 
