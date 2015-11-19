@@ -94,7 +94,7 @@ Estimated Total Time for all Phases: 45 minutes
   d. select any developer you like from the dropdown  
   e. ignore the callback URL; it is not used for this exercise.   
   f. click "+ Product"
-  ![new app](./images/create-developer-app-add-product-20150630-212308.png)  
+  ![create-developer-app-add-product](./images/create-developer-app-add-product.png)  
   g. select the WeatherQuota-1 product you just created.  
   h. be sure to click the checkmark on the right-hand-side of the form  
   i. click Save  
@@ -102,7 +102,8 @@ Estimated Total Time for all Phases: 45 minutes
 8. Get the client_id and client_secret for that app.  
 
   a. After saving the new developer app, you should see a list of developer apps. In the list, click the wq-app-1 you just created - it should be the top item in the list.   
-  b. click the "show" buttons to display the client_id and client_secret respectively.  Copy these values to a text file.  
+  b. click the "show" buttons to show the "consumer id" and "consumer secret" respectively.  Copy these values to a text file.  
+  ![show-credentials](./images/show-credentials.png)  
 
 
 
