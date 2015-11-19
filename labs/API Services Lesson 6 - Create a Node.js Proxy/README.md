@@ -15,6 +15,19 @@ Enterprise developers have found many creative ways to integrate Node.js applica
 ## Objectives
 The goal of this lesson is to introduce you to Node.js, download and use Node.js modules from NPM, create a simple API using Node.js and deploy the API to your Apigee Edge environment using Apigee’s deployment tool.
 
+## Why Node.js? 
+
+Node.js is *rapidly* growing in popularity, as this Google trends chart shows:
+
+![nodejs-google-trends](./images/nodejs-google-trends.png) 
+
+Also, nodejs is rapidly growing in power, as this chart from [modulecounts.com](http://modulecounts.com) shows:
+
+![nodejs-modulecounts](./images/nodejs-modulecounts.png) 
+
+Also, node performs well, and is being actively maintained. For all these reasons, including node.js into Apigee Edge makes a lot of sense. We think the ability to host nodejs applications in the platform, right next to the API Management capability, is a clear differentiator for Apigee Edge. 
+
+
 ## Prerequisites
 - [x] Your Apigee Edge organization name, user name, and the password 
 - [x] Node downloaded from http://nodejs.org/download/ and installed as an admin user
@@ -104,7 +117,9 @@ The goal of this lesson is to introduce you to Node.js, download and use Node.js
 
   All of the HTTP requests get processed by the HTTP server that is started on port 9000 with the `app.listen(portNumber)` code.
 
-- Go back to your terminal window and in the `apigee/node-api/weather` directory, run the following commands:
+- `npm` is a command-line tool that helps you manage node packages. xxxx
+
+Go back to your terminal window and in the `apigee/node-api/weather` directory, run the following commands:
 
   ```sh 
   npm init
