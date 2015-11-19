@@ -252,4 +252,5 @@ Some further notes:
 3. There is a complete readme for the runload tool, explaining its behavior and configuration, available [here](./Runload-README.md). There are many more possibilities that we haven't explored here. Also, we suggest that you play around with different values for the rates, and different values for the weights of input, to generate different load profiles. Experiment! 
 
 4. You can download the runload API Proxy and re-use it in any organization. We recommend running it for a week or more, to generate reasonable data and Analytis charts that are worth demonstrating. For example: 
-![Plus API Proxy](./images/resulting-chart-20150630-221032.png)
+![Resulting chart](./images/resulting-chart-20150630-221032.png)
+![TP99](./images/tp99-chart.png)
