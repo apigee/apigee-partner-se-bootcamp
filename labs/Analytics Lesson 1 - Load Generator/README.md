@@ -79,7 +79,7 @@ Estimated Total Time for all Phases: 45 minutes
   f. set the quota to be 1000 requests for every 1 minute  
   g. ignore the oauth scopes section; it is not used in this exercise.  
   h. add a proxy by clicking the "+ API Proxy" button
-  ![new product](./images/create-new-product-20150630-211843.png)  
+  ![new product](./images/create-new-product.png)  
 
   i. select the weather-quota apiproxy.  
   j. click Save to save the API Product
