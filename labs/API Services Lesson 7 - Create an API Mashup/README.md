@@ -160,11 +160,11 @@ curl -X POST -i \
     "status" : "approved",
     "api_product_list" : "[Hospitality Pro Product]",
     "expires_in" : "3599",
-    "developer.email" : "irajeevsingh+mpolo@gmail.com",
+    "developer.email" : "somebody+mpolo@gmail.com",
     "token_type" : "BearerToken",
     "client_id" : "A8AD5EBfy8nQTHnr2P7YEZFZAlAtKNnx",
     "access_token" : "fTEcxchwgHp3se8YBf0xFAjSffP4",
-    "organization_name" : "amer-partner7",
+    "organization_name" : "myorgname",
     "refresh_token_expires_in" : "0",
     "refresh_count" : "0"
   }
