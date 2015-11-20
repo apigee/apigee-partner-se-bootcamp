@@ -120,10 +120,8 @@ The goal of this lesson is to introduce you to Node.js, download and use Node.js
   All of the HTTP requests get processed by the HTTP server that is started on port 7000 with the `app.listen(portNumber)` code.
 
 - `npm` is a command-line tool that helps you manage node packages. For example the `npm install` command will download the named package and make it available in the `node_modules` subdirectory of your current directory. Any nodejs app you write will look in `node_modules` at runtime and will be able to find and use the modules you've installed.  
-  `npm` also performs other tasks.  One of them is, initializing a nodejs application directory.  Somewhat analogous to `git init`, `npm init` will prepare a directory to contain a node.js application. 
-  
-  Back in your terminal window, be sure to cd to the `apigee/node-api/weather` directory. Then, run the following commands:
-
+  `npm` also performs other tasks.  One of them is, initializing a nodejs application directory.  Somewhat analogous to `git init`, `npm init` will prepare a directory to contain a node.js application.   
+  Back in your terminal window, be sure to cd to the `apigee/node-api/weather` directory. Then, run the following commands:  
   1.
   ```sh 
   npm init
