@@ -42,7 +42,7 @@ The goal of this lesson is to introduce you to Node.js, download and use Node.js
 - Open up a terminal window
 - In your home directory, create a new directory structure as follows: `apigee/node-api/weather`
 - Go to the `apigee/node-api/weather` directory that you just created
-- Using your favorite code editor, create a new file in the `apigee/node-api/weather` directory with the following Javascript code in it and save it as `weather.js`
+- Using your favorite code editor (if you don't have one, try [Visual Studio Code](https://code.visualstudio.com/) (free) or [Sublime](http://www.sublimetext.com/) (pay) or TextWrangler), create a new file in the `apigee/node-api/weather` directory with the following Javascript code in it and save it as `weather.js`. 
   ```node
   var express  = require('express'),
       YQL      = require('yql'),
