@@ -121,42 +121,46 @@ The goal of this lesson is to introduce you to Node.js, download and use Node.js
 
 - `npm` is a command-line tool that helps you manage node packages. For example the `npm install` command will download the named package and make it available in the `node_modules` subdirectory of your current directory. Any nodejs app you write will look in `node_modules` at runtime and will be able to find and use the modules you've installed.  
   `npm` also performs other tasks.  One of them is, initializing a nodejs application directory.  Somewhat analogous to `git init`, `npm init` will prepare a directory to contain a node.js application.   
-  Back in your terminal window, be sure to cd to the `apigee/node-api/weather` directory. Then, run the following commands:  
-  1.
-  ```sh 
-  npm init
-  ```
+  Back in your terminal window, be sure to cd to the `apigee/node-api/weather` directory. Then, perform the following tasks:
 
-  This first command will run an interactive session. Provide the following values during the interactive npm init session to create a package.json file for the Node module that you will be deploying to Apigee Edge:
+  1. initialize the directory:
 
-  - name: weather
-  - version: 1.0.0
-  - description: Apigee API facade to a Yahoo weather service
-  - entry point: weather.js
-  - test command: 
-  - git repository: 
-  - keywords:
-  - author: YOUR-NAME
-  - license: MIT
+    ```sh 
+    npm init
+    ```
+    This first command will run an interactive session. Provide the following values during the interactive npm init session to create a package.json file for the Node module that you will be deploying to Apigee Edge:
 
-  2. 
-  ```sh
-  npm install express@4.13.3 --save
-  ```
-        
-  The prior command downloads the `express` module at the specified version, and updates the dependencies list in the `package.json` file.
+    - name: weather
+    - version: 1.0.0
+    - description: Apigee API facade to a Yahoo weather service
+    - entry point: weather.js
+    - test command: 
+    - git repository: 
+    - keywords:
+    - author: YOUR-NAME
+    - license: MIT
 
-  3. 
-  ```sh
-  npm install yql@1.0.2 --save
-  ```
+  2. install the express module
 
-  This command downloads Yahoo’s `yql` module locally and updates the dependencies list in the `package.json` file.
+    ```sh
+    npm install express@4.13.3 --save
+    ```
+    The prior command downloads the `express` module at the specified version, and updates the dependencies list in the `package.json` file.
+
+  3. install the yql module
+
+    ```sh
+    npm install yql@1.0.2 --save
+    ```
+
+    This command downloads Yahoo’s `yql` module locally and updates the dependencies list in the `package.json` file.
 
   4. check the package.json file: 
-  ``` cat package.json```
 
-  Observe that the package.json file has been created, and includes a list of dependencies. The directory is now ready for running a nodejs app that uses those modules.  You could have created this file manually, with those module names and version numbers , and then run `npm install` to get the same results. 
+    ``` 
+    cat package.json
+    ```
+    Observe that the package.json file has been created, and includes a list of dependencies. The directory is now ready for running a nodejs app that uses those modules.  You could have created this file manually, with those module names and version numbers , and then run `npm install` to get the same results. 
 
 - To test the weather API locally:
 
