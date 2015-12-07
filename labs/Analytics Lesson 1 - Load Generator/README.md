@@ -1,25 +1,32 @@
-Analytics: Lesson 1 - Load Generator
-========================================
+# Analytics Services: Lesson 1 - Load Generator
 
-
-Overview
---------
+## Overview
 
 Apigee Edge Analytics Services delivers the analytics tools and infrastructure that provides end-to-end visibility across the entire digital value chain. With Edge Analytics, enterprises can make data-driven decisions to grow the reach and revenue of your digital program, increase customer engagement, and accelerate digital transformation. In addition, Edge Analytics provides unmatched flexibility to meet changing business and analytics needs.
 
 Edge Analytics does this by collecting a data record for each transaction or message that flows through Apigee Edge, and then computing aggregates on that data, and providing ready-to-use analytics charts and visualizations.  Edge Analytics also provides the ability to serve ad-hoc queries, and to build custom reports, to allow anyone to gain finely-tuned visibility into traffic trends and usage. 
 
-Objectives
-------------
+### Demonstrating Edge Analytics
 
-In this lab you will get familiar with a tool that can be used to drive arbitrary contrived loads through APIs. As API Proxies defined in Apigee Edge handle the API traffic, Edge will collect the Analytics records, which allows you to visualize data charts on that data.  
+It's relatively simple to demonstrate the capabilities in Edge API Services - you can build a proxy that performs OAuth token verification, caching, rate limiting, or data transformation. In contrast, 
+it's difficult to demonstrate Edge Analytics Services. To effectively demonstrate or exercise Edge Analytics, you need lots and lots od Analytics data, and the only way to get that data is to send transactions into APIs managed by Apigee Edge. 
+
+We have developed a "load generator" tool which allows any Edge technician to generate load on APIs, which thereby generates Analytics data, and allows you to demonstrate and exercise Apigee Edge analytics services. 
+
+
+## Objectives of this Lesson
+
+In this lab you will get familiar with a tool that can be used to drive
+arbitrary contrived loads through APIs. In the configurations we show
+here, API Proxies defined in Apigee Edge handle the API traffic, which
+means Edge will collect an Analytics record for each transaction, which
+allows you to visualize data charts on that data.
 
 We call this tool "the load generator" and is implemented as a nodejs program called runLoad.js that runs within Apigee Edge.  Running  runLoad.js as a Script Target within Apigee Edge means the load generator runs continuously, in the cloud.  The load generator is packaged within an API Proxy, and it acts as a client, for one or more APIs that you specify.  
 
 Being able to generate a load on an API which varies over time in a somewhat random fashion is critical to being able to effectively demonstrate Apigee Edge Analytics. 
 
-Prerequisites
---------------
+## Prerequisites
 
 - API Services - Lesson 1 completed
 - The [weather-quota API Proxy](./weather-quota.zip) , which includes an oauth token verification policy.
@@ -50,7 +57,7 @@ Estimated Total Time for all Phases: 45 minutes
   i. In the resulting list of API Proxies, click the "oauth" proxy. 
 
   j. Click the Deployment drop-down, and select "test".  This will deploy the oauth proxy to the test environment.
-  ![New API Proxy](./images/deployment-dropdown.png)
+  ![Deployment dropdown](./images/deployment-dropdown-then-click.png)
 
 2. Import and Deploy the weather-quota apiproxy the same way.  
 Or use this link to deploy it to your org: [![Deploy to Apigee](./images/deploy_to_apigee.png)](https://ec2-52-23-232-127.compute-1.amazonaws.com/login-form/?repo=https://github.com/apigee/apigee-partner-se-bootcamp.git&apiFolder=/labs/Analytics%20Lesson%201%20-%20Load%20Generator/apiproxies/weather-quota/&makeScript=make.sh)
@@ -67,14 +74,16 @@ Or use this link to deploy it to your org: [![Deploy to Apigee](./images/deploy_
 6. In the Edge UI, create a new Product, containing the weather-quota proxy: 
 
   a. Click "Publish", and select "Products" from the dropdown  
+  ![publish products](./images/publish-products.png)  
   b. click "+Product"  
+  ![plus-api-product](./images/plus-api-product.png)  
   c. name the product "WeatherQuota-1"  
   d. tick the "test" checkbox  
   e. mark it public   
   f. set the quota to be 1000 requests for every 1 minute  
   g. ignore the oauth scopes section; it is not used in this exercise.  
   h. add a proxy by clicking the "+ API Proxy" button
-  ![new product](./images/create-new-product-20150630-211843.png)  
+  ![new product](./images/create-new-product.png)  
 
   i. select the weather-quota apiproxy.  
   j. click Save to save the API Product
@@ -87,7 +96,7 @@ Or use this link to deploy it to your org: [![Deploy to Apigee](./images/deploy_
   d. select any developer you like from the dropdown  
   e. ignore the callback URL; it is not used for this exercise.   
   f. click "+ Product"
-  ![new app](./images/create-developer-app-add-product-20150630-212308.png)  
+  ![create-developer-app-add-product](./images/create-developer-app-add-product.png)  
   g. select the WeatherQuota-1 product you just created.  
   h. be sure to click the checkmark on the right-hand-side of the form  
   i. click Save  
@@ -95,7 +104,8 @@ Or use this link to deploy it to your org: [![Deploy to Apigee](./images/deploy_
 8. Get the client_id and client_secret for that app.  
 
   a. After saving the new developer app, you should see a list of developer apps. In the list, click the wq-app-1 you just created - it should be the top item in the list.   
-  b. click the "show" buttons to display the client_id and client_secret respectively.  Copy these values to a text file.  
+  b. click the "show" buttons to show the "consumer id" and "consumer secret" respectively.  Copy these values to a text file.  
+  ![show-credentials](./images/show-credentials.png)  
 
 
 
@@ -116,7 +126,7 @@ Or use this link to deploy it to your org: [![Deploy to Apigee](./images/deploy_
 ![runload-1 proxy](./images/runload-1-proxy-modeljson.png)
 
 12. This shows some basic configuration for runload. The json looks like this: 
-```
+```json
 {
   "id" : "job1",
   "description": "drive some test APIs in the sandbox organization",
@@ -152,8 +162,8 @@ Or use this link to deploy it to your org: [![Deploy to Apigee](./images/deploy_
 1. Modify the configuration in model.json in this way: 
 
   a. set the "host" property to point to the DNS name of your Apigee Edge organization   
-  b. Replace CLIENT_ID_HERE with the client_id you saved earlier  
-  c. Likewise replace CLIENT_SECRET_HERE with the client_secret value  
+  b. Replace CLIENT_ID_HERE with the consumer id value you saved earlier  
+  c. Likewise replace CLIENT_SECRET_HERE with the consumer secret value from earlier
 
 2. Save the apiproxy. 
 
@@ -231,10 +241,9 @@ Or use this link to deploy it to your org: [![Deploy to Apigee](./images/deploy_
 5. Now open on the Trace tab for the "weather-quota" proxy. You should see a varying number of requests arrive, using tokens. 
 
 
-Conclusion
------------
+## Conclusion
 
-You now have seen how to use runload to generate "contrived" load on any API endpoint.  You've deployed an API proxy into Edge that contains a nodejs script target; and this script target runs indefinitely, invoking outbound API calls. 
+You now have seen how to use runload to generate "contrived" load on any API endpoint. You've deployed an API proxy into Edge that contains a nodejs script target; and this script target runs indefinitely, invoking outbound API calls. You now know how to generate load on any set of arbitrary API endpoints, using this tool. If those endpoints are managed by Apigee Edge, then you now have the capability to generate interesting looking Analytics charts via Edge, based on this contrived load. 
 
 Some further notes: 
 
@@ -245,4 +254,5 @@ Some further notes:
 3. There is a complete readme for the runload tool, explaining its behavior and configuration, available [here](./Runload-README.md). There are many more possibilities that we haven't explored here. Also, we suggest that you play around with different values for the rates, and different values for the weights of input, to generate different load profiles. Experiment! 
 
 4. You can download the runload API Proxy and re-use it in any organization. We recommend running it for a week or more, to generate reasonable data and Analytis charts that are worth demonstrating. For example: 
-![Plus API Proxy](./images/resulting-chart-20150630-221032.png)
+![Resulting chart](./images/resulting-chart-20150630-221032.png)
+![TP99](./images/tp99-chart.png)

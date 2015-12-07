@@ -30,6 +30,7 @@ In this lab you will go through configuring, get working Edge Microgateway insta
 - [x] Node 4.2.1 or later is installed
   ```
   node -v
+
   v4.2.1
   ```  
 - [x] Have access to Edge Org
@@ -45,24 +46,27 @@ In this lab you will go through configuring, get working Edge Microgateway insta
   ./edgemicro -h
   ```
 
-- Put the  cli/bin directory in your PATH variable. This way, you'll be able to execute Edge Microgateway commands from anywhere
+- Put the  cli/bin directory in your PATH variable. This way, you'll be able to execute Edge Microgateway commands from anywhere.
   ```
   export PATH=<Edge_Micro_Gateway_Installaton_Folder>/cli/bin:$PATH
   echo $PATH
   ```
 
-  **Note:** Throughout the tutorial, we assume that the  cli/bin directory is in your  PATH. If you do not put it in your  PATH, then you need to execute CLI commands from the `cli/bin` directory.
+  **Note:** Throughout the tutorial, we assume that the  `cli/bin` directory is in your  PATH. If you do not put it in your  PATH, then you need to execute CLI commands from the `cli/bin` directory.  OR, you need to prepend the ./cli/bin directory to all `edgemicro` commands. 
 
 - Configure the micro gateway to talk to the Edge deployment on public/private cloud
   ```
-  ./edgemicro configure -o <org­name> -e <env­name> -u <your Apigee email>
+  ./edgemicro configure -o <org-name> -e <env-name> -u <your Apigee email>
   ```
-- **Copy the** `Key`, `Secret` and `vault info`, for later parts of the exercise
+- **Copy the** `Key`, `Secret` and `vault info`, for later parts of the exercise. 
 
-- Verify that the edge micro is configured with the Edge Cloud org
+- Using the key and secret you just viewed, verify that the edge micro is configured correctly with the Edge Cloud org.
   ```
-  ./edgemicro verify -o <org­name> -e <env­name> -k <key> -s <secret>
+  ./edgemicro verify -o <org-name> -e <env-name> -k <key> -s <secret>
   ```
+
+  You should see happy messages. If not, you'll need to stop, and diagnose. 
+
 
 ### Start the Edge Micro agent
 
@@ -74,7 +78,10 @@ In this lab you will go through configuring, get working Edge Microgateway insta
 - Execute this command to start the server:
   ```
   npm start
-          edge micro agent listening on 9000
+  ```
+  You will see an output from that command: 
+  ```
+  edge micro agent listening on 9000
   ```
 
 The configuration done so far allows Edge Microgateway to bootstrap itself to Apigee Edge. The Edge Microgateway agent manages this bootstrapping process, which kicks off whenever you start or restart Edge Microgateway. After the bootstrapping succeeds, Edge Microgateway retrieves a payload of additional configuration information from Apigee Edge.
@@ -117,17 +124,17 @@ Log in to your organization on Apigee Edge.
 
 - Open a new terminal window (not the one where the agent is running) and print out help info for the  agentproc command. We're going to use the -c, -k, and -s options to start Edge Microgateway.
   ```
-  edgemicro agent proc -h
+  ./edgemicro agent proc -h
   ```
 
-**Note:** The tutorial assumes that the cli/bin directory is in your  PATH. If you do not put it in your  PATH, then you need to execute CLI commands from the `cli/bin` directory (`cd ../cli/bin` and run `./edgemicro agent proc -h`).
+  **Note:** The tutorial assumes that the cli/bin directory is in your  PATH. If you do not put it in your  PATH, then you need to execute CLI commands from the `cli/bin` directory (`cd ../cli/bin` and run `./edgemicro agent proc -h`).
 
-- Start Edge Microgateway by executing the following command, substituting the key and secretvalues in the -k and -s parameters.
+- Start Edge Microgateway by executing the following command, providing the key and secret values with the -k and -s parameters, respectively.
   ```
-  edgemicro agent proc -c start -k <key> -s <secret>
+  ./edgemicro agent proc -c start -k <key> -s <secret>
   ```
 
-- If the micro gateway is started successfully, you will see the following console output
+- If the micro gateway is started successfully, you will see something like the following console output:
   ```json
   {
     "pid": 9104,
@@ -153,102 +160,75 @@ Log in to your organization on Apigee Edge.
   MTQ0NzQ0NjgwNzkxOQ edge micro listening on port 8000
   ```
 
+  At this point, the agent retrieves a payload of Edge Microgateway configuration information from Apigee Edge. This information includes:
+  - [x] The public key we created and stored previously in the Apigee vault.
+  - [x] A JSON representation of all Edge Microgateway­aware proxies that exist in the organization/environment. These are all proxies that are named with the prefix edgemicro_. 
+  - [x] A JSON representation of all of the API products that exist in the organization.
 
-At this point, the agent retrieves a payload of Edge Microgateway configuration information from Apigee Edge. This information includes:
-- [x] The public key we created and stored previously in the Apigee vault.
-- [x] A JSON representation of all Edge Microgateway­aware proxies that exist in the organization/environment. These are all proxies that are named with the prefix edgemicro_. 
-- [x] A JSON representation of all of the API products that exist in the organization.
-
-With this information, Edge Microgateway knows which proxies and proxy paths are allowed. If/when configured, it uses the product information to enforce security (in the same way as any API proxy does on Apigee Edge, where developer app keys have an association with products). We'll go through the steps to secure Edge Microgateway shortly.
+  With this information, Edge Microgateway knows which proxies and proxy paths are allowed. If/when configured, it uses the product information to enforce security (in the same way as any API proxy does on Apigee Edge, where developer app keys have an association with products). We'll go through the steps to secure Edge Microgateway shortly.
 
 - To test our API Proxy, call the 
 
-```
-curl -i http://localhost:8000/{your-initials}/v1/weather/forecastrss?w=12797282
-```
+  ```
+  curl -i http://localhost:8000/{your-initials}/v1/weather/forecast?zipcode=98101
+  ```
 
 - If you will see an authorization error, your Micro Gateway is listening for the API you have configured in the previous step
-```
-{"error":"missing_authorization","error_description":"Missing Authorization header"}
-```
+  ```
+  {"error":"missing_authorization","error_description":"Missing Authorization header"}
+  ```
 
 - Run the following command to get the JWT Token
-```
-curl -i -X POST "http://<org name>-test.apigee.net/edgemicro-auth/token" -H "Content-Type:application/json" -d '{"grant_type": "client_credentials", "client_id":"<client_id>", "client_secret": "<client_secret"}'
-```
+  ```
+  curl -i -X POST "http://<org name>-test.apigee.net/edgemicro-auth/token" \
+    -H "Content-Type:application/json" \
+   -d '{
+    "grant_type": "client_credentials", 
+    "client_id":"...CLIENT_ID_HERE...", 
+    "client_secret": "...CLIENT_SECRET_HERE..."
+  }'
+  ```
+
+  The response you see will have a very long string, looking something like so: 
+  ```
+   "eyJ0eXAiOiJKV1QiLc9.eyJhcHBsaWNhdGlvbl9u....kkBnE40jk_2trmZkP6uf4-mcgUw91-qKofaw"
+  ```
 
 - Make the API Call with a bearer token you received in the step above
 
-```
-curl -i -H "Authorization:Bearer <JWT Token>" http://localhost:8000/{your-initials}/v1/weather/forecast?zipcode=95113
-```
+  ```
+  curl -i -H "Authorization:Bearer VERY_LONG_JWT_TOKEN_HERE" http://localhost:8000/{your-initials}/v1/weather/forecast?zipcode=95113
+  ```
 
-- You should see the response json
-```json
-{
-    "location": {
-        "city": "San Jose",
-        "country": "US",
-        "region": "CA"
-    },
-    "units": {
-        "distance": "mi",
-        "pressure": "in",
-        "speed": "mph",
-        "temperature": "F"
-    },
-    "condition": {
-        "code": "34",
-        "date": "Fri, 13 Nov 2015 12:53 pm PST",
-        "temp": "63",
-        "text": "Fair"
-    },
-    "forecast": [
-        {
-            "code": "32",
-            "date": "13 Nov 2015",
-            "day": "Fri",
-            "high": "66",
-            "low": "44",
-            "text": "Sunny"
-        },
-        {
-            "code": "32",
-            "date": "14 Nov 2015",
-            "day": "Sat",
-            "high": "69",
-            "low": "49",
-            "text": "Sunny"
-        },
-        {
-            "code": "30",
-            "date": "15 Nov 2015",
-            "day": "Sun",
-            "high": "58",
-            "low": "40",
-            "text": "AM Clouds/PM Sun"
-        },
-        {
-            "code": "32",
-            "date": "16 Nov 2015",
-            "day": "Mon",
-            "high": "61",
-            "low": "43",
-            "text": "Sunny"
-        },
-        {
-            "code": "30",
-            "date": "17 Nov 2015",
-            "day": "Tue",
-            "high": "66",
-            "low": "44",
-            "text": "AM Clouds/PM Sun"
-        }
-    ]
-}
-```
+- You should see the response json: 
+
+  ```json
+  {
+      "location": {
+          "city": "San Jose",
+          "country": "US",
+          "region": "CA"
+      },
+      "units": {
+          "distance": "mi",
+          "pressure": "in",
+          "speed": "mph",
+          "temperature": "F"
+      },
+      "condition": {
+          "code": "34",
+          "date": "Fri, 13 Nov 2015 12:53 pm PST",
+          "temp": "63",
+          "text": "Fair"
+      },
+      "forecast": [ 
+         . . . 
+      ]
+  }
+  ```
 
 You have used the credentials you received from your Edge org on cloud and you have used them on your local Micro Gateway. You are able to manage your APIs centrally, while the enforcement is happening locally.
 
-##Summary
+## Summary
+
 That completes this hands-on lesson. In this lesson you learned about setting up an Edge Micro Gateway, creating an API Proxy and corresponding life cycle on your Edge org. You now have a fully functioning and secure Edge Microgateway that can run your APIs locally, picking up the security credentials from your Edge org.
