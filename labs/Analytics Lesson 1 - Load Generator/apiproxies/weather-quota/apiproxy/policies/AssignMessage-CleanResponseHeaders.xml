@@ -1,0 +1,12 @@
+<AssignMessage name='AssignMessage-CleanResponseHeaders'>
+  <DisplayName>AssignMessage-CleanResponseHeaders</DisplayName>
+  <Remove>
+    <Headers>
+      <Header name='P3P'/>
+      <Header name='Via'/>
+      <Header name='Server'/>
+    </Headers>
+  </Remove>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <AssignTo createNew='false' type='response'></AssignTo>
+</AssignMessage>

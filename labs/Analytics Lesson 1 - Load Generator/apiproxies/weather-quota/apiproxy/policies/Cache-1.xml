@@ -1,0 +1,21 @@
+<ResponseCache name="Cache-1">
+  <DisplayName>Cache-1</DisplayName>
+  <CacheKey>
+    <Prefix>WeatherCache</Prefix>
+    <KeyFragment ref="request.header.accept"></KeyFragment>
+    <KeyFragment ref="access_token"></KeyFragment>
+    <KeyFragment ref="request.queryparam.w"></KeyFragment>
+  </CacheKey>
+  <Scope>Exclusive</Scope>
+  <ExpirySettings>
+<!--
+    <ExpiryDate></ExpiryDate>
+    <TimeOfDay></TimeOfDay>
+-->
+    <TimeoutInSec>120</TimeoutInSec>
+  </ExpirySettings>
+<!--
+  <SkipCacheLookup></SkipCacheLookup>
+  <SkipCachePopulation></SkipCachePopulation>
+-->
+</ResponseCache>

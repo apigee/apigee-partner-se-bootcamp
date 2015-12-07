@@ -1,0 +1,18 @@
+<RaiseFault name='RaiseFault-InvalidRequest'>
+  <DisplayName>RaiseFault-InvalidRequest</DisplayName>
+  <Description>Invalid Request</Description>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <FaultResponse>
+    <Set>
+      <Payload contentType='application/json'
+               variablePrefix='%' variableSuffix='#'><![CDATA[{
+  "response" : {
+    "message" : "invalid request"
+  }
+}
+]]></Payload>
+      <StatusCode>400</StatusCode>
+      <ReasonPhrase>Bad Request</ReasonPhrase>
+    </Set>
+  </FaultResponse>
+</RaiseFault>

@@ -1,0 +1,72 @@
+<ProxyEndpoint name="default">
+  <Description>Proxy for Yahoo weather lookup, with Token verification and Quota</Description>
+
+  <HTTPProxyConnection>
+    <BasePath>/v1/weather-quota</BasePath>
+    <Properties/>
+    <VirtualHost>default</VirtualHost>
+    <VirtualHost>secure</VirtualHost>
+  </HTTPProxyConnection>
+
+  <FaultRules/>
+    <DefaultFaultRule name="jsontoxml-again" enforceAlways='true'>
+      <Step>
+        <Name>JSONToXML-1</Name>
+        <Condition>!(request.header.accept =| "application/json")</Condition>
+      </Step>
+      <Step>
+        <Name>Javascript-PrettyPrint</Name>
+        <Condition>request.header.accept =| "application/json"</Condition>
+      </Step>
+    </DefaultFaultRule>
+
+  <Flows>
+    <Flow name='forecast - protected by a token'>
+      <Description>gets the weather for the designated WOEID, using an access token</Description>
+      <Request>
+        <Step><Name>OAuthV2-VerifyAccessToken</Name></Step>
+        <Step><Name>Quota-1</Name></Step>
+        <Step><Name>Cache-1</Name></Step>
+        <Step><Name>AssignMessage-RemoveKey</Name></Step>
+      </Request>
+
+      <Response>
+        <Step><Name>XSL-XformResponse</Name></Step>
+        <Step>
+          <Name>XMLToJSON-1</Name>
+          <Condition>request.header.accept =| "application/json"</Condition>
+        </Step>
+        <Step><Name>Cache-1</Name></Step>
+      </Response>
+      <Condition>(proxy.pathsuffix MatchesPath "/forecast") and (request.verb = "GET")</Condition>
+    </Flow>
+
+    <Flow name='fault'>
+      <Description>throws a fault due to an invalid request</Description>
+      <Request/>
+      <Response>
+        <Step><Name>RaiseFault-InvalidRequest</Name></Step>
+      </Response>
+    </Flow>
+
+  </Flows>
+
+
+  <PreFlow name="PreFlow">
+    <Request/>
+    <Response/>
+  </PreFlow>
+
+  <PostFlow name="PostFlow">
+    <Request/>
+    <Response>
+      <Step><Name>AssignMessage-CleanResponseHeaders</Name></Step>
+      <Step><Name>Javascript-PrettyPrint</Name></Step>
+      <Step><Name>Javascript-EmitElapsed</Name></Step>
+    </Response>
+  </PostFlow>
+
+  <RouteRule name="default">
+    <TargetEndpoint>default</TargetEndpoint>
+  </RouteRule>
+</ProxyEndpoint>

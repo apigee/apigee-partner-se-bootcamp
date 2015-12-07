@@ -1,0 +1,11 @@
+<Quota name="Quota-1">
+  <!-- for use after VerifyAccessToken -->
+    <DisplayName>Quota-1</DisplayName>
+    <Identifier ref="access_token"/>
+    <Allow countRef="apiproduct.developer.quota.limit" count="1"/>
+    <Interval ref="apiproduct.developer.quota.interval"></Interval>
+    <TimeUnit ref="apiproduct.developer.quota.timeunit"></TimeUnit>
+    <Distributed>true</Distributed>
+    <PreciseAtSecondsLevel>false</PreciseAtSecondsLevel>
+    <Synchronous>true</Synchronous>
+</Quota>

@@ -1,0 +1,7 @@
+<XSL enabled="true" continueOnError="false" async="false" name="XSL-XformResponse">
+  <DisplayName>XSL - Response</DisplayName>
+  <OutputVariable>response.content</OutputVariable>
+  <Parameters ignoreUnresolvedVariables="true"/>
+  <ResourceURL>xsl://xformWeatherResponse.xsl</ResourceURL>
+  <Source>response</Source>
+</XSL>
