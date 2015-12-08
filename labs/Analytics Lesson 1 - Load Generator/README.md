@@ -60,7 +60,7 @@ Estimated Total Time for all Phases: 45 minutes
   ![Deployment dropdown](./images/deployment-dropdown-then-click.png)
 
 2. Import and Deploy the weather-quota apiproxy the same way.  
-Or use this link to deploy it to your org: [![Deploy to Apigee](./images/deploy_to_apigee.png)](https://ec2-52-23-232-127.compute-1.amazonaws.com/login-form/?repo=https://github.com/apigee/apigee-partner-se-bootcamp.git&apiFolder=/labs/Analytics%20Lesson%201%20-%20Load%20Generator/apiproxies/weather-quota/&makeScript=make.sh)
+Or use this link to deploy it to your org: [![Deploy to Apigee](./images/deploy_to_apigee.png)](https://ec2-52-23-232-127.compute-1.amazonaws.com/login-form/?repo=git@github.com:apigee/apigee-partner-se-bootcamp.git&apiFolder=/labs/Analytics%20Lesson%201%20-%20Load%20Generator/apiproxies/weather-quota/&makeScript=make.sh)
 
 
 3. Import the runload-1 apiproxy the same way. EXCEPT - do not deploy the runload-1 proxy.  We'll deploy it in a few moments. 
