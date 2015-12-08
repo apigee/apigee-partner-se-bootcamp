@@ -63,8 +63,7 @@ You can follow the following commands to import the OAuth Proxy or <a href="http
 2. Import and Deploy the weather-quota apiproxy the same way.  
 Or <a href="https://ec2-52-23-232-127.compute-1.amazonaws.com/login-form/?repo=git@github.com:apigee/apigee-partner-se-bootcamp.git&apiFolder=/labs/Analytics%20Lesson%201%20-%20Load%20Generator/apiproxies/weather-quota/&makeScript=make.sh" target="_blank">use this link to import and deploy </a>
 
-3. Import the runload-1 apiproxy the same way. EXCEPT - do not deploy the runload-1 proxy.  We'll deploy it in a few moments. 
-Or <a href="https://ec2-52-23-232-127.compute-1.amazonaws.com/login-form/?repo=git@github.com:apigee/apigee-partner-se-bootcamp.git&apiFolder=/labs/Analytics%20Lesson%201%20-%20Load%20Generator/apiproxies/weather-quota/&makeScript=make.sh" target="_blank">use this link to only import and not deploy </a>
+3. Import the runload-1 apiproxy the same way. EXCEPT - do not deploy the runload-1 proxy.  We'll deploy it in a few moments or <a href="https://ec2-52-23-232-127.compute-1.amazonaws.com/login-form/?repo=git@github.com:apigee/apigee-partner-se-bootcamp.git&apiFolder=/labs/Analytics%20Lesson%201%20-%20Load%20Generator/apiproxies/runload-1/&makeScript=make.sh" target="_blank">use this link to only import and not deploy </a>
 
 4. Using the "new API Proxy editor", examine the oauth proxy you have imported - you will see that it has exactly two flows: the first is named AccessTokenClientCredential, which accepts a POST to /token. Apps can use this to request a bearer token which will be verified by the weather-quota proxy. The second is a "default flow" which matches all other inbound requests.  This one just returns an "Unknown request" error (404)  to the caller. 
 ![oauth proxy](./images/oauth-proxy.png)
