@@ -181,34 +181,43 @@ The goal of this lesson is to introduce you to Node.js, download and use Node.js
   - If everything is working correctly, you should see a response similar to the following: 
 
     ```json
-    {
-      "location": {
-        "city": "Seattle",
-        "country": "US",
-        "region": "WA"
+
+  {
+    "location": {
+      "city": "Louisville",
+      "region": " CO",
+      "country": "United States"
+    },
+    "units": {
+      "distance": "mi",
+      "speed": "mph",
+      "temperature": "F",
+      "pressure": "in"
+    },
+    "condition": {
+      "date": "Wed, 01 Jun 2016 09:00 AM MDT",
+      "text": "Partly Cloudy",
+      "code": "30",
+      "temp": "54"
+    },
+    "forecast": [
+      {
+        "code": "47",
+        "text": "Scattered Thunderstorms",
+        "high": "65",
+        "low": "48",
+        "date": "01 Jun 2016",
+        "day": "Wed"
       },
-      "units": {
-        "distance": "mi",
-        "pressure": "in",
-        "speed": "mph",
-        "temperature": "F"
+      {
+        "code": "34",
+        "text": "Mostly Sunny",
+        "high": "76",
+        "low": "51",
+        "date": "02 Jun 2016",
+        "day": "Thu"
       },
-      "condition": {
-        "code": "29",
-        "date": "Sun, 26 Oct 2014 9:53 pm PDT",
-        "temp": "49",
-        "text": "Partly Cloudy"
-      },
-      "forecast": [
-        {
-          "code": "29",
-          "date": "26 Oct 2014",
-          "day": "Sun",
-          "high": "55",
-          "low": "46",
-          "text": "Partly Cloudy"
-        },
-          . . . 
+             . . .
       ]
     }
     ```
