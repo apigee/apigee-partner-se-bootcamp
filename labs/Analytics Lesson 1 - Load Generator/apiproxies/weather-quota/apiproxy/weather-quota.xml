@@ -1,0 +1,21 @@
+<APIProxy revision="1" name="weather-quota">
+    <ConfigurationVersion minorVersion="0" majorVersion="4"/>
+    <CreatedAt>1378154434970</CreatedAt>
+    <CreatedBy>DChiesa@apigee.com</CreatedBy>
+    <Description>Weather Proxy for demo</Description>
+    <DisplayName>Weather Proxy</DisplayName>
+    <LastModifiedAt>1435642812891</LastModifiedAt>
+    <Policies>
+        <Policy>Quota-1</Policy>
+        <Policy>Cache-1</Policy>
+        <Policy>VerifyAPIKey</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources/>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

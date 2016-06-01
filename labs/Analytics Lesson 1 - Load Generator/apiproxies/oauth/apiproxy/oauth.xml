@@ -1,0 +1,21 @@
+<APIProxy revision="1" name="oauth">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1429588792445</CreatedAt>
+    <CreatedBy>noreply_admin@apigee.com</CreatedBy>
+    <Description>An API proxy that enforces OAuth 2.0 Client Credential Grant flow</Description>
+    <DisplayName>oauth</DisplayName>
+    <LastModifiedAt>1435642900640</LastModifiedAt>
+    <LastModifiedBy>noreply_admin@apigee.com</LastModifiedBy>
+    <Policies>
+        <Policy>GenerateAccessTokenClient</Policy>
+        <Policy>RaiseFault-UnknownRequest</Policy>
+        <Policy>RefreshAccessToken</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources/>
+    <TargetServers/>
+    <TargetEndpoints/>
+    <validate>false</validate>
+</APIProxy>

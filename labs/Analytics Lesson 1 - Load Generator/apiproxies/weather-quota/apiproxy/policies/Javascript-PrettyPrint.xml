@@ -1,0 +1,3 @@
+<Javascript name='Javascript-PrettyPrint' timeLimit='200' >
+  <ResourceURL>jsc://prettyPrint.js</ResourceURL>
+</Javascript>

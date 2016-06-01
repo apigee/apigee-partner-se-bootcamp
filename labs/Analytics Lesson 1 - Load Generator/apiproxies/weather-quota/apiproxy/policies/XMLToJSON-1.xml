@@ -1,0 +1,19 @@
+<XMLToJSON name='XMLToJSON-1'>
+  <DisplayName>XML2JSON Mediation</DisplayName>
+  <Format>yahoo</Format>
+    <!--
+  <Options>
+    <RecognizeNumber>true</RecognizeNumber>
+    <RecognizeBoolean>true</RecognizeBoolean>
+    <RecognizeNull>true</RecognizeNull>
+        <NullValue>NULL</NullValue>
+        <NamespaceSeparator>***</NamespaceSeparator>
+        <NamespaceBlockName>#namespaces</NamespaceBlockName>
+        <DefaultNamespaceNodeName>&amp;</DefaultNamespaceNodeName>
+        <TextAlwaysAsProperty>false</TextAlwaysAsProperty>
+        <TextNodeName>TEXT</TextNodeName>
+        <AttributeBlockName>ATT_BLOCK</AttributeBlockName>
+        <AttributePrefix>ATT_</AttributePrefix>
+  </Options>
+    -->
+</XMLToJSON>

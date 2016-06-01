@@ -1,0 +1,36 @@
+<ProxyEndpoint name="default">
+  <Description/>
+
+  <HTTPProxyConnection>
+    <BasePath>/oauth</BasePath>
+    <Properties/>
+    <VirtualHost>secure</VirtualHost>
+  </HTTPProxyConnection>
+
+  <FaultRules/>
+  <Flows>
+    <Flow name="AccessTokenClientCredential">
+      <Description/>
+      <Request>
+        <Step>
+          <FaultRules/>
+          <Name>GenerateAccessTokenClient</Name>
+        </Step>
+      </Request>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST")</Condition>
+    </Flow>
+
+    <Flow name="unknown request">
+      <Request>
+        <Step>
+          <Name>RaiseFault-UnknownRequest</Name>
+        </Step>
+      </Request>
+      <Response/>
+    </Flow>
+  </Flows>
+
+  <RouteRule name="NoRoute"/>
+
+</ProxyEndpoint>

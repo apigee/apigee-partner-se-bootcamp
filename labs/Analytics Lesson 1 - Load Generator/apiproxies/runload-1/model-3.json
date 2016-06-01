@@ -1,0 +1,54 @@
+{
+  "id" : "job1",
+  "description": "drive some test APIs in the sandbox organization",
+  "loglevel" : 3,
+  "defaultProperties": {
+    "scheme": "https",
+    "host": "NAME-sandbox-test.apigee.net",
+    "headers" : {
+      "Accept" : "application/json"
+    }
+  },
+
+  "initialContext" : {
+    "credentials" : [
+      [["client_id_here","client_secret_here"], 20],
+      [["another__client_id_here","another_client_secret_here"], 10]
+    ]
+  },
+
+  "invocationsPerHour" : [
+     88,  74,  80,  64,  80,  78,  80, 108,
+    100, 124,  81, 188, 120, 140, 101,  86,
+    128, 161, 192, 141, 167, 145, 146, 103
+  ],
+
+  "variationByDayOfWeek" : [
+    1.2, 1.42, 0.942, 0.82, 1.184, 1.1, 0.64
+  ],
+
+  "sequences" : [{
+    "description" : "create-token",
+    "iterations" : 1,
+    "requests" : [ {
+      "imports" : [{
+        "description" : "setup the weighted random selector for creds",
+        "fn" : "function(ctx) {return (ctx.cwrs)? ctx.cwrs : new WeightedRandomSelector(ctx.credentials);}",
+        "valueRef" : "cwrs"
+      }, {
+        "description" : "choose a credential",
+        "fn" : "function(ctx) {return ctx.cwrs.select()[0];}",
+        "valueRef" : "creds"
+      } ],
+      "method" : "post",
+      "url" : "/oauth/token",
+      "payload" : "grant_type=client_credentials&client_id={creds[0]}&client_secret={creds[1]}",
+      "extracts" : [{
+          "description" : "extract the returned bearer token",
+          "fn" : "function(obj) {return obj.access_token;}",
+          "valueRef" : "oauth_bearer_token"
+        }] 
+    }]
+  }]
+}
+

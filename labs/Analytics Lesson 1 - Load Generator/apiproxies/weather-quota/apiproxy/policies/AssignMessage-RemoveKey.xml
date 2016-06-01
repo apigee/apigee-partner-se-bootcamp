@@ -1,0 +1,10 @@
+<AssignMessage name='AssignMessage-RemoveKey'>
+  <DisplayName>AssignMessage - Remove Key</DisplayName>
+  <Remove>
+    <Headers>
+      <Header name='apikey'/>
+    </Headers>
+  </Remove>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <AssignTo createNew='false' transport='http' type='request'></AssignTo>
+</AssignMessage>

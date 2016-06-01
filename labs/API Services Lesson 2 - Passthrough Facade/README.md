@@ -38,7 +38,7 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
         ![3_api_create.png](./images/3_api_create.png)
         
         - Starting Point Type: **Backend Service**
-        - Backend Service URL: **https://amer-apibaas-prod.apigee.net/**appservices/{your-org}/hospitality/hotels
+        - Backend Service URL: **https://api.usergrid.com/**{your-org}/hospitality/hotels
         - Name: **{your-initials}_hotels**
         - Project Base Path: **/{your-initials}/v1/hotels**
         - Description: **Facade to the BaaS hotels data collection**

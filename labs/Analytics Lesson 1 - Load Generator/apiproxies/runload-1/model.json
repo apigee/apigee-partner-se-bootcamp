@@ -1,0 +1,28 @@
+{
+  "id" : "job1",
+  "description": "drive some test APIs in the sandbox organization",
+  "loglevel" : 3,
+  "defaultProperties": {
+    "scheme": "https",
+    "host": "NAME-sandbox-test.apigee.net",
+    "headers" : {
+      "Accept" : "application/json"
+    }
+  },
+
+  "initialContext" : {
+    "client_id" : "CLIENT_ID_HERE",
+    "client_secret": "CLIENT_SECRET_HERE"
+  },
+
+  "sequences" : [{
+    "description" : "create-token",
+    "iterations" : 1,
+    "requests" : [ {
+      "method" : "post",
+      "url" : "/oauth/token",
+      "payload" : "grant_type=client_credentials&client_id={client_id}&client_secret={client_secret}"
+    }]
+  }]
+}
+
