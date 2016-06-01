@@ -64,7 +64,7 @@ The goal of this lesson is to introduce you to Node.js, download and use Node.js
       }
       else {
         // Create the query according to YQL requirements.
-        // No need to further sanitize the query param, because of tegex check above.
+        // No need to further sanitize the query param, because of regex check above.
         var forecastQuery =
            'SELECT * FROM weather.forecast WHERE woeid IN (SELECT woeid FROM geo.places(1) WHERE text="'+
            request.query.zipcode +'")';
