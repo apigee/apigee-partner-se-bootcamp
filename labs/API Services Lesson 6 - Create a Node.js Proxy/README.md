@@ -63,9 +63,12 @@ The goal of this lesson is to introduce you to Node.js, download and use Node.js
         sendError(response, 400, 'Missing or invalid query parameter - zipcode');
       }
       else {
-        // create the query per YQL module documentation & then execute the query
-        var forecastQuery = 'SELECT * FROM weather.forecast WHERE (location = ' +
-          request.query.zipcode + ')';
+        // create the query according to YQL requirements
+        // TODO: Sanitize the query param
+        var forecastQuery =
+           'SELECT * FROM weather.forecast WHERE woeid IN (SELECT woeid FROM geo.places(1) WHERE text="'+
+           request.query.zipcode +'")';
+
         var query = new YQL(forecastQuery);
         // execute the query and then asynchronously create/send the
         // response in the anonymous callback function.
