@@ -58,7 +58,7 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
         ![05_deployment.png](./images/05_deployment.png)
  - The green dot in the dropdown indicates that the proxy we just created is deployed to the `test` environment
  - Click on the `test` environment name. This undeploys the proxy from the `test` environment
- - Click on the `Deployment` drop-down again. Notice the dot adjacent to the test environment is now greyed. Select the `test` environment. This re-deploys the proxy to the `test` environment.
+ - Click on the `Deployment` drop-down again. Notice the dot adjacent to the test environment is now greyed. Select the `test` environment. This re-deploys the proxy to the `test` environment. You can also deploy to `prod`. These environment names correspond to sets of VMs in the Apigee cloud. The environment names are chosen by the Customer at the time of initial license purchase, and customers can choose to have numerous environments.
 - **Tracing the execution of a proxy** can also be done easily from the Management UI. This is a very powerful capability of the product since it makes it easy to troubleshoot and monitor API proxies running on Apigee Edge. Trace lets you probe the details of each step through an API proxy flow. 
  - From the `hotels` API Proxy page, click on the `Trace` tab
         ![06_trace.png](./images/06_trace.png)
@@ -70,6 +70,7 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
  - You will see the a transaction appear in the `Transactions` section and a visual representation of the executed proxy flow in the `Transaction Map` section
  - The `Transaction Map` is interactive - click on the various execution steps within the flow and review the information provided in the `Phase Details` section. You will notice that for each step information such as headers, variables, payload, properties and other relevant information is available. This helps you quickly understand exactly what is happening within the proxy flow.
         ![09_trace_message.png](./images/09_trace_message.png)
+ - You can of course invoke the API from any HTTP client - curl, postman, resty, or whatever app you write. 
  - At this point, we will start to use the Google `Postman` tool as a client to invoke our proxy and continue to use `Postman` throughout the rest of the labs. 
     - Launch `Postman`
     - load the [postman collection](../../resources/SE Technical Enablement.json.postman_collection)
