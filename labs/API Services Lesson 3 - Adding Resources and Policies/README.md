@@ -296,7 +296,7 @@ Here's a brief description of the elements in this policy. You can read more abo
 - Notice that the new icon appears in the flow.  Again, click the icon to select the newly added policy
 ![15_select_assign_msg](./images/15_select_assign_msg.png)
 
-- copy-paste the follwing code in the center-lower panel: 
+- copy-paste the following code in the center-lower panel: 
     ```xml
     <AssignMessage name="Set-Query-Parameters">
       <DisplayName>Set Query Parameters</DisplayName>
@@ -337,7 +337,7 @@ You could have tested the proxy in stages, as you added each policy to the flow.
 
 - Click the `Trace` tab and start a trace session by clicking the `Start Trace Session` button
 
-- Use Postman to test the `/GET hotels` request with the following query parameters combinations and review the results being returned
+- Use Postman or curl (etc) to test the `/GET hotels` request with the following query parameters combinations and review the results being returned
  - zipcode=98101&radius=1000
  - zipcode=98101&radius=200
  - zipcode=94105&radius=400
