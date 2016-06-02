@@ -68,7 +68,7 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
         ![09_trace_message.png](./images/09_trace_message.png)
  - At this point, we will start to use the Google `Postman` tool as a client to invoke our proxy and continue to use `Postman` throughout the rest of the labs. 
     - Launch `Postman`
-    - load the [postman collection|resources/SE Technical Enablement.json.postman_collection]
+    - load the [postman collection](resources/SE Technical Enablement.json.postman_collection)
     - Select the `SE Technical Enablement` environment
         ![10_postman_overview.png](./images/10_postman_overview.png)
     - Open the `SE Technical Enablement` project
