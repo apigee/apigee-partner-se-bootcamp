@@ -34,19 +34,23 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
  - You will then see a list of API Proxies configured in your organization. To create a new API proxy, select the `+ API Proxy` button.
    ![03_plus_api_proxy](./images/03_plus_api_proxy.png)
 
- -  On the `New API Proxy` form that is displayed, provide information needed to generate an API proxy
-        ![3_api_create.png](./images/3_api_create.png)
-        
-        - Starting Point Type: **Backend Service**
-        - Backend Service URL: **https://amer-apibaas-prod.apigee.net/appservices/**{your-org}/hospitality/hotels
-        - Name: **{your-initials}_hotels**
-        - Project Base Path: **/{your-initials}/v1/hotels**
+ -  On the `New API Proxy` form that is displayed, choose **Reverse Proxy**, and click `Next`
+        ![03-Reverse-Proxy.png](./images/03-Reverse-Proxy.png)  
+
+ - provide information needed to generate an API proxy
+        - Proxy Name: **{your-initials}_hotels**
+        - Proxy Base Path: **/{your-initials}/v1/hotels**
+        - Existing API: **https://amer-apibaas-prod.apigee.net/appservices/**{your-org}/hospitality/hotels
         - Description: **Facade to the BaaS hotels data collection**
-        - Features: **None**
         
- - Click on `Build` to build and deploy the proxy
- - Once the proxy has been deployed, click on the `Close` button
- - Review the information on the resulting API Proxy page
+ - Click `Next` 
+ - Choose `Pass through` (for now), and Click `Next` 
+ - De-select the `default` virtual host; this means the proxy will be available only on the TLS-protected endpoint. Click `Next`
+ - Choose `test` for the deploy environment. Click `Build and Deploy` 
+ - Apigee Edge will create and build and deploy your new API Proxy to the Edge tenant. 
+ 
+ - Once the proxy has been deployed, click on the hyperlinked proxy name to view it
+ - Review the information on the resulting API Proxy summary page
         ![4_api_overview.png](./images/4_api_overview.png)
  - That’s it! With those few steps, you’ve deployed a simple passthrough API Proxy which acts as a facade to our BaaS `hotels` data collection
 - **Deployment** - deploying a proxy makes the proxy available for use at runtime, and undeploying makes it unavailable. These deployment actions apply to a particular {proxy, environment} pair. It's easy to do from the Management UI.
