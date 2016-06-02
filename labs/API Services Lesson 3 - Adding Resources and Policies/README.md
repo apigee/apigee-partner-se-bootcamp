@@ -427,6 +427,10 @@ Many times the response coming from the backend target endpoint is not exactly w
 
 - Save the changes to the API Proxy, wait for it to successfully deploy and test again using Postman as described in the earlier in the lesson.
 
+## For Shirkers
+
+You can find a completed API proxy for the above, [here](../../resources/dc_hotels_proxy_2016_06_02.zip).  If you want a shortcut for all of the above steps, you can simply import this zip file, change the base path, and deploy it.  
+
 ## Summary
 
 That completes this hands-on lesson. 
