@@ -112,14 +112,14 @@ https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels
         - [x] `select * where hotelRating = 5 and city = 'Seattle'`
         - [x] `select * where hotelRating = 5 or city = 'Seattle'`
         - [x] `select * where shortDescription contains 'Amazon'`   - 
- - These queries can also be provided as parameters to the GET API by using the `ql` query parameter. Switch to the browser tab used to issue GET API calls directly against the BaaS.
- - Call the GET API as follows to get hotels in the city of Burlingame
+ - These queries can be submitted via the GET API by using the `ql` query parameter. The query string must be url-encoded. 
+ - Switch to the browser tab used to issue GET API calls directly against the BaaS. For example, call the GET API as follows to get hotels in the city of Burlingame:
  ```
  https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels?ql=select%20*%20where%20city=%27Burlingame%27
  ```
  Replace `{your-org}` with the actual name of your API BaaS organization name.
  **Note:** Most browsers will URL encode special characters automatically
- - Try the other query examples provided earlier and use them as the value of the `ql` parameter of the GET API call.
+ - Try the other query examples provided earlier and use them as the value of the `ql` parameter of the GET API call. You can also use curl, if you can url-encode the query properly.
 
 ##Summary
 That completes this hands-on lesson. We have barely scratched the surface of Apigee API BaaS capabilities. In this lab we learned how data is stored in an easy-to-consume format, how it can be accessed and interacted with using the BaaS portal and RESTful APIs automatically exposed by BaaS, and how to easily query the data including full-text searching. For further information refer to the API BaaS [documentation](http://apigee.com/docs/developer-services/content/add-and-edit-content).
