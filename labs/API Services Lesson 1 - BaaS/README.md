@@ -60,13 +60,19 @@ The objective of this lesson is to provide an overview of API Backend-as-a-Servi
 
 ##Prerequisites
 - [x] Your Apigee Edge organization name, user name, and the password 
-- [x] Your Apigee API BaaS organization name
+- [x] The name of your Apigee API BaaS (or usergrid) organization and application 
+- [x] nodejs
+
+## Preparation: Loading Data
+
+If you do not have the hotels collection in your Usergrid app, you can load it using the tools provided [here](../../resources/baas-hospitality-loader/) . Follow the Readme. 
+
 
 ##Estimated Time: 30 mins
 - **Interacting with Data Collections** in the BaaS can be done easily from the BaaS portal. The BaaS portal provides a user interface built using the RESTful APIs automatically exposed by BaaS for data collections. A data collection called `hotels` has already been created for you in your BaaS instance.
-  - Open a browser tab & log in to your API BaaS instance by going to: https://appservices.apigee.com/amer-apibaas. 
+  - Open a browser tab & log in to your API BaaS or Usergrid instance. For example, you might login to: https://appservices.apigee.com/amer-apibaas . 
   - Pick your API BaaS organization from the Organization drop-down
-  - Pick the `hospitality` App from the App drop-down
+  - Pick the `hospitality` App from the App drop-down, or the app in which you loaded the hotels collection
   ![Select App](./images/1_select_app.png)
   - From the BaaS portal menu, select `Data`
   - From the Data collections, select `hotels`
