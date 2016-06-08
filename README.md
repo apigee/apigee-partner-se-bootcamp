@@ -1,10 +1,10 @@
-# Apigee Technical Bootcamp
+# Apigee Edge Technical Bootcamp
 
-Welcome to the Apigee Technical Bootcamp. We are excited to invite you into the Apigeek community. The Labs and the content of this bootcamp will allow you to get hands-on experience with Apigee Edge. At the end of the exercise, you will: 
+Welcome to the Apigee Edge Technical Bootcamp. We are excited to invite you into the Apigeek community. The Labs and the content of this bootcamp will allow you to get hands-on experience with Apigee Edge. At the end of the exercise, you will: 
 
-- Understand Apigee functionality
+- Understand Apigee Edge functionality
 - Be able to produce a custom demo/POC on Apigee Edge 
-- Identify Apigee opportunities in the projects you are working on.
+- Identify opportunities where Apigee Edge can help in the projects you are working on.
 
 ##Suggested Agenda
 
