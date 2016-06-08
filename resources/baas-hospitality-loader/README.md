@@ -6,7 +6,7 @@ There are two scripts:
 * loader.js - loads data into usergrid
 * deleteAllItems.js -deletes the data from a collection when you are finished with it.
 
-In particular, thee tools are handy for loading the hospitality data into any Usergrid organization and application.
+In particular, these tools are handy for loading the hospitality data into any Usergrid organization and application. They could also be used for other data and other collections. 
 
 
 
@@ -36,7 +36,7 @@ You can specify all of these things as command-line options. Or, you can specify
 
 Example commmand, specifying all options, using client credentials:
 
-```node ./deleteAllItems.js -o amer-partner7 -a myapp1 -i YYYAZZJDJD -s YkjakajksjksE8 \
+```node ./deleteAllItems.js -o amer-partner7 -a myapp1 -i YYYAZZJDJD -s YkjakajksjksE8 \ 
      -v -e https://amer-apibaas-prod.apigee.net/appservices/ -C hotels```
 
 Example command specifying a configuration file:
@@ -56,7 +56,8 @@ The configuration file must have contents like so:
 }
 ```
 
-You can find the client id and secret  in the Usergrid Admin UI for your application. 
+The URI property specifies the BaaS endpoint (rather than https://api.usergrid.com). 
+You can find the client id and secret in the Usergrid/BaaS Admin UI for your application. 
 
 
 
@@ -67,13 +68,14 @@ Or, for user credentials, with the Usergrid API endpoint (which is the default):
   "org": "cheeso",
   "app": "your-application-name",
   "username" : "JoePavelski1",
-  "password" : "VerySecret!!"
+  "password" : "VerySecret!!",
   "collection" : "hotels", 
   "verbose" : true
 }
 ```
 
-To authenticate with user credentials,  you must have created a user in your Usergrid application.  Do this via the usergrid Admin UI. 
+Notice, no URI property there.  To authenticate with user credentials,  you must have created a user in your Usergrid application.  Do this via the usergrid Admin UI. 
+
 
 
 
