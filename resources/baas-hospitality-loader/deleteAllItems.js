@@ -6,7 +6,7 @@
 // Demonstrate how to iteratively delete all items in a BaaS collection.
 //
 // created: Mon Feb  9 11:18:18 2015
-// last saved: <2016-June-06 19:36:02>
+// last saved: <2016-June-07 19:59:39>
 
 /*
 * ugCollectionForEach
@@ -22,13 +22,26 @@
 *********************************************/
 
 var util = require('util'),
-    // _ = require('lodash'),
-    baasConn = require('./config/baas-connection.json'),
+    Getopt = require('node-getopt'),
     usergrid = require('usergrid'),
-    readlineSync = require('readline-sync'), 
+    readlineSync = require('readline-sync'),
     common = require('./lib/common.js'),
     pageSize = 120,
-    ugClient;
+    ugClient,
+    getopt = new Getopt([
+      ['c' , 'config=ARG', 'the configuration json file, which contains Usergrid/Baas org, app, and credentials'],
+      ['o' , 'org=ARG', 'the Usergrid/BaaS organization.'],
+      ['a' , 'app=ARG', 'the Usergrid/BaaS application.'],
+      ['C' , 'collection=ARG', 'the Usergrid/BaaS collection from which to remove all items.'],
+      ['u' , 'username=ARG', 'app user with permissions to create collections. (only if not using client creds!)'],
+      ['p' , 'password=ARG', 'password for the app user.'],
+      ['i' , 'clientid=ARG', 'clientid for the Usergrid/Baas app. (only if not using user creds!)'],
+      ['s' , 'clientsecret=ARG', 'clientsecret for the clientid.'],
+      ['e' ,  'endpoint=ARG', 'the BaaS endpoint (if not api.usergrid.com)'],
+      ['v' , 'verbose'],
+      ['V' , 'superverbose'],
+      ['h' , 'help']
+    ]).bindHelp();
 
 
 function ugCollectionForEach (ugClient, options, f, doneCb) {
@@ -102,44 +115,19 @@ function allDone(e, startTime) {
 
 // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-function usage() {
-  console.log("deleteAllItems.js - delete all items in a collection within usergrid");
-  console.log("  *** DANGER: this will delete data.");
-  console.log("usage:");
-  console.log("   node ./deleteAllItems.js  <collection-name>");
-  console.log();
-}
-
 function main(args) {
-  var collection; 
+  var collection, baasConn;
   try {
-    
-    args.forEach(function(arg) {
-      if ((arg === '-?') || (arg === '-h')) {
-        usage();
-        process.exit(0);
-      }
-      else {
-        if ( ! collection) { 
-          collection = arg;
-        }
-        else {
-          common.logWrite('error - specify just one collection.');
-          usage();
-          process.exit(0);
-        }
-      }
-    });
-    
-    if (collection) {
+    baasConn = common.processOptions(getopt, args);
+    if (baasConn.collection) {
       console.log('using org:%s app:%s, delete all items from collection: %s\n',
-                  baasConn.org, baasConn.app, collection);
+                  baasConn.org, baasConn.app, baasConn.collection);
       console.log('** YOU WILL LOSE DATA.');
       if (!readlineSync.keyInYN('Are you sure? : ')) {
-        // Key that is not `Y` was pressed.
+        // the user did not press Y
         console.log('abort.');
         process.exit();
-      }      
+      }
       common.logWrite('start');
       var startTime = new Date();
       common.usergridAuth(baasConn, function (e, ugClient) {
@@ -147,17 +135,16 @@ function main(args) {
           common.logWrite(JSON.stringify(e, null, 2) + '\n');
           process.exit(1);
         }
-        common.logWrite('token: %s', ugClient.token);
         ugCollectionForEach(ugClient,
-                            { type:collection, qs:{limit:pageSize} },
+                            { type:baasConn.collection, qs:{limit:pageSize} },
                             deleteOneEntity,
                             function(e) { allDone(e, startTime); });
       });
     }
     else {
-      usage();
+      getopt.showHelp();
     }
-    
+
   }
   catch (exc1) {
     console.log("Exception:" + exc1);
@@ -166,5 +153,3 @@ function main(args) {
 }
 
 main(process.argv.slice(2));
-
-

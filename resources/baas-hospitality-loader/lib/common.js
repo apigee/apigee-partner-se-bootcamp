@@ -4,11 +4,13 @@
 // common functions used by the loader and deleteAllItems scripts.
 //
 // created: Mon Jun  6 17:32:20 2016
-// last saved: <2016-June-06 20:20:00>
+// last saved: <2016-June-07 20:03:59>
 
 (function (globalScope){
-  var util = require('util'), 
-      usergrid = require('usergrid');
+  var util = require('util'),
+      usergrid = require('usergrid'),
+      fs = require('fs'),
+      readlineSync = require('readline-sync');
 
   function logWrite() {
     var time = (new Date()).toString(),
@@ -17,7 +19,6 @@
       time.substr(16, 8) + '] ';
     console.log(tstr + util.format.apply(null, arguments));
   }
-
 
   function elapsedToHHMMSS (elapsed) {
     function leadingPad(n, p, c) {
@@ -39,17 +40,15 @@
   }
 
   function usergridAuth(baasConn, fn) {
-    var ugClient;
+    var ugClient, ugConfig = {
+          URI : baasConn.URI || 'https://api.usergrid.com',
+          orgName: baasConn.org,
+          appName: baasConn.app,
+          buildCurl: baasConn.buildCurl,
+          logging: baasConn.wantLogging
+        };
     if (baasConn.username && baasConn.password) {
-      ugClient = new usergrid.client({
-        orgName: baasConn.org,
-        appName: baasConn.app,
-        buildCurl: true,
-        logging: baasConn.wantLogging || false,
-        //authType: usergrid.AUTH_CLIENT_ID,
-        // clientId: baasConn.clientId,
-        // clientSecret: baasConn.clientSecret
-      });
+      ugClient = new usergrid.client(ugConfig);
       ugClient.login(baasConn.username, baasConn.password,
                      function (e) {
                        if (e) {
@@ -58,36 +57,80 @@
                        else {
                          // make a new client just for the app user, then use this
                          // client to make calls against the API.
-                         fn(null, new usergrid.client({
-                           orgName: baasConn.org,
-                           appName: baasConn.app,
-                           authType:usergrid.AUTH_APP_USER,
-                           token:ugClient.token
-                         }));
+                         ugConfig.authType = usergrid.AUTH_APP_USER;
+                         ugConfig.token = ugClient.token;
+                         fn(null, new usergrid.client(ugConfig));
                        }
                      });
     }
-    else if (baasConn.clientId && baasConn.clientSecret) {
-      fn(null, new usergrid.client({
-        orgName: baasConn.org,
-        appName: baasConn.app,
-        buildCurl: true,
-        logging: baasConn.wantLogging || false,
-        authType: usergrid.AUTH_CLIENT_ID,
-        clientId: baasConn.clientId,
-        clientSecret: baasConn.clientSecret
-      }));
+    else if (baasConn.clientid && baasConn.clientsecret) {
+      ugConfig.authType = usergrid.AUTH_CLIENT_ID;
+      ugConfig.clientId = baasConn.clientid;
+      ugConfig.clientSecret = baasConn.clientsecret;
+      fn(null, new usergrid.client(ugConfig));
     }
     else {
       fn({error: "missing credentials"});
     }
   }
 
+  function processOptions(getopt, args) {
+    var opt = getopt.parse(args), baasConn;
+
+    if (opt.options.config) {
+      baasConn = JSON.parse(fs.readFileSync(opt.options.config, 'utf8'));
+    }
+    else {
+      baasConn = {};
+
+      if (opt.options.username) {
+        baasConn.username = opt.options.username;
+        if (opt.options.password) {
+          baasConn.password = opt.options.password;
+        }
+        else {
+          baasConn.password = readlineSync.question(' Password for '+ baasConn.username + ' : ',
+                                                    {hideEchoBack: true});
+        }
+      }
+      else if (opt.options.clientid) {
+        baasConn.clientid = opt.options.clientid;
+        if (opt.options.clientsecret) {
+          baasConn.clientsecret = opt.options.clientsecret;
+        }
+        else {
+          baasConn.clientsecret = readlineSync.question(' Client Secret for '+ baasConn.clientid + ' : ',
+                                                        {hideEchoBack: true});
+        }
+      }
+      baasConn.org = opt.options.org;
+      baasConn.app = opt.options.app;
+      baasConn.wantLogging = opt.options.verbose;
+      baasConn.buildCurl = opt.options.superverbose;
+      baasConn.URI = opt.options.endpoint; // eg, https://amer-apibaas-prod.apigee.net/appservices/
+      baasConn.collection = opt.options.collection;
+    }
+
+    if ( !baasConn.org || !baasConn.app) {
+      console.log('must supply baas org and app');
+      getopt.showHelp();
+      process.exit(1);
+    }
+
+    if ( ! ((baasConn.clientid && baasConn.clientsecret) ||
+            (baasConn.username && baasConn.password))) {
+      console.log('must supply username+password -or- clientid+clientsecret');
+      getopt.showHelp();
+      process.exit(1);
+    }
+    return baasConn;
+  }
 
   module.exports = {
     logWrite : logWrite,
     elapsedToHHMMSS : elapsedToHHMMSS,
-    usergridAuth : usergridAuth
+    usergridAuth : usergridAuth,
+    processOptions : processOptions
   };
 
 

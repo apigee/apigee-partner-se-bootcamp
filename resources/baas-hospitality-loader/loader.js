@@ -6,20 +6,32 @@
 // Load JSON collections into an API BaaS organization + app.
 //
 // created: Thu Feb  5 19:29:44 2015
-// last saved: <2016-June-06 20:08:28>
+// last saved: <2016-June-07 19:50:19>
 
 var fs = require('fs'),
     path = require('path'),
+    Getopt = require('node-getopt'),
     common = require('./lib/common.js'),
     _ = require('lodash'),
     startTime,
     dataDir = path.join('./', 'data'),
-    baasConn = require('./config/baas-connection.json'),
     usergrid = require('usergrid'),
     re1 = new RegExp('\\s{2,}', 'g'),
     batchNum = 0,
     batchSize = 25,
-    count = 0;
+    count = 0,
+    getopt = new Getopt([
+      ['c' , 'config=ARG', 'the configuration json file, which contains Usergrid/Baas org, app, and credentials'],
+      ['o' , 'org=ARG', 'the Usergrid/BaaS organization.'],
+      ['a' , 'app=ARG', 'the Usergrid/BaaS application.'],
+      ['u' , 'username=ARG', 'app user with permissions to create collections. (only if not using client creds!)'],
+      ['p' , 'password=ARG', 'password for the app user.'],
+      ['i' , 'clientid=ARG', 'clientid for the Usergrid/Baas app. (only if not using user creds!)'],
+      ['s' , 'clientsecret=ARG', 'clientsecret for the clientid.'],
+      ['e' ,  'endpoint=ARG', 'the BaaS endpoint (if not api.usergrid.com)'],
+      ['v' , 'verbose'],
+      ['h' , 'help']
+    ]).bindHelp();
 
 // monkeypatch ug client to allow batch create.
 // http://stackoverflow.com/a/24334895/48082
@@ -119,21 +131,9 @@ function doUploadWork (ugClient, collectionName, data, cb) {
 
 
 function main(args) {
-  var collection;
+  var collection, baasConn;
   try {
-
-    args.forEach(function(arg) {
-      if ((arg === '-?') || (arg === '-h')) {
-        usage();
-        process.exit(0);
-      }
-      else {
-        common.logWrite('error - no parameters supported.');
-        usage();
-        process.exit(0);
-      }
-    });
-
+    baasConn = common.processOptions(getopt, args);
     common.logWrite('start');
     startTime = new Date();
     common.usergridAuth(baasConn, function (e, ugClient){
@@ -141,7 +141,6 @@ function main(args) {
         common.logWrite(JSON.stringify(e, null, 2) + '\n');
         process.exit(1);
       }
-      common.logWrite('token: %s', ugClient.token);
       fs.readdir(dataDir, function (err,files){
         files.forEach(function(filename) {
           if (filename.indexOf('.json') > 0) {

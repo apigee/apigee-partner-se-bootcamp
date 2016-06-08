@@ -9,6 +9,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "readline-sync": "^1.4.1",
+    "node-getopt": "~0.2.3",
     "util" : "~0.10.3",
     "lodash" : "~4.13.1",
     "usergrid": "~0.10.11"
