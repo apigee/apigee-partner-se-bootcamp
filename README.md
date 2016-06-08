@@ -1,9 +1,9 @@
-# Apigee Partner SE Bootcamp
+# Apigee Technical Bootcamp
 
-Welcome to Apigee Partner SE Bootcamp. We are excited to invite you into the previliged Apigee SE community. The Labs and the content of this bootcamp will allow you to get a hands on experience of Apigee, that will allow you to
+Welcome to the Apigee Technical Bootcamp. We are excited to invite you into the Apigeek community. The Labs and the content of this bootcamp will allow you to get hands-on experience with Apigee Edge. At the end of the exercise, you will: 
 
 - Understand Apigee functionality
-- Do a custom demo/POC on Apigee platform
+- Be able to produce a custom demo/POC on Apigee Edge 
 - Identify Apigee opportunities in the projects you are working on.
 
 ##Suggested Agenda
