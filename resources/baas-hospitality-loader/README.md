@@ -10,7 +10,6 @@ In particular, these tools are handy for loading the hospitality data into any U
 
 
 
-
 ## Before you run
 
 You must use `npm install` to get the necessary pre-requisites.
@@ -76,6 +75,11 @@ Or, for user credentials, with the Usergrid API endpoint (which is the default):
 
 Notice, no URI property there.  To authenticate with user credentials,  you must have created a user in your Usergrid application.  Do this via the usergrid Admin UI. 
 
+
+
+## Exporting Baas Data: Nope
+
+There are no tools here that export data from BaaS Collections.
 
 
 
