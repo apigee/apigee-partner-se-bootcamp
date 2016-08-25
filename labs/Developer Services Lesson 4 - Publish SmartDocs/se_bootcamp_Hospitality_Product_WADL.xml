@@ -8,8 +8,7 @@
 			</method>
 			<param name="zipcode" style="query"/>
 			<param name="radius" style="query"/>
-			<param name="some-header-name" style="header"/>
-			<param name="weight" style="header"/>
+			<param name="Authorization" style="header"/>
 		</resource>
 		<resource path="/sm/v1/hotels/{hotel-uuid}">
 			<method name="GET" apigee:displayName="Get Individual Hotels">
@@ -19,8 +18,7 @@
 			</method>
 			<param name="zipcode" style="query"/>
 			<param name="radius" style="query"/>
-			<param name="some-header-name" style="header"/>
-			<param name="weight" style="header"/>
+			<param name="Authorization" style="header"/>
 		</resource>
 	</resources>
 </application>
