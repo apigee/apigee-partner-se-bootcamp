@@ -20,5 +20,36 @@
 			<param name="radius" style="query"/>
 			<param name="Authorization" style="header"/>
 		</resource>
+		<resource path="/oauth/client_credential/accesstoken">
+			<method name="POST" apigee:displayName="Get Hotels">
+				<apigee:tags>
+					<apigee:tag primary="true">auth</apigee:tag>
+				</apigee:tags>
+				<request>
+					<!--param default="admin" name="username" required="true"
+						style="template" type="xsd:string" />
+					<param default="Apigee_1" name="password" required="true"
+						style="template" type="xsd:string" /-->
+
+					<param default="application/x-www-form-urlencoded" name="Content-Type" required="true" style="header" type="xsd:string" />
+
+					<representation>
+                        <!-- This section describes the body content, i.e. the payload. -->
+                        <!-- Set required to true to indicate the content as mandatory in the Console -->
+                        <apigee:payload required="true">
+                            <!-- Docs are optional, but recommended. -->
+                            <doc apigee:url="http://api.mydomain.com/doc/resource3/method1">
+                                Content description.
+                            </doc>
+                            <!-- Body content. -->
+                            <apigee:content>
+                                <![CDATA[client_id=UFQYDB6aGGyRQijQ07NAspkG5DRA5fwl&client_secret=UFz5lH52JJld3ZMI]]>
+                            </apigee:content>
+                        </apigee:payload>
+                    </representation>
+				</request>
+			</method>
+			
+		</resource>
 	</resources>
 </application>
