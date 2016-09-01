@@ -84,7 +84,9 @@ https://amer-partner5-prod.apigee.net/v1/baas-data-util/upload?org={your-org}
 
 Replace `{your-org}` with the actual name of your API BaaS 
 
-Note: Its a bad API design to have a GET resource updates the data, but this is being done to make it easy to load the sample data from a brower!! Lets just use this URL once and erase this from our memories!
+Note: Its a bad API design to have a GET resource updates the data.
+We are only doing this to make it easy to load the sample data from a brower!! 
+Lets just use this URL once and erase this from our memories!
 ```
 
 
