@@ -63,19 +63,29 @@ The objective of this lesson is to provide an overview of API Backend-as-a-Servi
 - [x] The name of your Apigee API BaaS (or usergrid) organization and application 
 - [x] nodejs
 
-## Preparation: Loading Data
-
-If you do not have the hotels collection in your Usergrid app, you can load it using the tools provided [here](../../resources/baas-hospitality-loader/) . Follow the Readme. 
 
 
 ##Estimated Time: 30 mins
 
 ### Loading Sample Data into BaaS
 
-- Open a browser tab & log in to your API BaaS https://apigee.com/appservices ![Create App](./images/1_create_app.png)
+- Open a browser tab & log in to your API BaaS https://apigee.com/appservices 
+![Create App](./images/1_create_app.png)
+- Name your application `hospitality` that is where we will load our sample data
+- Make sure that the new application we created in selected ![Select App](./images/1_select_app.png)
+- Go to `users`--> `Guest` --> `Add Permission` ![Update Guest Permissions](./images/1_update_guest_permissions.png)
+- Type `/**` in Path and Select all the Verbs `Get`, `POST`, `PUT`, `DELETE` ![New Permissions](./images/1_new_permissions.png)
+- This will effectively diable security on our application, making it easy to update and get data from our application. Any requests that come in with no auth credentials are treated as Guest
+**Note:** We will not do something like this in production. And we will follow one of the auth schemes supported by BaaS to access the data. [See BaaS Authentication](http://docs.apigee.com/app-services/content/authenticating-users-and-application-clients)
+- Open this link in a browser to load the sample data into your BaaS org
+```
+https://amer-partner5-prod.apigee.net/v1/baas-data-util/upload?org={your-org}
+```
+Replace `{your-org}` with the actual name of your API BaaS 
+
+**Note:** Alternatively, you can use [this node utility](src/apibaas-data-uploader) to load the sample `hotels.json` data listed in `data` folder and run `node upload.js`
 
 - **Interacting with Data Collections** in the BaaS can be done easily from the BaaS portal. The BaaS portal provides a user interface built using the RESTful APIs automatically exposed by BaaS for data collections. A data collection called `hotels` has already been created for you in your BaaS instance.
-  - Open a browser tab & log in to your API BaaS or Usergrid instance. For example, you might login to: https://apigee.com/appservices 
   - Pick your API BaaS organization from the Organization drop-down
   - Pick the `hospitality` App from the App drop-down, or the app in which you loaded the hotels collection
   ![Select App](./images/1_select_app.png)
@@ -98,13 +108,13 @@ If you do not have the hotels collection in your Usergrid app, you can load it u
 - **Paging through results** is supported inherently by BaaS. By default, the GET API for data collections in BaaS returns 10 entities at a time. This can be changed by providing a `limits` query parameter when calling the API. To page through the results, API BaaS provides a cursor attribute, which can be used in subsequent calls
  - Open up another browser tab and go to 
  ```
-https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels
+https://api.usergrid.com/{your-org}/hospitality/hotels
  ```
  Replace `{your-org}` with the actual name of your API BaaS organization name
  **Note:** The `hospitality` App created for these lab exercises has been configured so that the Guest role has full permissions (that is, /** for GET, POST, PUT, and DELETE) to all the data collections in the App. As with any other app, you can secure the application by updating its roles and permissions. For more on working with permissions and roles, see [Managing access by defining permission rules](http://apigee.com/docs/app-services/content/managing-access-defining-permission-rules).
  - Effectively you’ve called the GET API for the `hotels` data collection by calling the above URL. Review the information presented in JSON format. This is the same information you previously saw on the BaaS portal. 
  - Browse towards the bottom of the response. You’ll notice that by default BaaS provides 10 entities at a time. This can be verified by looking at the attribute "count" : 10
- - Now call the GET API as follows with the limits parameter ``` https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels?limit=20 ```
+ - Now call the GET API as follows with the limits parameter ``` https://api.usergrid.com/{your-org}/hospitality/hotels?limit=20 ```
  Replace `{your-org}` with the actual name of your API BaaS organization name.
  - Review the results and you’ll notice that BaaS has returned 20 hotels instead of 10 this time around
  - To page forward to the next set of results, copy the value of the `cursor` attributed provided at the bottom of the results and call the GET API again after adding the query parameter `cursor={cursor value}` to the URL. 
@@ -126,7 +136,7 @@ https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels
  - These queries can be submitted via the GET API by using the `ql` query parameter. The query string must be url-encoded. 
  - Switch to the browser tab used to issue GET API calls directly against the BaaS. For example, call the GET API as follows to get hotels in the city of Burlingame:
  ```
- https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels?ql=select%20*%20where%20city=%27Burlingame%27
+ https://api.usergrid.com/appservices/{your-org}/hospitality/hotels?ql=select%20*%20where%20city=%27Burlingame%27
  ```
  Replace `{your-org}` with the actual name of your API BaaS organization name.
  **Note:** Most browsers will URL encode special characters automatically
