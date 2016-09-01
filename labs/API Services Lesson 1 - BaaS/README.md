@@ -69,8 +69,13 @@ If you do not have the hotels collection in your Usergrid app, you can load it u
 
 
 ##Estimated Time: 30 mins
+
+### Loading Sample Data into BaaS
+
+- Open a browser tab & log in to your API BaaS https://apigee.com/appservices ![Create App](./images/1_create_app.png)
+
 - **Interacting with Data Collections** in the BaaS can be done easily from the BaaS portal. The BaaS portal provides a user interface built using the RESTful APIs automatically exposed by BaaS for data collections. A data collection called `hotels` has already been created for you in your BaaS instance.
-  - Open a browser tab & log in to your API BaaS or Usergrid instance. For example, you might login to: https://appservices.apigee.com/amer-apibaas . 
+  - Open a browser tab & log in to your API BaaS or Usergrid instance. For example, you might login to: https://apigee.com/appservices 
   - Pick your API BaaS organization from the Organization drop-down
   - Pick the `hospitality` App from the App drop-down, or the app in which you loaded the hotels collection
   ![Select App](./images/1_select_app.png)

@@ -40,7 +40,7 @@ In this lab you will get familiar with the Apigee Edge Management UI by creating
  - provide information needed to generate an API proxy
         - Proxy Name: **{your-initials}_hotels**
         - Proxy Base Path: **/{your-initials}/v1/hotels**
-        - Existing API: **https://amer-apibaas-prod.apigee.net/appservices/**{your-org}/hospitality/hotels
+        - Existing API: **https://api.usergrid.com/{your-org}/hospitality/hotels**
         - Description: **Facade to the BaaS hotels data collection**
         
  - Click `Next` 
