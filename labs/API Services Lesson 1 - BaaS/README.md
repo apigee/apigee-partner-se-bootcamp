@@ -82,7 +82,7 @@ The objective of this lesson is to provide an overview of API Backend-as-a-Servi
 ```
 https://amer-partner5-prod.apigee.net/v1/baas-data-util/upload?org={your-org}
 
-Replace `{your-org}` with the actual name of your API BaaS 
+Replace `{your-org}` with the actual name of your API BaaS Org
 
 Note: Its a bad API design to have a GET resource updates the data.
 We are only doing this to make it easy to load the sample data from a brower!! 
