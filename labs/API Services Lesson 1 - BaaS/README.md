@@ -116,7 +116,7 @@ Lets just use this URL once and erase this from our memories!
 - **Paging through results** is supported inherently by BaaS. By default, the GET API for data collections in BaaS returns 10 entities at a time. This can be changed by providing a `limits` query parameter when calling the API. To page through the results, API BaaS provides a cursor attribute, which can be used in subsequent calls
  - Open up another browser tab and go to 
  ```
-https://api.usergrid.com/{your-org}/hospitality/hotels
+https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels
  ```
  Replace `{your-org}` with the actual name of your API BaaS organization name
  **Note:** The `hospitality` App created for these lab exercises has been configured so that the Guest role has full permissions (that is, /** for GET, POST, PUT, and DELETE) to all the data collections in the App. As with any other app, you can secure the application by updating its roles and permissions. For more on working with permissions and roles, see [Managing access by defining permission rules](http://apigee.com/docs/app-services/content/managing-access-defining-permission-rules).
@@ -144,7 +144,7 @@ https://api.usergrid.com/{your-org}/hospitality/hotels
  - These queries can be submitted via the GET API by using the `ql` query parameter. The query string must be url-encoded. 
  - Switch to the browser tab used to issue GET API calls directly against the BaaS. For example, call the GET API as follows to get hotels in the city of Burlingame:
  ```
- https://api.usergrid.com/appservices/{your-org}/hospitality/hotels?ql=select%20*%20where%20city=%27Burlingame%27
+https://amer-apibaas-prod.apigee.net/appservices/{your-org}/hospitality/hotels?ql=select%20*%20where%20city=%27Burlingame%27
  ```
  Replace `{your-org}` with the actual name of your API BaaS organization name.
  **Note:** Most browsers will URL encode special characters automatically
